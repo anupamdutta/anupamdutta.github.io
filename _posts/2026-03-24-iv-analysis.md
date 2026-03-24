@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "IV Analysis: The Silent Driver of Your P&L"
-date: 2026-03-25
+date: 2026-03-24
 tags: [IV, Volatility, Options]
 ---
 
