@@ -51,6 +51,6 @@ But a process can be built.
 
 ## Work
 
-- https://lynqverse.com  
-- https://www.gammagrid.lynqverse.com  
-- anupam.dutta@lynqverse.com
+- 🌐 [Lynqverse](https://lynqverse.com)  
+- 🌐 [GammaGrid Platform](https://www.gammagrid.lynqverse.com)  
+- 📧 [anupam.dutta@lynqverse.com](mailto:anupam.dutta@lynqverse.com)
