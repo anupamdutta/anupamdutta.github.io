@@ -1,8 +1,24 @@
 ---
 layout: home
-title: Home
+title: GammaGrid Insights
 ---
 
-Welcome to my trading blog.
+## Market structure is not random.
 
-This is where I break down real market structure, IV behavior, and systematic edge.
+I study volatility, positioning, and gamma flows.
+
+This is not prediction.  
+This is structure.
+
+---
+
+### What you’ll find here:
+
+- IV behavior breakdown  
+- Gamma positioning insights  
+- Real trade logic, not hindsight  
+- Systematic edge development  
+
+---
+
+Trade less. Observe more. Execute with intent.
