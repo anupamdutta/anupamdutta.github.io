@@ -4,7 +4,6 @@ title: About
 permalink: /about/
 ---
 
-## About
 
 I am Anupam Dutta. This is not a blog. This is a Quant Research Lab.
 
