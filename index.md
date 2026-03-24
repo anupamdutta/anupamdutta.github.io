@@ -1,9 +1,8 @@
 ---
 layout: home
-title: GammaGrid Insights
+
 ---
 
-# GammaGrid Insights
 
 > Market structure is not random.
 
