@@ -58,6 +58,7 @@ Unlike standard models, it focuses on **structural consistency, volatility align
   </a>
 </div>
 <br>
+
 ---
 
 ## Philosophy
@@ -77,6 +78,6 @@ But a process can be built.
 
 ## Work
 
-- 🌐 [Lynqverse](https://lynqverse.com)  
-- 🌐 [GammaGrid Platform](https://www.gammagrid.lynqverse.com)  
+- 🌐 [Lynqverse Research](https://lynqverse.com)  
+- 🌐 [GammaGrid Web Platform](https://www.gammagrid.lynqverse.com)  
 - 📧 [anupam.dutta@lynqverse.com](mailto:anupam.dutta@lynqverse.com)
