@@ -1,1 +1,1 @@
-# gurudevtrades.github.io    
+# gurudevtrades.github.io     
