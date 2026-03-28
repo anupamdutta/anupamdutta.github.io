@@ -8,29 +8,40 @@ layout: home
 
 ---
 
-## Hello,
+<div style="display:flex; align-items:center; gap:20px; flex-wrap:wrap; margin-top:20px;">
 
-I am Anupam Dutta.
+  <img src="/assets/images/anupam.png"
+       style="
+         width:90px;
+         height:90px;
+         border-radius:50%;
+         object-fit:cover;
+         border:2px solid #38bdf8;
+         box-shadow:0 0 12px rgba(56,189,248,0.4);
+       ">
 
-I work on volatility structure, gamma positioning, and systematic option pricing.
+  <div>
+    <strong>Hello, I am Anupam Dutta.</strong><br>
+    I work on volatility structure, gamma positioning, and systematic option pricing.<br>
+    Threads: <a href="https://www.threads.net/@gammagrid">@gammagrid</a>
 
-You can follow my thoughts on Threads:  
-👉 @gammagrid
+    <div style="margin-top:10px;">
+      <a href="/about/"
+         style="
+           background:#020617;
+           border:1px solid #38bdf8;
+           color:#38bdf8;
+           padding:6px 14px;
+           border-radius:6px;
+           text-decoration:none;
+           font-family:monospace;
+           box-shadow:0 0 8px rgba(56,189,248,0.3);
+         ">
+         Read More →
+      </a>
+    </div>
+  </div>
 
-<div style="margin-top:15px;">
-  <a href="/about/"
-     style="
-       background:#020617;
-       border:1px solid #38bdf8;
-       color:#38bdf8;
-       padding:8px 16px;
-       border-radius:6px;
-       text-decoration:none;
-       font-family:monospace;
-       box-shadow:0 0 8px rgba(56,189,248,0.3);
-     ">
-     Read More →
-  </a>
 </div>
 <br>
 
