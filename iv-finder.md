@@ -6,7 +6,6 @@ permalink: /iv-finder/
 
 <div class="iv-container">
 
-  <h2>IV Finder</h2>
 
   <p class="subtext">
     This is a precision Implied Volatility solver designed for index options like Nifty50.  
@@ -14,8 +13,7 @@ permalink: /iv-finder/
     implied funding conditions rather than relying purely on static interest rate assumptions.  
     Built as a lightweight interface, it represents the foundational layer of a more advanced volatility framework.
   </p>
-
-  <hr>
+  <br>
 
   <div class="iv-grid">
 
