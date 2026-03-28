@@ -4,7 +4,6 @@ title: MMR Terminal
 permalink: /mmr-terminal/
 ---
 
-# MMR TERMINAL
 
 > Market Maker Risk Engine  
 > Volatility Surface Normalization
