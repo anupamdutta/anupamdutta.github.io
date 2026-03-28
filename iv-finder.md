@@ -4,42 +4,47 @@ title: IV Finder
 permalink: /iv-finder/
 ---
 
-<div style="max-width:600px; font-family:monospace;">
+<div class="iv-container">
 
-<h2>IV Finder</h2>
+  <p class="subtext">Estimate implied volatility from market price</p>
 
-<p style="color:#64748b;">
-Estimate implied volatility from market price.
-</p>
+  <div class="iv-grid">
 
----
+    <div>
+      <label>Spot</label>
+      <input id="spot" type="number">
+    </div>
 
-<label>Spot Price</label><br>
-<input id="spot" type="number"><br><br>
+    <div>
+      <label>Strike</label>
+      <input id="strike" type="number">
+    </div>
 
-<label>Strike Price</label><br>
-<input id="strike" type="number"><br><br>
+    <div>
+      <label>DTE</label>
+      <input id="dte" type="number">
+    </div>
 
-<label>Days to Expiry</label><br>
-<input id="dte" type="number"><br><br>
+    <div>
+      <label>Option Price</label>
+      <input id="price" type="number">
+    </div>
 
-<label>Option Price</label><br>
-<input id="price" type="number"><br><br>
+    <div>
+      <label>Type</label>
+      <select id="type">
+        <option value="call">Call</option>
+        <option value="put">Put</option>
+      </select>
+    </div>
 
-<label>Option Type</label><br>
-<select id="type">
-  <option value="call">Call</option>
-  <option value="put">Put</option>
-</select><br><br>
+  </div>
 
-<button onclick="calcIV()">Find Implied Volatility</button>
+  <button class="run-btn" onclick="calcIV()">Run IV Solver</button>
 
----
-
-<h3 id="result"></h3>
+  <div id="result" class="result-box"></div>
 
 </div>
-
 <script>
 
 function normCDF(x) {
