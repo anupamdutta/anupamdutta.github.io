@@ -40,7 +40,7 @@ permalink: /iv-finder/
 
   </div>
 
-  <button class="run-btn" onclick="calcIV()">Run IV Solver</button>
+  <button class="run-btn" onclick="runIV()">Run IV Solver</button>
 
   <div id="result" class="result-box"></div>
 
