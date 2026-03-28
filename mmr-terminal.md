@@ -103,9 +103,8 @@ Training is recommended.
 
 ## Download
 
-👉 [Download MMR Terminal](#)
+👉 [Download MMR Terminal](https://drive.google.com/file/d/14wL_Fpe5ju2zbOb2RGCr4oD3RJ2hLP9H/view?usp=sharing)
 
-[(https://drive.google.com/file/d/14wL_Fpe5ju2zbOb2RGCr4oD3RJ2hLP9H/view?usp=sharing)]
 
 ---
 
