@@ -107,8 +107,28 @@ async function runIV() {
       return showError("IV calculation failed. Check inputs.");
     }
 
-    document.getElementById("result").innerText =
-      "IV = " + json.iv.toFixed(4) + "%";
+    document.getElementById("result").innerHTML = `
+    <pre class="iv-output">
+    ========================================
+            IV SOLVER OUTPUT
+    ========================================
+    
+    INPUT PARAMETERS
+    
+    Spot Price        : ${S}
+    Strike Price      : ${K}
+    Days to Expiry    : ${DTE}
+    Option Type       : ${type.toUpperCase()}
+    
+    ----------------------------------------
+    
+    RESULT
+    
+    Implied Volatility : ${json.iv.toFixed(4)} %
+    
+    ========================================
+    </pre>
+    `;
 
   } catch (err) {
     showError("Connection error. Try again.");
