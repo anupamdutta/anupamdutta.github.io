@@ -5,3 +5,4 @@ markdown: kramdown
 header_pages:
   - about.md
   - mmr-terminal.md
+  - iv-finder.md
