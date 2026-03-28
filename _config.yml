@@ -4,3 +4,4 @@ description: Precision Options Trading, Systems, and Insights
 markdown: kramdown
 header_pages:
   - about.md
+  - mmr-terminal.md
