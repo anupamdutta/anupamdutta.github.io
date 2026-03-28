@@ -32,6 +32,7 @@ You can follow my thoughts on Threads:
      Read More →
   </a>
 </div>
+<br>
 
 ---
 
