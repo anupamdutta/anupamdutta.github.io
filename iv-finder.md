@@ -8,10 +8,7 @@ permalink: /iv-finder/
 
 
   <p class="subtext">
-    This is a precision Implied Volatility solver designed for index options like Nifty50.  
-    Unlike basic calculators, it is structured to reflect market-consistent pricing by accounting for 
-    implied funding conditions rather than relying purely on static interest rate assumptions.  
-    Built as a lightweight interface, it represents the foundational layer of a more advanced volatility framework.
+    This is a precision Implied Volatility solver designed for index options like Nifty50.
   </p>
   <br>
 
