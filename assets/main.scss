@@ -97,15 +97,16 @@ code {
 
 .mmr-layout {
   display: grid;
-  grid-template-columns: 420px 1fr;
+  grid-template-columns: minmax(300px, 420px) 1fr;
   gap: 32px;
   max-width: 1400px;
   margin: auto;
+  align-items: start;
 }
 
 /* LEFT PANEL */
 .mmr-left {
-  position: sticky;
+  position: relative;
   top: 20px;
 }
 
@@ -113,7 +114,8 @@ code {
 .mmr-right {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 18px;
+  gap: 16px;
+  align-content: start;
 }
 
 /* ===== CARD ===== */
@@ -149,6 +151,8 @@ code {
 
 .iv-container {
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   padding: 26px;
   border-radius: 14px;
   border: 1px solid rgba(56,189,248,0.2);
@@ -282,26 +286,20 @@ label {
 @media (max-width: 900px) {
 
   .mmr-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* 🔥 stack */
     gap: 20px;
   }
 
-  .mmr-left {
-    position: relative;
-  }
-
   .mmr-right {
-    grid-template-columns: 1fr;
-    gap: 14px;
+    grid-template-columns: 1fr; /* 🔥 no 2-column */
   }
 
   .iv-grid {
-    grid-template-columns: 1fr;
-    gap: 10px;
+    grid-template-columns: 1fr; /* 🔥 single column inputs */
   }
 
   .iv-container {
-    padding: 20px;
+    padding: 18px;
   }
 
   .mmr-card {
