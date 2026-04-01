@@ -4,72 +4,59 @@ title: MMR Terminal Web
 permalink: /mmr-terminal-web/
 ---
 
-<div class="iv-container">
+<div class="mmr-layout">
 
-  <p class="subtext">
-    Auth Protected Option Pricing Engine
-  </p>
+  <!-- ================= LEFT PANEL ================= -->
+  <div class="mmr-left">
+    <div class="iv-container">
 
-  <!-- ================= AUTH ================= -->
-  <div class="iv-grid">
+      <p class="subtext">
+        Auth Protected Option Pricing Engine
+      </p>
 
-    <div class="field">
-      <label>App Key</label>
-      <input id="appKey">
-    </div>
+      <!-- AUTH -->
+      <div class="iv-grid">
+        <div class="field">
+          <label>App Key</label>
+          <input id="appKey">
+        </div>
 
-    <div class="field">
-      <label>App Token</label>
-      <div class="auth-row">
-        <input id="appToken" type="password">
-        <button class="btn-small" onclick="toggleToken()">Show</button>
+        <div class="field">
+          <label>App Token</label>
+          <div class="auth-row">
+            <input id="appToken" type="password">
+            <button class="btn-small" onclick="toggleToken()">Show</button>
+          </div>
+        </div>
       </div>
-    </div>
 
+      <br>
+
+      <!-- INPUTS -->
+      <div class="iv-grid">
+        <div class="field"><label>Spot</label><input id="spot" type="number"></div>
+        <div class="field"><label>Strike</label><input id="strike" type="number"></div>
+        <div class="field"><label>DTE</label><input id="dte" type="number"></div>
+        <div class="field"><label>Strike Diff</label><input id="strikeDiff" type="number"></div>
+        <div class="field"><label>Rate %</label><input id="rate" type="number"></div>
+        <div class="field"><label>Mag Factor</label><input id="fac" type="number" value="1"></div>
+      </div>
+
+      <button class="run-btn" onclick="runMMR()">Run MMR Terminal</button>
+
+    </div>
   </div>
 
-  <br>
+  <!-- ================= RIGHT PANEL ================= -->
+  <div class="mmr-right">
 
-  <!-- ================= INPUTS ================= -->
-  <div class="iv-grid">
+    <div class="mmr-card" id="box-input"></div>
+    <div class="mmr-card" id="box-model"></div>
 
-    <div class="field">
-      <label>Spot</label>
-      <input id="spot" type="number">
-    </div>
-
-    <div class="field">
-      <label>Strike</label>
-      <input id="strike" type="number">
-    </div>
-
-    <div class="field">
-      <label>DTE</label>
-      <input id="dte" type="number">
-    </div>
-
-    <div class="field">
-      <label>Strike Diff</label>
-      <input id="strikeDiff" type="number">
-    </div>
-
-    <div class="field">
-      <label>Rate %</label>
-      <input id="rate" type="number">
-    </div>
-
-    <div class="field">
-      <label>Mag Factor</label>
-      <input id="fac" type="number" value="1" min="0">
-    </div>
+    <div class="mmr-card" id="box-original"></div>
+    <div class="mmr-card" id="box-adjusted"></div>
 
   </div>
-
-  <div style="text-align:center;">
-    <button class="run-btn" style="width:260px;" onclick="runMMR()">Run MMR Terminal</button>
-  </div>
-
-  <div id="result" class="result-box"></div>
 
 </div>
 
@@ -121,13 +108,15 @@ async function runMMR(){
     fac: Number(document.getElementById("fac").value)
   }
 
-  // ===== VALIDATION =====
   if(!payload.appKey) return showError("App Key required")
   if(!payload.appToken) return showError("Token required")
   if(payload.fac < 0) return showError("Mag Factor must not be negative")
 
-  const out = document.getElementById("result")
-  out.innerHTML = "Running..."
+  // Clear previous
+  document.getElementById("box-input").innerHTML = "Loading..."
+  document.getElementById("box-model").innerHTML = ""
+  document.getElementById("box-original").innerHTML = ""
+  document.getElementById("box-adjusted").innerHTML = ""
 
   try{
 
@@ -139,73 +128,60 @@ async function runMMR(){
     const json = await res.json()
 
     if(json.error){
-      out.innerHTML = ""
       showError(json.message)
       return
     }
 
-    const line = "============================================================"
-    const title = "MARKET MAKER RISK (MMR) OPTION PRICING"
-    
-    // center title manually (60 width)
-    const centeredTitle = "      " + title   // tuned spacing for 60-char width
-    
-    out.innerHTML = `
-    <div class="iv-output">
-    ${line}
-    ${centeredTitle}
-    ${line}
-    
-    [ INPUT PARAMETERS ]
-    
-    Spot Price        : ${payload.spot}
-    Strike Price      : ${payload.strike}
-    DTE (Days)        : ${payload.dte}
-    Strike Diff       : ${payload.strikeDiff}
-    Funding Rate (%)  : ${payload.rate}
-    Mag Factor        : ${payload.fac}
-    
-    ------------------------------------------------------------
-    
-    [ MODEL OUTPUT ]
-    
-    Iteration         : ${json.iteration}
-    MMR Vol (%)       : ${json.mmr_pct.toFixed(3)}
-    BS Call           : ${json.call.toFixed(3)}
-    BS Put            : ${json.put.toFixed(3)}
-    
-    ------------------------------------------------------------
-    
-    [ ORIGINAL MODEL ]
-    
-    Call              : ${json.call_model.toFixed(3)}
-    Put               : ${json.put_model.toFixed(3)}
-    IV Call (%)       : ${json.iv_call.toFixed(3)}
-    IV Put (%)        : ${json.iv_put.toFixed(3)}
-    Synthetic Fwd     : ${json.sf.toFixed(3)}
-    
-    ------------------------------------------------------------
-    
-    [ ADJUSTED MODEL ]
-    
-    Call              : ${json.call_model.toFixed(3)}
-    Put               : ${json.put_model_adj.toFixed(3)}
-    IV Call (%)       : ${json.iv_call.toFixed(3)}
-    IV Put (%)        : ${json.iv_put_adj.toFixed(3)}
-    Synthetic Fwd     : ${json.sf_adj.toFixed(3)}
-    
-    ------------------------------------------------------------
-    
-    [ RESIDUAL ]
-    
-    L1 Error          : ${json.delta.toFixed(6)}
-    
-    ${line}
-    </div>
+    // ===== INPUT =====
+    document.getElementById("box-input").innerHTML = `
+      <div class="mmr-card-title">[ INPUT PARAMETERS ]</div>
+      Spot: ${payload.spot}<br>
+      Strike: ${payload.strike}<br>
+      DTE: ${payload.dte}<br>
+      Strike Diff: ${payload.strikeDiff}<br>
+      Rate: ${payload.rate}<br>
+      Mag Factor: ${payload.fac}
+    `
+
+    // ===== MODEL =====
+    document.getElementById("box-model").innerHTML = `
+      <div class="mmr-card-title">[ MODEL OUTPUT ]</div>
+      Iteration: ${json.iteration}<br>
+      MMR Vol: ${json.mmr_pct.toFixed(3)}<br>
+      Call: ${json.call.toFixed(3)}<br>
+      Put: ${json.put.toFixed(3)}
+    `
+
+    // ===== ORIGINAL =====
+    document.getElementById("box-original").innerHTML = `
+      <div class="mmr-card-title">[ ORIGINAL MODEL ]</div>
+      Call: ${json.call_model.toFixed(3)}<br>
+      Put: ${json.put_model.toFixed(3)}<br>
+      IV Call: ${json.iv_call.toFixed(3)}<br>
+      IV Put: ${json.iv_put.toFixed(3)}<br>
+      SF: ${json.sf.toFixed(3)}
+    `
+
+    // ===== ADJUSTED + RESIDUAL =====
+    const residualColor = json.delta < 0.01 ? "#22c55e" : "#ef4444";
+
+    document.getElementById("box-adjusted").innerHTML = `
+      <div class="mmr-card-title">[ ADJUSTED MODEL ]</div>
+      Call: ${json.call_model.toFixed(3)}<br>
+      Put: ${json.put_model_adj.toFixed(3)}<br>
+      IV Call: ${json.iv_call.toFixed(3)}<br>
+      IV Put: ${json.iv_put_adj.toFixed(3)}<br>
+      SF: ${json.sf_adj.toFixed(3)}
+
+      <br><br>
+
+      <div style="color:#facc15;">[ RESIDUAL ]</div>
+      <div style="color:${residualColor};">
+        L1 Error: ${json.delta.toFixed(6)}
+      </div>
     `
 
   }catch(e){
-    out.innerHTML = ""
     showError("Connection error")
   }
 }
