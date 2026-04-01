@@ -321,3 +321,43 @@ label {
     font-size: 14px;
   }
 }
+/* ===== IV PAGE ONLY (SAFE) ===== */
+.iv-page .iv-layout {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr; /* output bigger */
+  gap: 32px;
+  max-width: 1400px;
+  margin: auto;
+  align-items: start;
+}
+
+/* LEFT OUTPUT */
+.iv-page .iv-output-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* RIGHT INPUT */
+.iv-page .iv-input-panel {
+  width: 100%;
+}
+
+/* BUTTON */
+.iv-btn {
+  width: auto !important;
+  min-width: 200px;
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+
+  .iv-page .iv-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .iv-page .iv-output-panel {
+    grid-template-columns: 1fr;
+  }
+
+}
