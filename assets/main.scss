@@ -308,14 +308,13 @@ label {
 /* ===== MMR ABOUT SECTION ===== */
 /* FULL WIDTH BREAKOUT */
 .mmr-about-full {
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
+  width: 100%;
   margin-top: 50px;
 }
 
 /* CENTERED CONTENT */
 .mmr-about-box {
-  max-width: 1100px;
+  max-width: 1400px;
   margin: 0 auto;            /* 🔥 THIS FIXES ALIGNMENT */
   padding: 24px;
 
