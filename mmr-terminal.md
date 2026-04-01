@@ -113,11 +113,14 @@ If you prefer not to install the application, you can access the MMR Terminal di
 
 👉 [Open MMR Terminal Web](https://anupamdutta.github.io/mmr-terminal-web/)
 
----
 
+<div class="note-text">
 Both versions provide the same core engine.
 
-The desktop version offers a more controlled execution environment, while the web version allows quick access without installation.
+The desktop version offers a more controlled execution environment,  
+while the web version allows quick access without installation.
+</div>
+
 ---
 
 ## Framework
