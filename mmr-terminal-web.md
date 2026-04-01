@@ -7,7 +7,7 @@ permalink: /mmr-terminal-web/
 <div class="iv-container">
 
   <p class="subtext">
-    MMR Terminal - Auth Protected Option Pricing Engine
+    Auth Protected Option Pricing Engine
   </p>
 
   <!-- ================= AUTH ================= -->
@@ -145,7 +145,7 @@ async function runMMR(){
     }
 
     out.innerHTML = `
-<pre class="iv-output">
+<div class="iv-output">
 ==============================================================
         MARKET MAKER RISK (MMR) OPTION PRICING
 ==============================================================
@@ -193,7 +193,7 @@ Synthetic Forward (F*)   : ${json.sf_adj.toFixed(3)}
 Calibration Residual (L1): ${json.delta.toFixed(6)}
 
 ==============================================================
-</pre>
+</div>
     `
 
   }catch(e){
