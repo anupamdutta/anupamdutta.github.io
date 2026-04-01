@@ -144,56 +144,64 @@ async function runMMR(){
       return
     }
 
+    const line = "============================================================"
+    const title = "MARKET MAKER RISK (MMR) OPTION PRICING"
+    
+    // center title manually (60 width)
+    const centeredTitle = "      " + title   // tuned spacing for 60-char width
+    
     out.innerHTML = `
-<div class="iv-output">
-==============================================================
-        MARKET MAKER RISK (MMR) OPTION PRICING
-==============================================================
-
-INPUT PARAMETERS
-
-Spot Price               : ${payload.spot}
-Strike Price             : ${payload.strike}
-Days to Expiry (DTE)     : ${payload.dte}
-Strike Difference        : ${payload.strikeDiff}
-Implied Funding Rate (%) : ${payload.rate}
-Mag Factor               : ${payload.fac}
-
---------------------------------------------------------------
-
-MODEL OUTPUT
-
-Solver Iteration         : ${json.iteration}
-MMR Volatility (%)       : ${json.mmr_pct.toFixed(3)}
-Black-Scholes Call       : ${json.call.toFixed(3)}
-Black-Scholes Put        : ${json.put.toFixed(3)}
-
---------------------------------------------------------------
-
-ORIGINAL MODEL (UNCONSTRAINED SURFACE)
-
-Model Call               : ${json.call_model.toFixed(3)}
-Model Put                : ${json.put_model.toFixed(3)}
-Call Implied Vol (%)     : ${json.iv_call.toFixed(3)}
-Put Implied Vol (%)      : ${json.iv_put.toFixed(3)}
-Synthetic Forward (F*)   : ${json.sf.toFixed(3)}
-
---------------------------------------------------------------
-
-ADJUSTED MODEL (VOL-SURFACE CONSISTENCY)
-
-Model Call               : ${json.call_model.toFixed(3)}
-Model Put                : ${json.put_model_adj.toFixed(3)}
-Call Implied Vol (%)     : ${json.iv_call.toFixed(3)}
-Put Implied Vol (%)      : ${json.iv_put_adj.toFixed(3)}
-Synthetic Forward (F*)   : ${json.sf_adj.toFixed(3)}
-
---------------------------------------------------------------
-
-Calibration Residual (L1): ${json.delta.toFixed(6)}
-
-==============================================================
-</div>
+    <div class="iv-output">
+    ${line}
+    ${centeredTitle}
+    ${line}
+    
+    [ INPUT PARAMETERS ]
+    
+    Spot Price        : ${payload.spot}
+    Strike Price      : ${payload.strike}
+    DTE (Days)        : ${payload.dte}
+    Strike Diff       : ${payload.strikeDiff}
+    Funding Rate (%)  : ${payload.rate}
+    Mag Factor        : ${payload.fac}
+    
+    ------------------------------------------------------------
+    
+    [ MODEL OUTPUT ]
+    
+    Iteration         : ${json.iteration}
+    MMR Vol (%)       : ${json.mmr_pct.toFixed(3)}
+    BS Call           : ${json.call.toFixed(3)}
+    BS Put            : ${json.put.toFixed(3)}
+    
+    ------------------------------------------------------------
+    
+    [ ORIGINAL MODEL ]
+    
+    Call              : ${json.call_model.toFixed(3)}
+    Put               : ${json.put_model.toFixed(3)}
+    IV Call (%)       : ${json.iv_call.toFixed(3)}
+    IV Put (%)        : ${json.iv_put.toFixed(3)}
+    Synthetic Fwd     : ${json.sf.toFixed(3)}
+    
+    ------------------------------------------------------------
+    
+    [ ADJUSTED MODEL ]
+    
+    Call              : ${json.call_model.toFixed(3)}
+    Put               : ${json.put_model_adj.toFixed(3)}
+    IV Call (%)       : ${json.iv_call.toFixed(3)}
+    IV Put (%)        : ${json.iv_put_adj.toFixed(3)}
+    Synthetic Fwd     : ${json.sf_adj.toFixed(3)}
+    
+    ------------------------------------------------------------
+    
+    [ RESIDUAL ]
+    
+    L1 Error          : ${json.delta.toFixed(6)}
+    
+    ${line}
+    </div>
     `
 
   }catch(e){
