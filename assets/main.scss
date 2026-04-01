@@ -146,12 +146,14 @@ code {
 /* INPUTS */
 input, select {
   width: 100%;
-  padding: 8px;
+  height: 40px;                 /* 🔥 FIXED HEIGHT */
+  padding: 0 10px;              /* 🔥 remove vertical padding */
   background: #020617;
   border: 1px solid #1e293b;
   color: #38bdf8;
   border-radius: 4px;
   font-family: monospace;
+  box-sizing: border-box;       /* 🔥 IMPORTANT */
 }
 
 input:focus, select:focus {
@@ -227,27 +229,27 @@ label {
 
 /* ===== AUTH ROW ===== */
 
-.auth-row {
-  display:flex;
-  gap:8px;
-  align-items:center;
+.auth-row input {
+  flex: 1;
+  min-width: 0;
 }
 
-.auth-row input {
-  flex:1;
-  height:38px;     /* 🔥 FIXED ALIGNMENT */
-}
 
 .btn-small {
-  height:38px;     /* 🔥 MATCH INPUT */
-  padding:8px 14px;
-  border-radius:6px;
-  border:1px solid #38bdf8;
-  background:#020617;
-  color:#38bdf8;
-  font-family: "JetBrains Mono", monospace;
-  cursor:pointer;
-  transition:0.2s;
+  height: 40px;                 /* 🔥 EXACT MATCH */
+  padding: 0 14px;
+  border-radius: 4px;
+  border: 1px solid #38bdf8;
+  background: #020617;
+  color: #38bdf8;
+  font-family: monospace;
+  cursor: pointer;
+
+  display: flex;                /* 🔥 CENTER TEXT PERFECTLY */
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;       /* 🔥 MATCH INPUT */
 }
 
 .btn-small:hover {
