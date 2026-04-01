@@ -25,7 +25,7 @@ permalink: /mmr-terminal-web/
           <label>App Token</label>
           <div class="auth-row">
             <input id="appToken" type="password">
-            <button class="btn-small" onclick="toggleToken()">Show</button>
+            <button class="btn-small" onclick="toggleToken(event)">Show</button>
           </div>
         </div>
       </div>
@@ -50,13 +50,57 @@ permalink: /mmr-terminal-web/
   <!-- ================= RIGHT PANEL ================= -->
   <div class="mmr-right">
 
-    <div class="mmr-card" id="box-input"></div>
-    <div class="mmr-card" id="box-model"></div>
+    <div class="mmr-card" id="box-input">
+      <div class="mmr-card-title">[ INPUT PARAMETERS ]</div>
+      Waiting for input...
+    </div>
 
-    <div class="mmr-card" id="box-original"></div>
-    <div class="mmr-card" id="box-adjusted"></div>
+    <div class="mmr-card" id="box-model">
+      <div class="mmr-card-title">[ MODEL OUTPUT ]</div>
+      Waiting for model to run...
+    </div>
+
+    <div class="mmr-card" id="box-original">
+      <div class="mmr-card-title">[ ORIGINAL MODEL ]</div>
+      No data yet...
+    </div>
+
+    <div class="mmr-card" id="box-adjusted">
+      <div class="mmr-card-title">[ ADJUSTED MODEL ]</div>
+      No data yet...
+    </div>
 
   </div>
+  <div class="mmr-about">
+
+  <div class="mmr-about-box">
+
+    <div class="mmr-about-title">[ ABOUT MMR TERMINAL ]</div>
+
+    <p>
+      MMR Terminal is a precision Market Maker Risk (MMR) based option pricing engine 
+      designed for advanced derivatives analysis and model-driven trading decisions.
+    </p>
+
+    <p>
+      ⚠️ This is a highly advanced tool. Proper understanding and training are strongly 
+      recommended before use.
+    </p>
+
+    <p>
+      Access to this system requires a valid <b>App Key</b> and <b>Token</b>, which are 
+      available through subscription. Monthly usage charges apply.
+    </p>
+
+    <p>
+      <b>Developer Contact:</b><br>
+      Anupam Dutta<br>
+      📞 +91-8240775462
+    </p>
+
+  </div>
+
+</div>
 
 </div>
 
@@ -71,7 +115,7 @@ permalink: /mmr-terminal-web/
 <script>
 
 /* ================= TOKEN TOGGLE ================= */
-function toggleToken(){
+function toggleToken(event){
   const f = document.getElementById("appToken")
   const btn = event.target
 
@@ -112,11 +156,26 @@ async function runMMR(){
   if(!payload.appToken) return showError("Token required")
   if(payload.fac < 0) return showError("Mag Factor must not be negative")
 
-  // Clear previous
-  document.getElementById("box-input").innerHTML = "Loading..."
-  document.getElementById("box-model").innerHTML = ""
-  document.getElementById("box-original").innerHTML = ""
-  document.getElementById("box-adjusted").innerHTML = ""
+  /* ===== LOADING STATE (PRO UI) ===== */
+  document.getElementById("box-input").innerHTML = `
+    <div class="mmr-card-title">[ INPUT PARAMETERS ]</div>
+    Loading input...
+  `
+
+  document.getElementById("box-model").innerHTML = `
+    <div class="mmr-card-title">[ MODEL OUTPUT ]</div>
+    Running model...
+  `
+
+  document.getElementById("box-original").innerHTML = `
+    <div class="mmr-card-title">[ ORIGINAL MODEL ]</div>
+    Processing...
+  `
+
+  document.getElementById("box-adjusted").innerHTML = `
+    <div class="mmr-card-title">[ ADJUSTED MODEL ]</div>
+    Optimizing...
+  `
 
   try{
 
@@ -132,7 +191,7 @@ async function runMMR(){
       return
     }
 
-    // ===== INPUT =====
+    /* ===== INPUT ===== */
     document.getElementById("box-input").innerHTML = `
       <div class="mmr-card-title">[ INPUT PARAMETERS ]</div>
       Spot: ${payload.spot}<br>
@@ -143,7 +202,7 @@ async function runMMR(){
       Mag Factor: ${payload.fac}
     `
 
-    // ===== MODEL =====
+    /* ===== MODEL ===== */
     document.getElementById("box-model").innerHTML = `
       <div class="mmr-card-title">[ MODEL OUTPUT ]</div>
       Iteration: ${json.iteration}<br>
@@ -152,7 +211,7 @@ async function runMMR(){
       Put: ${json.put.toFixed(3)}
     `
 
-    // ===== ORIGINAL =====
+    /* ===== ORIGINAL ===== */
     document.getElementById("box-original").innerHTML = `
       <div class="mmr-card-title">[ ORIGINAL MODEL ]</div>
       Call: ${json.call_model.toFixed(3)}<br>
@@ -162,7 +221,7 @@ async function runMMR(){
       SF: ${json.sf.toFixed(3)}
     `
 
-    // ===== ADJUSTED + RESIDUAL =====
+    /* ===== ADJUSTED + RESIDUAL ===== */
     const residualColor = json.delta < 0.01 ? "#22c55e" : "#ef4444";
 
     document.getElementById("box-adjusted").innerHTML = `
