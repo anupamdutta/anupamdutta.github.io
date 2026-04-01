@@ -65,7 +65,9 @@ permalink: /mmr-terminal-web/
 
   </div>
 
-  <button class="run-btn" onclick="runMMR()">Run MMR Terminal</button>
+  <div style="text-align:center;">
+    <button class="run-btn" style="width:260px;" onclick="runMMR()">Run MMR Terminal</button>
+  </div>
 
   <div id="result" class="result-box"></div>
 
