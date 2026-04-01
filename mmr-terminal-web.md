@@ -20,9 +20,9 @@ permalink: /mmr-terminal-web/
 
     <div class="field">
       <label>App Token</label>
-      <div style="display:flex; gap:6px;">
-        <input id="appToken" type="password" style="flex:1;">
-        <button class="run-btn" style="width:120px; padding:6px;" onclick="toggleToken()">Toggle</button>
+      <div class="auth-row">
+        <input id="appToken" type="password">
+        <button class="btn-small" onclick="toggleToken()">Show</button>
       </div>
     </div>
 
@@ -60,12 +60,12 @@ permalink: /mmr-terminal-web/
 
     <div class="field">
       <label>Mag Factor</label>
-      <input id="fac" type="number" value="1" min="1">
+      <input id="fac" type="number" value="1" min="0">
     </div>
 
   </div>
 
-  <button class="run-btn" onclick="runMMR()">Run MMR</button>
+  <button class="run-btn" onclick="runMMR()">Run MMR Terminal</button>
 
   <div id="result" class="result-box"></div>
 
@@ -84,7 +84,15 @@ permalink: /mmr-terminal-web/
 /* ================= TOKEN TOGGLE ================= */
 function toggleToken(){
   const f = document.getElementById("appToken")
-  f.type = f.type === "password" ? "text" : "password"
+  const btn = event.target
+
+  if(f.type === "password"){
+    f.type = "text"
+    btn.innerText = "Hide"
+  }else{
+    f.type = "password"
+    btn.innerText = "Show"
+  }
 }
 
 /* ================= MODAL ================= */
@@ -114,7 +122,7 @@ async function runMMR(){
   // ===== VALIDATION =====
   if(!payload.appKey) return showError("App Key required")
   if(!payload.appToken) return showError("Token required")
-  if(payload.fac <= 0) return showError("Mag Factor must be > 0")
+  if(payload.fac < 0) return showError("Mag Factor must not be negative")
 
   const out = document.getElementById("result")
   out.innerHTML = "Running..."
