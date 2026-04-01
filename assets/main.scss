@@ -144,8 +144,8 @@ code {
 .iv-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  row-gap: 20px;
-  column-gap: 40px;
+  row-gap: 10px;      /* 🔥 reduced from 20px */
+  column-gap: 24px;   /* slightly tighter horizontally too */
 }
 
 /* INPUTS */
