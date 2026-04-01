@@ -8,7 +8,7 @@
 
 /* ===== BASE ===== */
 body {
-  background-color: #0b0f1a;
+  background-color: #071824;
   color: #cbd5e1;
   font-family: "JetBrains Mono", monospace;
   line-height: 1.7;
@@ -88,7 +88,7 @@ a:hover {
 
 /* ===== CODE ===== */
 pre {
-  background: #020617;
+  background: #071824;
   border: 1px solid #1e293b;
   padding: 12px;
   border-radius: 8px;
@@ -96,7 +96,7 @@ pre {
 
 /* 🔥 IMPORTANT: terminal output override */
 .iv-output {
-  background: #020617;
+  background: #071824;
   border: 1px solid #38bdf8;
   padding: 14px;
   border-radius: 8px;
@@ -156,7 +156,7 @@ code {
   height: 30px !important;
   padding: 0 10px !important;   /* remove vertical padding */
   line-height: 30px;            /* 🔥 force vertical centering */
-  background: #020617;
+  background: #071824;
   border: 1px solid #1e293b;
   color: #38bdf8;
   border-radius: 4px;
