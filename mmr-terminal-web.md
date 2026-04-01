@@ -71,7 +71,9 @@ permalink: /mmr-terminal-web/
     </div>
 
   </div>
-  <div class="mmr-about-full">
+  
+</div>
+<div class="mmr-about-full">
   <div class="mmr-about-box">
     
     <div class="mmr-about-title">[ ABOUT MMR TERMINAL ]</div>
@@ -91,8 +93,6 @@ permalink: /mmr-terminal-web/
     </p>
 
   </div>
-</div>
-
 </div>
 
 <!-- ================= MODAL ================= -->
