@@ -105,7 +105,19 @@ Training is recommended.
 
 👉 [Download MMR Terminal](https://drive.google.com/file/d/14wL_Fpe5ju2zbOb2RGCr4oD3RJ2hLP9H/view?usp=sharing)
 
+<br>
 
+### Web Access
+
+If you prefer not to install the application, you can access the MMR Terminal directly via the web interface:
+
+👉 [Open MMR Terminal Web](https://anupamdutta.github.io/mmr-terminal-web/)
+
+---
+
+Both versions provide the same core engine.
+
+The desktop version offers a more controlled execution environment, while the web version allows quick access without installation.
 ---
 
 ## Framework
