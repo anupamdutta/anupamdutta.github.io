@@ -17,7 +17,7 @@ body {
 
 /* ===== LAYOUT FIX ===== */
 .wrapper {
-  max-width: 900px;
+  max-width: 1000px;   /* 🔥 FIXED */
   margin: auto;
   padding: 20px;
 }
@@ -89,6 +89,24 @@ pre {
   border-radius: 8px;
 }
 
+/* 🔥 IMPORTANT: terminal output override */
+.iv-output {
+  background: #020617;
+  border: 1px solid #38bdf8;
+  padding: 14px;
+  border-radius: 8px;
+  color: #22c55e;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  box-shadow: 0 0 15px rgba(34,197,94,0.2);
+
+  white-space: pre;          /* 🔥 FIXED (no wrap) */
+  overflow-x: auto;          /* 🔥 horizontal scroll */
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
 code {
   background: #020617;
   color: #38bdf8;
@@ -110,7 +128,6 @@ code {
   max-width: 600px;
   margin: auto;
   padding: 20px;
-  font-family: "JetBrains Mono", monospace;
 }
 
 .subtext {
@@ -154,7 +171,7 @@ label {
 /* BUTTON */
 .run-btn {
   margin-top: 20px;
-  width: 100%;
+  width: 260px;              /* 🔥 FIXED */
   padding: 10px;
   background: #020617;
   border: 1px solid #38bdf8;
@@ -163,6 +180,9 @@ label {
   cursor: pointer;
   border-radius: 6px;
   transition: 0.2s;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .run-btn:hover {
@@ -172,10 +192,8 @@ label {
 /* RESULT */
 .result-box {
   margin-top: 20px;
-  font-size: 18px;
-  color: #22c55e;
-  text-shadow: 0 0 6px rgba(34,197,94,0.5);
 }
+
 /* ===== MODAL ===== */
 
 .modal {
@@ -206,57 +224,22 @@ label {
   cursor: pointer;
   font-size: 18px;
 }
-.iv-output {
-  background: #020617;
-  border: 1px solid #38bdf8;
-  padding: 14px;
-  border-radius: 8px;
-  color: #22c55e;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 13px;
-  line-height: 1.5;
-  box-shadow: 0 0 15px rgba(34,197,94,0.2);
 
-  white-space: pre-wrap;      /* 🔥 CRITICAL */
-  word-break: break-word;     /* 🔥 CRITICAL */
-  overflow-x: auto;           /* 🔥 fallback */
-}
-@media (max-width: 600px){
+/* ===== AUTH ROW ===== */
 
-  .iv-output{
-    font-size: 11px;
-    padding: 10px;
-  }
-
-}
-
-@media (max-width: 600px){
-
-  .iv-grid{
-    grid-template-columns: 1fr;   /* 🔥 stack inputs */
-    column-gap: 0;
-  }
-
-}
-@media (max-width: 600px){
-
-  .run-btn{
-    width: 100%;
-  }
-
-}
-.auth-row{
+.auth-row {
   display:flex;
   gap:8px;
   align-items:center;
 }
 
-.auth-row input{
+.auth-row input {
   flex:1;
-  margin-bottom:0;
+  height:38px;     /* 🔥 FIXED ALIGNMENT */
 }
 
-.btn-small{
+.btn-small {
+  height:38px;     /* 🔥 MATCH INPUT */
   padding:8px 14px;
   border-radius:6px;
   border:1px solid #38bdf8;
@@ -267,6 +250,26 @@ label {
   transition:0.2s;
 }
 
-.btn-small:hover{
+.btn-small:hover {
   box-shadow:0 0 8px rgba(56,189,248,0.6);
+}
+
+/* ===== MOBILE FIXES ===== */
+
+@media (max-width: 600px){
+
+  .iv-grid {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+  }
+
+  .iv-output {
+    font-size: 11px;
+    padding: 10px;
+  }
+
+  .run-btn {
+    width: 100%;
+  }
+
 }
