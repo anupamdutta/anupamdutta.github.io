@@ -217,3 +217,28 @@ label {
   line-height: 1.6;
   box-shadow: 0 0 10px rgba(34,197,94,0.2);
 }
+.auth-row{
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+
+.auth-row input{
+  flex:1;
+  margin-bottom:0;
+}
+
+.btn-small{
+  padding:8px 14px;
+  border-radius:6px;
+  border:1px solid #38bdf8;
+  background:#020617;
+  color:#38bdf8;
+  font-family: "JetBrains Mono", monospace;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.btn-small:hover{
+  box-shadow:0 0 8px rgba(56,189,248,0.6);
+}
