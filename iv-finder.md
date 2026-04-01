@@ -4,53 +4,71 @@ title: IV Finder
 permalink: /iv-finder/
 ---
 
-<div class="iv-container">
+<div class="iv-layout">
 
+  <!-- ================= LEFT OUTPUT ================= -->
+  <div class="iv-output-panel">
 
-  <p class="subtext">
-    This is a precision Implied Volatility solver designed for index options like Nifty50.
-  </p>
-  <br>
-
-  <div class="iv-grid">
-
-    <div class="field">
-      <label>Spot</label>
-      <input id="spot" type="number">
+    <div class="mmr-card" id="box-input">
+      <div class="mmr-card-title">[ INPUT PARAMETERS ]</div>
+      Waiting for input...
     </div>
 
-    <div class="field">
-      <label>Strike</label>
-      <input id="strike" type="number">
-    </div>
-
-    <div class="field">
-      <label>DTE</label>
-      <input id="dte" type="number">
-    </div>
-
-    <div class="field">
-      <label>Option Price</label>
-      <input id="price" type="number">
-    </div>
-
-    <div class="field">
-      <label>Type</label>
-      <select id="type">
-        <option value="call">Call</option>
-        <option value="put">Put</option>
-      </select>
+    <div class="mmr-card" id="box-result">
+      <div class="mmr-card-title">[ RESULT ]</div>
+      Run solver to see IV
     </div>
 
   </div>
 
-  <button class="run-btn" onclick="runIV()">Run IV Solver</button>
+  <!-- ================= RIGHT INPUT ================= -->
+  <div class="iv-input-panel">
+    <div class="iv-container">
 
-  <div id="result" class="result-box"></div>
+      <p class="subtext">
+        This is a precision Implied Volatility solver designed for index options like Nifty50.
+      </p>
+
+      <div class="iv-grid">
+
+        <div class="field">
+          <label>Spot</label>
+          <input id="spot" type="number" placeholder="e.g. 17427.95">
+        </div>
+
+        <div class="field">
+          <label>Strike</label>
+          <input id="strike" type="number" placeholder="e.g. 17350">
+        </div>
+
+        <div class="field">
+          <label>DTE</label>
+          <input id="dte" type="number" placeholder="Days to expiry">
+        </div>
+
+        <div class="field">
+          <label>Option Price</label>
+          <input id="price" type="number" placeholder="Market price">
+        </div>
+
+        <div class="field">
+          <label>Type</label>
+          <select id="type">
+            <option value="call">Call</option>
+            <option value="put">Put</option>
+          </select>
+        </div>
+
+      </div>
+
+      <button class="run-btn iv-btn" onclick="runIV()">Run IV Solver</button>
+
+    </div>
+  </div>
 
 </div>
 
-<!-- MODAL -->
+<!-- ================= MODAL ================= -->
 <div id="errorModal" class="modal">
   <div class="modal-content">
     <span class="close" onclick="closeModal()">&times;</span>
@@ -60,6 +78,7 @@ permalink: /iv-finder/
 
 <script>
 
+/* ================= MODAL ================= */
 function showError(msg) {
   document.getElementById("modalText").innerText = msg;
   document.getElementById("errorModal").style.display = "flex";
@@ -69,6 +88,7 @@ function closeModal() {
   document.getElementById("errorModal").style.display = "none";
 }
 
+/* ================= MAIN ================= */
 async function runIV() {
 
   let S = parseFloat(document.getElementById("spot").value);
@@ -82,11 +102,14 @@ async function runIV() {
   if (!K || K <= 0) return showError("Invalid Strike value");
   if (!DTE || DTE <= 0) return showError("DTE must be greater than 0");
   if (!P || P <= 0) return showError("Invalid Option Price");
-
   if (DTE > 3650) return showError("DTE too large (check input)");
 
-  // ===== API CALL =====
+  // ===== LOADING STATE =====
+  document.getElementById("box-input").innerHTML = "Loading...";
+  document.getElementById("box-result").innerHTML = "";
+
   try {
+
     const res = await fetch("https://script.google.com/macros/s/AKfycbyCLcqtV8YiPbuizHVQdaRhMmlI1LCZS6Z8qmo0XRslg9SY8kU9VtHVWdJ39AGcYlhM1g/exec", {
       method: "POST",
       body: JSON.stringify({
@@ -104,27 +127,24 @@ async function runIV() {
       return showError("IV calculation failed. Check inputs.");
     }
 
-    document.getElementById("result").innerHTML = `
-    <pre class="iv-output">
-    ========================================
-            IV SOLVER OUTPUT
-    ========================================
-    
-    INPUT PARAMETERS
-    
-    Spot Price        : ${S}
-    Strike Price      : ${K}
-    Days to Expiry    : ${DTE}
-    Option Type       : ${type.toUpperCase()}
-    
-    ----------------------------------------
-    
-    RESULT
-    
-    Implied Volatility : ${json.iv.toFixed(4)} %
-    
-    ========================================
-    </pre>
+    /* ===== INPUT BOX ===== */
+    document.getElementById("box-input").innerHTML = `
+      <div class="mmr-card-title">[ INPUT PARAMETERS ]</div>
+      Spot: ${S}<br>
+      Strike: ${K}<br>
+      DTE: ${DTE}<br>
+      Option Price: ${P}<br>
+      Type: ${type.toUpperCase()}
+    `;
+
+    /* ===== RESULT BOX ===== */
+    const color = json.iv > 0 ? "#22c55e" : "#ef4444";
+
+    document.getElementById("box-result").innerHTML = `
+      <div class="mmr-card-title">[ RESULT ]</div>
+      <div style="color:${color}; font-size:14px;">
+        IV: ${json.iv.toFixed(4)} %
+      </div>
     `;
 
   } catch (err) {
