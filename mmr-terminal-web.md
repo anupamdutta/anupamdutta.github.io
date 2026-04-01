@@ -71,35 +71,26 @@ permalink: /mmr-terminal-web/
     </div>
 
   </div>
-  <div class="mmr-about">
-
+  <div class="mmr-about-full">
   <div class="mmr-about-box">
-
+    
     <div class="mmr-about-title">[ ABOUT MMR TERMINAL ]</div>
 
-    <p>
-      MMR Terminal is a precision Market Maker Risk (MMR) based option pricing engine 
-      designed for advanced derivatives analysis and model-driven trading decisions.
-    </p>
+    <p>MMR Terminal is a high-precision Market Maker Risk (MMR) based option pricing engine 
+    built for advanced derivatives analysis and model-driven decision making.</p>
+
+    <p>⚠️ This is an advanced system intended for experienced users. Proper understanding 
+    is strongly recommended before usage.</p>
+
+    <p>Access requires a valid <b>App Key</b> and <b>Token</b>, available via subscription. 
+    Monthly charges apply.</p>
 
     <p>
-      ⚠️ This is a highly advanced tool. Proper understanding and training are strongly 
-      recommended before use.
-    </p>
-
-    <p>
-      Access to this system requires a valid <b>App Key</b> and <b>Token</b>, which are 
-      available through subscription. Monthly usage charges apply.
-    </p>
-
-    <p>
-      <b>Developer Contact:</b><br>
-      Anupam Dutta<br>
+      <b>Developer:</b> Anupam Dutta<br>
       📞 +91-8240775462
     </p>
 
   </div>
-
 </div>
 
 </div>
