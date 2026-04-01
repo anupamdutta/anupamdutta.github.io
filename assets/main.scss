@@ -305,6 +305,39 @@ label {
     min-height: auto;
   }
 }
+/* ===== MMR ABOUT SECTION ===== */
+.mmr-about {
+  max-width: 1100px;
+  margin: 50px auto 20px;
+  padding: 0 20px;
+}
+
+.mmr-about-box {
+  border: 1px solid rgba(56,189,248,0.3);
+  border-radius: 10px;
+  padding: 20px;
+  background: rgba(2,6,23,0.6);
+  color: #94a3b8;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.mmr-about-title {
+  color: #38bdf8;
+  font-weight: 600;
+  margin-bottom: 12px;
+  font-family: monospace;
+}
+
+/* subtle highlight */
+.mmr-about-box p {
+  margin-bottom: 10px;
+}
+
+/* warning emphasis */
+.mmr-about-box p:nth-child(3) {
+  color: #facc15;
+}
 
 /* EXTRA SMALL DEVICES */
 @media (max-width: 480px) {
