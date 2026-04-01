@@ -4,66 +4,70 @@ title: IV Finder
 permalink: /iv-finder/
 ---
 
-<div class="iv-layout">
+<div class="iv-page">
 
-  <!-- ================= LEFT OUTPUT ================= -->
-  <div class="iv-output-panel">
+  <div class="iv-layout">
 
-    <div class="mmr-card" id="box-input">
-      <div class="mmr-card-title">[ INPUT PARAMETERS ]</div>
-      Waiting for input...
-    </div>
+    <!-- ================= LEFT OUTPUT ================= -->
+    <div class="iv-output-panel">
 
-    <div class="mmr-card" id="box-result">
-      <div class="mmr-card-title">[ RESULT ]</div>
-      Run solver to see IV
-    </div>
-
-  </div>
-
-  <!-- ================= RIGHT INPUT ================= -->
-  <div class="iv-input-panel">
-    <div class="iv-container">
-
-      <p class="subtext">
-        This is a precision Implied Volatility solver designed for index options like Nifty50.
-      </p>
-
-      <div class="iv-grid">
-
-        <div class="field">
-          <label>Spot</label>
-          <input id="spot" type="number" placeholder="e.g. 17427.95">
-        </div>
-
-        <div class="field">
-          <label>Strike</label>
-          <input id="strike" type="number" placeholder="e.g. 17350">
-        </div>
-
-        <div class="field">
-          <label>DTE</label>
-          <input id="dte" type="number" placeholder="Days to expiry">
-        </div>
-
-        <div class="field">
-          <label>Option Price</label>
-          <input id="price" type="number" placeholder="Market price">
-        </div>
-
-        <div class="field">
-          <label>Type</label>
-          <select id="type">
-            <option value="call">Call</option>
-            <option value="put">Put</option>
-          </select>
-        </div>
-
+      <div class="mmr-card" id="box-input">
+        <div class="mmr-card-title">[ INPUT PARAMETERS ]</div>
+        Waiting for input...
       </div>
 
-      <button class="run-btn iv-btn" onclick="runIV()">Run IV Solver</button>
+      <div class="mmr-card" id="box-result">
+        <div class="mmr-card-title">[ RESULT ]</div>
+        Run solver to see IV
+      </div>
 
     </div>
+
+    <!-- ================= RIGHT INPUT ================= -->
+    <div class="iv-input-panel">
+      <div class="iv-container">
+
+        <p class="subtext">
+          This is a precision Implied Volatility solver designed for index options like Nifty50.
+        </p>
+
+        <div class="iv-grid">
+
+          <div class="field">
+            <label>Spot</label>
+            <input id="spot" type="number" placeholder="e.g. 17427.95">
+          </div>
+
+          <div class="field">
+            <label>Strike</label>
+            <input id="strike" type="number" placeholder="e.g. 17350">
+          </div>
+
+          <div class="field">
+            <label>DTE</label>
+            <input id="dte" type="number" placeholder="Days to expiry">
+          </div>
+
+          <div class="field">
+            <label>Option Price</label>
+            <input id="price" type="number" placeholder="Market price">
+          </div>
+
+          <div class="field">
+            <label>Type</label>
+            <select id="type">
+              <option value="call">Call</option>
+              <option value="put">Put</option>
+            </select>
+          </div>
+
+        </div>
+
+        <button class="run-btn iv-btn" onclick="runIV()">Run IV Solver</button>
+
+      </div>
+    </div>
+
   </div>
 
 </div>
