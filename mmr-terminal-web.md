@@ -143,9 +143,27 @@ async function runMMR(){
     fac: Number(document.getElementById("fac").value)
   }
 
-  if(!payload.appKey) return showError("App Key required")
-  if(!payload.appToken) return showError("Token required")
-  if(payload.fac < 0) return showError("Mag Factor must not be negative")
+  // ===== VALIDATION =====
+  if (!payload.appKey) return showError("App Key required");
+  if (!payload.appToken) return showError("Token required");
+  
+  if (!payload.spot || payload.spot <= 0)
+    return showError("Spot must be greater than 0");
+  
+  if (!payload.strike || payload.strike <= 0)
+    return showError("Strike must be greater than 0");
+  
+  if (!payload.dte || payload.dte <= 0)
+    return showError("DTE must be greater than 0");
+  
+  if (!payload.strikeDiff || payload.strikeDiff <= 0)
+    return showError("Strike Diff must be greater than 0");
+  
+  if (!payload.rate || payload.rate <= 0)
+    return showError("Rate must be greater than 0");
+  
+  if (payload.fac < 0)
+    return showError("Mag Factor must not be negative");
 
   /* ===== LOADING STATE (PRO UI) ===== */
   document.getElementById("box-input").innerHTML = `
