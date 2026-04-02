@@ -61,6 +61,20 @@ h1, h2, h3 {
   color: #e2e8f0;
 }
 
+/* ===== GLOBAL H1 ===== */
+h1 {
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 20px;
+  }
+}
+
 p {
   color: #94a3b8;
 }
