@@ -428,3 +428,24 @@ label {
   }
 
 }
+
+/* ===== OUTPUT BOX FONT BOOST (SAFE OVERRIDE) ===== */
+.mmr-right .mmr-card {
+  font-size: 15px;     /* increase overall */
+  line-height: 1.7;
+}
+
+/* model output slightly bigger */
+#box-model {
+  font-size: 16px;
+}
+
+/* titles slightly bigger */
+.mmr-right .mmr-card-title {
+  font-size: 14px;
+}
+
+/* optional: better spacing */
+.mmr-right .mmr-card br {
+  margin-bottom: 4px;
+}
