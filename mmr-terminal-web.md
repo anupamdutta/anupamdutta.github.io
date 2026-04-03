@@ -36,7 +36,7 @@ permalink: /mmr-terminal-web/
       <div class="iv-grid">
         <div class="field"><label>Spot</label><input id="spot" type="number" placeholder="e.g. 23190.40"></div>
         <div class="field"><label>Strike Diff</label><input id="strikeDiff" type="number" placeholder="e.g. 50"></div>
-        <div class="field"><label>Rate %</label><input id="rate" type="number" placeholder="e.g. 6></div>
+        <div class="field"><label>Rate %</label><input id="rate" type="number" placeholder="e.g. 6"></div>
         <div class="field"><label>DTE</label><input id="dte" type="number" placeholder="Days to Expiry"></div>
       </div>
 
