@@ -183,6 +183,13 @@ async function runMMR(){
       Strike Diff: ${payload.strikeDiff}<br>
       Rate: ${payload.rate}<br>
       DTE: ${payload.dte}
+    
+      <br><br>
+    
+      <div style="font-size:11px; opacity:0.7; line-height:1.5;">
+        Estimated option values may require scaling to align with observed market prices, 
+        ensuring accurate risk representation under model-implied dynamics.
+      </div>
     `
 
     /* ===== MODEL ===== */
@@ -192,8 +199,8 @@ async function runMMR(){
       Iteration: ${json.iteration}<br>
       Strike: ${json.strike_final}<br>
       MMR Vol: ${json.mmr_pct.toFixed(3)}<br>
-      Call: ${json.call.toFixed(3)}<br>
-      Put: ${json.put.toFixed(3)}
+      Estimated Call Base: ${json.call.toFixed(3)}<br>
+      Estimated Put Base: ${json.put.toFixed(3)}
       <br><br>
 
       <div style="color:#facc15;">[ CALIBRATION RESIDUAL ]</div>
