@@ -34,10 +34,10 @@ permalink: /mmr-terminal-web/
 
       <!-- INPUTS -->
       <div class="iv-grid">
-        <div class="field"><label>Spot</label><input id="spot" type="number"></div>
-        <div class="field"><label>Strike Diff</label><input id="strikeDiff" type="number"></div>
-        <div class="field"><label>Rate %</label><input id="rate" type="number"></div>
-        <div class="field"><label>Mag Factor</label><input id="fac" type="number" value="0"></div>
+        <div class="field"><label>Spot</label><input id="spot" type="number" placeholder="e.g. 23190.40"></div>
+        <div class="field"><label>Strike Diff</label><input id="strikeDiff" type="number" placeholder="e.g. 50"></div>
+        <div class="field"><label>Rate %</label><input id="rate" type="number" placeholder="e.g. 6></div>
+        <div class="field"><label>DTE</label><input id="dte" type="number" placeholder="Days to Expiry"></div>
       </div>
 
       <button class="run-btn" onclick="runMMR()">Run MMR Terminal</button>
@@ -59,12 +59,12 @@ permalink: /mmr-terminal-web/
     </div>
 
     <div class="mmr-card" id="box-original">
-      <div class="mmr-card-title">[ ORIGINAL MODEL ]</div>
+      <div class="mmr-card-title">[ UNCONSTRAINED VOL-SURFACE ]</div>
       No data yet...
     </div>
 
     <div class="mmr-card" id="box-adjusted">
-      <div class="mmr-card-title">[ ADJUSTED MODEL ]</div>
+      <div class="mmr-card-title">[ VOL-SURFACE CONSISTENCY ]</div>
       No data yet...
     </div>
 
@@ -136,7 +136,7 @@ async function runMMR(){
     spot: Number(document.getElementById("spot").value),
     strikeDiff: Number(document.getElementById("strikeDiff").value),
     rate: Number(document.getElementById("rate").value),
-    fac: Number(document.getElementById("fac").value)
+    dte: Number(document.getElementById("dte").value)
   }
 
   // ===== VALIDATION =====
@@ -153,8 +153,11 @@ async function runMMR(){
   if (!payload.rate || payload.rate <= 0)
     return showError("Rate must be greater than 0");
   
-  if (payload.fac < 0)
-    return showError("Mag Factor must not be negative");
+  if (!payload.dte || payload.dte <= 0)
+    return showError("DTE must be greater than 0");
+  
+  if (payload.dte > 3650)
+    return showError("DTE too large (check input)");
 
   /* ===== LOADING STATE (PRO UI) ===== */
   document.getElementById("box-input").innerHTML = `
@@ -168,12 +171,12 @@ async function runMMR(){
   `
 
   document.getElementById("box-original").innerHTML = `
-    <div class="mmr-card-title">[ ORIGINAL MODEL ]</div>
+    <div class="mmr-card-title">[ UNCONSTRAINED VOL-SURFACE ]</div>
     Processing...
   `
 
   document.getElementById("box-adjusted").innerHTML = `
-    <div class="mmr-card-title">[ ADJUSTED MODEL ]</div>
+    <div class="mmr-card-title">[ VOL-SURFACE CONSISTENCY ]</div>
     Optimizing...
   `
 
@@ -197,7 +200,7 @@ async function runMMR(){
       Spot: ${payload.spot}<br>
       Strike Diff: ${payload.strikeDiff}<br>
       Rate: ${payload.rate}<br>
-      Mag Factor: ${payload.fac}
+      DTE: ${payload.dte}
     `
 
     /* ===== MODEL ===== */
@@ -212,28 +215,28 @@ async function runMMR(){
 
     /* ===== ORIGINAL ===== */
     document.getElementById("box-original").innerHTML = `
-      <div class="mmr-card-title">[ ORIGINAL MODEL ]</div>
+      <div class="mmr-card-title">[ UNCONSTRAINED VOL-SURFACE ]</div>
       Call: ${json.call_model.toFixed(3)}<br>
       Put: ${json.put_model.toFixed(3)}<br>
       IV Call: ${json.iv_call.toFixed(3)}<br>
       IV Put: ${json.iv_put.toFixed(3)}<br>
-      SF: ${json.sf.toFixed(3)}
+      SF (F*): ${json.sf.toFixed(3)}
     `
 
     /* ===== ADJUSTED + RESIDUAL ===== */
     const residualColor = json.delta < 0.01 ? "#22c55e" : "#ef4444";
 
     document.getElementById("box-adjusted").innerHTML = `
-      <div class="mmr-card-title">[ ADJUSTED MODEL ]</div>
+      <div class="mmr-card-title">[ VOL-SURFACE CONSISTENCY ]</div>
       Call: ${json.call_model.toFixed(3)}<br>
       Put: ${json.put_model_adj.toFixed(3)}<br>
       IV Call: ${json.iv_call.toFixed(3)}<br>
       IV Put: ${json.iv_put_adj.toFixed(3)}<br>
-      SF: ${json.sf_adj.toFixed(3)}
+      SF (F**): ${json.sf_adj.toFixed(3)}
 
       <br><br>
 
-      <div style="color:#facc15;">[ RESIDUAL ]</div>
+      <div style="color:#facc15;">[ CALIBRATION RESIDUAL ]</div>
       <div style="color:${residualColor};">
         L1 Error: ${json.delta.toFixed(6)}
       </div>
