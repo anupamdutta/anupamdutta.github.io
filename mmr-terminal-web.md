@@ -35,11 +35,9 @@ permalink: /mmr-terminal-web/
       <!-- INPUTS -->
       <div class="iv-grid">
         <div class="field"><label>Spot</label><input id="spot" type="number"></div>
-        <div class="field"><label>Strike</label><input id="strike" type="number"></div>
-        <div class="field"><label>DTE</label><input id="dte" type="number"></div>
         <div class="field"><label>Strike Diff</label><input id="strikeDiff" type="number"></div>
         <div class="field"><label>Rate %</label><input id="rate" type="number"></div>
-        <div class="field"><label>Mag Factor</label><input id="fac" type="number" value="1"></div>
+        <div class="field"><label>Mag Factor</label><input id="fac" type="number" value="0"></div>
       </div>
 
       <button class="run-btn" onclick="runMMR()">Run MMR Terminal</button>
@@ -136,8 +134,6 @@ async function runMMR(){
     appKey: document.getElementById("appKey").value.trim(),
     appToken: document.getElementById("appToken").value.trim(),
     spot: Number(document.getElementById("spot").value),
-    strike: Number(document.getElementById("strike").value),
-    dte: Number(document.getElementById("dte").value),
     strikeDiff: Number(document.getElementById("strikeDiff").value),
     rate: Number(document.getElementById("rate").value),
     fac: Number(document.getElementById("fac").value)
@@ -150,11 +146,6 @@ async function runMMR(){
   if (!payload.spot || payload.spot <= 0)
     return showError("Spot must be greater than 0");
   
-  if (!payload.strike || payload.strike <= 0)
-    return showError("Strike must be greater than 0");
-  
-  if (!payload.dte || payload.dte <= 0)
-    return showError("DTE must be greater than 0");
   
   if (!payload.strikeDiff || payload.strikeDiff <= 0)
     return showError("Strike Diff must be greater than 0");
@@ -204,8 +195,6 @@ async function runMMR(){
     document.getElementById("box-input").innerHTML = `
       <div class="mmr-card-title">[ INPUT PARAMETERS ]</div>
       Spot: ${payload.spot}<br>
-      Strike: ${payload.strike}<br>
-      DTE: ${payload.dte}<br>
       Strike Diff: ${payload.strikeDiff}<br>
       Rate: ${payload.rate}<br>
       Mag Factor: ${payload.fac}
@@ -215,6 +204,7 @@ async function runMMR(){
     document.getElementById("box-model").innerHTML = `
       <div class="mmr-card-title">[ MODEL OUTPUT ]</div>
       Iteration: ${json.iteration}<br>
+      Strike: ${json.strike_final}<br>
       MMR Vol: ${json.mmr_pct.toFixed(3)}<br>
       Call: ${json.call.toFixed(3)}<br>
       Put: ${json.put.toFixed(3)}
