@@ -58,16 +58,6 @@ permalink: /mmr-terminal-web/
       Waiting for model to run...
     </div>
 
-    <div class="mmr-card" id="box-original">
-      <div class="mmr-card-title">[ UNCONSTRAINED VOL-SURFACE ]</div>
-      No data yet...
-    </div>
-
-    <div class="mmr-card" id="box-adjusted">
-      <div class="mmr-card-title">[ VOL-SURFACE CONSISTENCY ]</div>
-      No data yet...
-    </div>
-
   </div>
   
 </div>
@@ -170,15 +160,7 @@ async function runMMR(){
     Running model...
   `
 
-  document.getElementById("box-original").innerHTML = `
-    <div class="mmr-card-title">[ UNCONSTRAINED VOL-SURFACE ]</div>
-    Processing...
-  `
-
-  document.getElementById("box-adjusted").innerHTML = `
-    <div class="mmr-card-title">[ VOL-SURFACE CONSISTENCY ]</div>
-    Optimizing...
-  `
+  
 
   try{
 
@@ -204,6 +186,7 @@ async function runMMR(){
     `
 
     /* ===== MODEL ===== */
+    const residualColor = json.delta < 0.01 ? "#22c55e" : "#ef4444";
     document.getElementById("box-model").innerHTML = `
       <div class="mmr-card-title">[ MODEL OUTPUT ]</div>
       Iteration: ${json.iteration}<br>
@@ -211,29 +194,6 @@ async function runMMR(){
       MMR Vol: ${json.mmr_pct.toFixed(3)}<br>
       Call: ${json.call.toFixed(3)}<br>
       Put: ${json.put.toFixed(3)}
-    `
-
-    /* ===== ORIGINAL ===== */
-    document.getElementById("box-original").innerHTML = `
-      <div class="mmr-card-title">[ UNCONSTRAINED VOL-SURFACE ]</div>
-      Call: ${json.call_model.toFixed(3)}<br>
-      Put: ${json.put_model.toFixed(3)}<br>
-      IV Call: ${json.iv_call.toFixed(3)}<br>
-      IV Put: ${json.iv_put.toFixed(3)}<br>
-      SF (F*): ${json.sf.toFixed(3)}
-    `
-
-    /* ===== ADJUSTED + RESIDUAL ===== */
-    const residualColor = json.delta < 0.01 ? "#22c55e" : "#ef4444";
-
-    document.getElementById("box-adjusted").innerHTML = `
-      <div class="mmr-card-title">[ VOL-SURFACE CONSISTENCY ]</div>
-      Call: ${json.call_model.toFixed(3)}<br>
-      Put: ${json.put_model_adj.toFixed(3)}<br>
-      IV Call: ${json.iv_call.toFixed(3)}<br>
-      IV Put: ${json.iv_put_adj.toFixed(3)}<br>
-      SF (F**): ${json.sf_adj.toFixed(3)}
-
       <br><br>
 
       <div style="color:#facc15;">[ CALIBRATION RESIDUAL ]</div>
@@ -241,6 +201,8 @@ async function runMMR(){
         L1 Error: ${json.delta.toFixed(6)}
       </div>
     `
+
+    
 
   }catch(e){
     showError("Connection error")
