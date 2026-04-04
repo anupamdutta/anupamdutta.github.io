@@ -248,6 +248,8 @@ async function runMMR(){
     } else {
       residualColor = "#facc15";   // YELLOW
     }
+    const signSymbol = json.calib_sign === 1 ? "▼/●" :
+                   json.calib_sign === -1 ? "▲" : "●";
     
     document.getElementById("box-model").innerHTML = `
       <div class="mmr-card-title">[ MODEL OUTPUT ]</div>
@@ -260,7 +262,7 @@ async function runMMR(){
     
       <div style="color:#facc15;">[ CALIBRATION RESIDUAL ]</div>
       <div style="color:${residualColor}; font-weight:600;">
-        L1 Error: ${json.delta.toFixed(6)}
+        L1 Error: ${json.delta.toFixed(6)} ${signSymbol}
       </div>
     `;
     
