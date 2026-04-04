@@ -237,7 +237,18 @@ async function runMMR(){
     `;
 
     /* ===== MODEL ===== */
-    const residualColor = json.delta < 0.01 ? "#22c55e" : "#ef4444";
+
+    // 🎯 COLOR BASED ON CALIB SIGN
+    let residualColor;
+    
+    if (json.calib_sign === 1) {
+      residualColor = "#22c55e";   // GREEN
+    } else if (json.calib_sign === -1) {
+      residualColor = "#ef4444";   // RED
+    } else {
+      residualColor = "#facc15";   // YELLOW
+    }
+    
     document.getElementById("box-model").innerHTML = `
       <div class="mmr-card-title">[ MODEL OUTPUT ]</div>
       Iteration: ${json.iteration}<br>
@@ -246,13 +257,12 @@ async function runMMR(){
       Estimated Call Base: ${json.call.toFixed(3)}<br>
       Estimated Put Base: ${json.put.toFixed(3)}
       <br><br>
-
+    
       <div style="color:#facc15;">[ CALIBRATION RESIDUAL ]</div>
-      <div style="color:${residualColor};">
+      <div style="color:${residualColor}; font-weight:600;">
         L1 Error: ${json.delta.toFixed(6)}
       </div>
-    `
-
+    `;
     
 
   }catch(e){
