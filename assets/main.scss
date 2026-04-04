@@ -452,6 +452,85 @@ label {
   font-size: 14px;
 }
 
+/* ========================================= */
+/* ========== STRIKE TOGGLE ================= */
+/* ========================================= */
+
+.toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 34px; /* match input height */
+}
+
+/* SWITCH BASE */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 42px;
+  height: 20px;
+}
+
+/* HIDE DEFAULT CHECKBOX */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* SLIDER TRACK */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background: #020617;
+  border: 1px solid #1e293b;
+  border-radius: 20px;
+  transition: 0.25s;
+}
+
+/* GLOW EFFECT (matches your theme) */
+.slider:hover {
+  box-shadow: 0 0 6px rgba(56,189,248,0.4);
+}
+
+/* SLIDER DOT */
+.slider:before {
+  content: "";
+  position: absolute;
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  top: 2.5px;
+  background: #38bdf8;
+  border-radius: 50%;
+  transition: 0.25s;
+}
+
+/* ACTIVE STATE */
+input:checked + .slider {
+  background: rgba(56,189,248,0.15);
+  border-color: #38bdf8;
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+  background: #22c55e;
+}
+
+/* LABEL TEXT */
+#toggleLabel {
+  font-size: 11px;
+  color: #64748b;
+  min-width: 28px;
+}
+
+/* DISABLED INPUT LOOK */
+#manualStrike:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 /* optional: better spacing */
 .mmr-right .mmr-card br {
   margin-bottom: 4px;
