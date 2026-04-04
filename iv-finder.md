@@ -146,7 +146,7 @@ async function runIV() {
 
     document.getElementById("box-result").innerHTML = `
       <div class="mmr-card-title">[ RESULT ]</div>
-      <div style="color:${color}; font-size:14px;">
+      <div style="color:${color}; font-size:18px;">
         IV: ${json.iv.toFixed(4)} %
       </div>
     `;
