@@ -36,9 +36,24 @@ permalink: /mmr-terminal-web/
       <div class="iv-grid">
         <div class="field"><label>Spot</label><input id="spot" type="number" placeholder="e.g. 23190.40"></div>
         <div class="field"><label>Strike Diff</label><input id="strikeDiff" type="number" placeholder="e.g. 50"></div>
-        <div class="field"><label>Rate %</label><input id="rate" type="number" placeholder="e.g. 6"></div>
-        <div class="field"><label>DTE</label><input id="dte" type="number" placeholder="Days to Expiry"></div>
-      </div>
+        <div class="field">
+          <label>Auto Strike</label>
+          <div class="toggle-row">
+            <label class="switch">
+              <input type="checkbox" id="autoStrike" checked onchange="toggleStrikeInput()">
+              <span class="slider"></span>
+            </label>
+            <span id="toggleLabel">ON</span>
+          </div>
+        </div>
+        
+        <div class="field">
+          <label>Manual Strike</label>
+          <input id="manualStrike" type="number" placeholder="Enter strike" disabled>
+        </div>
+          <div class="field"><label>Rate %</label><input id="rate" type="number" placeholder="e.g. 6"></div>
+          <div class="field"><label>DTE</label><input id="dte" type="number" placeholder="Days to Expiry"></div>
+        </div>
 
       <button class="run-btn" onclick="runMMR()">Run MMR Terminal</button>
 
@@ -93,6 +108,22 @@ permalink: /mmr-terminal-web/
 
 <script>
 
+function toggleStrikeInput() {
+  const isAuto = document.getElementById("autoStrike").checked;
+  const manualField = document.getElementById("manualStrike");
+  const label = document.getElementById("toggleLabel");
+
+  if (isAuto) {
+    manualField.disabled = true;
+    label.innerText = "ON";
+  } else {
+    manualField.disabled = false;
+    label.innerText = "OFF";
+  }
+}
+
+  
+
 /* ================= TOKEN TOGGLE ================= */
 function toggleToken(event){
   const f = document.getElementById("appToken")
@@ -120,14 +151,20 @@ function closeModal(){
 /* ================= MAIN ================= */
 async function runMMR(){
 
+  const isAutoStrike = document.getElementById("autoStrike").checked;
+  const manualStrikeVal = Number(document.getElementById("manualStrike").value);
+  
   const payload = {
     appKey: document.getElementById("appKey").value.trim(),
     appToken: document.getElementById("appToken").value.trim(),
     spot: Number(document.getElementById("spot").value),
     strikeDiff: Number(document.getElementById("strikeDiff").value),
     rate: Number(document.getElementById("rate").value),
-    dte: Number(document.getElementById("dte").value)
-  }
+    dte: Number(document.getElementById("dte").value),
+  
+    autoStrike: isAutoStrike,
+    strike: isAutoStrike ? null : manualStrikeVal
+  };
 
   // ===== VALIDATION =====
   if (!payload.appKey) return showError("App Key required");
@@ -148,6 +185,12 @@ async function runMMR(){
   
   if (payload.dte > 3650)
     return showError("DTE too large (check input)");
+
+  if (!isAutoStrike) {
+    if (!manualStrikeVal || manualStrikeVal <= 0) {
+      return showError("Manual Strike must be greater than 0");
+    }
+  }
 
   /* ===== LOADING STATE (PRO UI) ===== */
   document.getElementById("box-input").innerHTML = `
@@ -180,6 +223,8 @@ async function runMMR(){
     document.getElementById("box-input").innerHTML = `
       <div class="mmr-card-title">[ INPUT PARAMETERS ]</div>
       Spot: ${payload.spot}<br>
+      Strike Mode: ${payload.autoStrike ? "AUTO" : "MANUAL"}<br>
+      ${!payload.autoStrike ? `Strike: ${payload.strike}<br>` : ""}
       Strike Diff: ${payload.strikeDiff}<br>
       Rate: ${payload.rate}<br>
       DTE: ${payload.dte}
@@ -187,10 +232,9 @@ async function runMMR(){
       <br><br>
     
       <div style="font-size:11px; opacity:0.7; line-height:1.5;">
-        Estimated option values may require scaling to align with observed market prices, 
-        ensuring accurate risk representation under model-implied dynamics.
+        Estimated option values may require scaling to align with observed market prices.
       </div>
-    `
+    `;
 
     /* ===== MODEL ===== */
     const residualColor = json.delta < 0.01 ? "#22c55e" : "#ef4444";
