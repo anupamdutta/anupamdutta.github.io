@@ -270,9 +270,6 @@ async function runMMR(){
       Iteration: ${json.iteration}<br>
       Strike: ${json.strike_final}<br>
       MMR Vol: ${json.mmr_pct.toFixed(3)}<br>
-      Estimated Call Base: ${json.call.toFixed(3)}<br>
-      Estimated Put Base: ${json.put.toFixed(3)}
-      <br>
       <div style="color:#facc15;">[ CALIBRATION RESIDUAL ]</div>
       <div style="color:${residualColor}; font-weight:600;">
         L1 Error: ${json.delta.toFixed(6)} ${signSymbol}
