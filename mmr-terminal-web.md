@@ -293,7 +293,8 @@ async function runMMR(){
       Call Model: ${Number(json.call_model).toFixed(3)}<br>
       Put Model: ${Number(json.put_model).toFixed(3)}<br>
       Call IV (%): ${Number(json.call_iv).toFixed(3)}<br>
-      Put IV (%): ${Number(json.put_iv).toFixed(3)}
+      Put IV (%): ${Number(json.put_iv).toFixed(3)}<br>
+      SF(F*): ${Number(json.sf).toFixed(3)}
     `;
     
     /* ===== CONSISTENT SURFACE ===== */
@@ -303,7 +304,8 @@ async function runMMR(){
       Call Model Adj: ${Number(json.call_model_adj).toFixed(3)}<br>
       Put Model Adj: ${Number(json.put_model_adj).toFixed(3)}<br>
       Call IV Adj (%): ${Number(json.call_iv_adj).toFixed(3)}<br>
-      Put IV Adj (%): ${Number(json.iv_put_adj).toFixed(3)}
+      Put IV Adj (%): ${Number(json.iv_put_adj).toFixed(3)}<br>
+      SF Adj(F**): ${Number(json.sf_adj).toFixed(3)}
     `;
     
 
