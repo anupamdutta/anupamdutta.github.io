@@ -248,12 +248,6 @@ async function runMMR(){
       Strike Diff: ${payload.strikeDiff}<br>
       Rate: ${payload.rate}<br>
       DTE: ${payload.dte}
-    
-      <br><br>
-    
-      <div style="font-size:11px; opacity:0.7; line-height:1.5;">
-        Estimated option values may require scaling to align with observed market prices.
-      </div>
     `;
 
     /* ===== MODEL ===== */
@@ -278,8 +272,7 @@ async function runMMR(){
       MMR Vol: ${json.mmr_pct.toFixed(3)}<br>
       Estimated Call Base: ${json.call.toFixed(3)}<br>
       Estimated Put Base: ${json.put.toFixed(3)}
-      <br><br>
-    
+      <br>
       <div style="color:#facc15;">[ CALIBRATION RESIDUAL ]</div>
       <div style="color:${residualColor}; font-weight:600;">
         L1 Error: ${json.delta.toFixed(6)} ${signSymbol}
@@ -301,9 +294,9 @@ async function runMMR(){
     document.getElementById("box-surface-adj").innerHTML = `
       <div class="mmr-card-title">[ VOLATILITY SURFACE CONSISTENCY ]</div>
     
-      Call Model Adj: ${Number(json.call_model_adj).toFixed(3)}<br>
+      Call Model Adj: ${Number(json.call_model).toFixed(3)}<br>
       Put Model Adj: ${Number(json.put_model_adj).toFixed(3)}<br>
-      Call IV Adj (%): ${Number(json.call_iv_adj).toFixed(3)}<br>
+      Call IV Adj (%): ${Number(json.call_iv).toFixed(3)}<br>
       Put IV Adj (%): ${Number(json.iv_put_adj).toFixed(3)}<br>
       SF Adj(F**): ${Number(json.sf_adj).toFixed(3)}
     `;
