@@ -73,6 +73,16 @@ permalink: /mmr-terminal-web/
       Waiting for model to run...
     </div>
 
+    <div class="mmr-card" id="box-surface-raw">
+      <div class="mmr-card-title">[ UNCONSTRAINED VOLATILITY SURFACE ]</div>
+      Waiting...
+    </div>
+    
+    <div class="mmr-card" id="box-surface-adj">
+      <div class="mmr-card-title">[ VOLATILITY SURFACE CONSISTENCY ]</div>
+      Waiting...
+    </div>
+
   </div>
   
 </div>
@@ -203,6 +213,16 @@ async function runMMR(){
     Running model...
   `
 
+  document.getElementById("box-surface-raw").innerHTML = `
+    <div class="mmr-card-title">[ UNCONSTRAINED VOLATILITY SURFACE ]</div>
+    Loading...
+  `;
+
+  document.getElementById("box-surface-adj").innerHTML = `
+    <div class="mmr-card-title">[ VOLATILITY SURFACE CONSISTENCY ]</div>
+    Loading...
+  `;
+
   
 
   try{
@@ -264,6 +284,26 @@ async function runMMR(){
       <div style="color:${residualColor}; font-weight:600;">
         L1 Error: ${json.delta.toFixed(6)} ${signSymbol}
       </div>
+    `;
+
+    /* ===== UNCONSTRAINED SURFACE ===== */
+    document.getElementById("box-surface-raw").innerHTML = `
+      <div class="mmr-card-title">[ UNCONSTRAINED VOLATILITY SURFACE ]</div>
+    
+      Call Model: ${Number(json.call_model).toFixed(3)}<br>
+      Put Model: ${Number(json.put_model).toFixed(3)}<br>
+      Call IV (%): ${Number(json.call_iv).toFixed(3)}<br>
+      Put IV (%): ${Number(json.put_iv).toFixed(3)}
+    `;
+    
+    /* ===== CONSISTENT SURFACE ===== */
+    document.getElementById("box-surface-adj").innerHTML = `
+      <div class="mmr-card-title">[ VOLATILITY SURFACE CONSISTENCY ]</div>
+    
+      Call Model Adj: ${Number(json.call_model_adj).toFixed(3)}<br>
+      Put Model Adj: ${Number(json.put_model_adj).toFixed(3)}<br>
+      Call IV Adj (%): ${Number(json.call_iv_adj).toFixed(3)}<br>
+      Put IV Adj (%): ${Number(json.iv_put_adj).toFixed(3)}
     `;
     
 
