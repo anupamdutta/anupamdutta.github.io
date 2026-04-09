@@ -34,7 +34,7 @@ permalink: /mmr-terminal-web/
 
       <!-- INPUTS -->
       <div class="iv-grid">
-        <div class="field"><label>Spot</label><input id="spot" type="number" placeholder="e.g. 23190.40"></div>
+        <div class="field"><label>Spot/SF</label><input id="spot" type="number" placeholder="e.g. 23190.40"></div>
         <div class="field"><label>Strike Diff</label><input id="strikeDiff" type="number" placeholder="e.g. 50"></div>
         <div class="field">
           <label>Auto Strike</label>
@@ -252,7 +252,7 @@ async function runMMR(){
     /* ===== INPUT ===== */
     document.getElementById("box-input").innerHTML = `
       <div class="mmr-card-title">[ INPUT PARAMETERS ]</div>
-      Spot: ${payload.spot}<br>
+      Spot/SF: ${payload.spot}<br>
       ${!payload.autoStrike ? `Strike: ${payload.strike}<br>` : ""}
       Strike Diff: ${payload.strikeDiff}<br>
       Rate: ${payload.rate}<br>
@@ -276,10 +276,17 @@ async function runMMR(){
     
     document.getElementById("box-model").innerHTML = `
       <div class="mmr-card-title">[ MODEL OUTPUT ]</div>
-      Iteration: ${json.iteration}<br>
+    
+      Iteration: ${json.iteration ?? "—"}<br>
       Strike: ${json.strike} | Type: ${json.option_type}<br>
       Option Price: ${json.option_price}<br>
       Min. Points: ${json.profit_points.min} | Max. Points: ${json.profit_points.max}<br>
+    
+      <br>
+      <div style="font-size:12px; color:#facc15; line-height:1.4;">
+        ⚠ Model output is for educational purposes only.<br>
+        ${json.iteration > 0 ? "⚠ Iteration > 0: model estimates may be unreliable." : ""}
+      </div>
     `;
 
     
