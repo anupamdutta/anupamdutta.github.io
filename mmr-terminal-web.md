@@ -194,7 +194,8 @@ async function runMMR(){
     dte: Number(document.getElementById("dte").value),
   
     autoStrike: isAutoStrike,
-    strike: isAutoStrike ? null : manualStrikeVal
+    strike: isAutoStrike ? null : manualStrikeVal,
+    fac: Number(document.getElementById("fac").value)
   };
 
   // ===== VALIDATION =====
@@ -221,6 +222,10 @@ async function runMMR(){
     if (!manualStrikeVal || manualStrikeVal <= 0) {
       return showError("Manual Strike must be greater than 0");
     }
+  }
+
+  if (![0,1].includes(payload.fac)) {
+    return showError("Fac must be 0 or 1");
   }
 
   /* ===== LOADING STATE (PRO UI) ===== */
@@ -264,11 +269,11 @@ async function runMMR(){
     document.getElementById("box-input").innerHTML = `
       <div class="mmr-card-title">[ INPUT PARAMETERS ]</div>
       Spot: ${payload.spot}<br>
-      Strike Mode: ${payload.autoStrike ? "AUTO" : "MANUAL"}<br>
       ${!payload.autoStrike ? `Strike: ${payload.strike}<br>` : ""}
       Strike Diff: ${payload.strikeDiff}<br>
       Rate: ${payload.rate}<br>
       DTE: ${payload.dte}
+      Mag. Factor: ${payload.fac}<br>
     `;
 
     /* ===== MODEL ===== */
