@@ -65,10 +65,10 @@ permalink: /mmr-terminal-web/
             </div>
         
             <div class="field">
-              <label>Mag Factor</label>
+              <label>Option Type</label>
               <select id="fac">
-                <option value="0">0</option>
-                <option value="1">1</option>
+                <option value="0">Put</option>
+                <option value="1">Call</option>
               </select>
             </div>
         
@@ -94,15 +94,7 @@ permalink: /mmr-terminal-web/
       Waiting for model to run...
     </div>
 
-    <div class="mmr-card" id="box-surface-raw">
-      <div class="mmr-card-title">[ UNCONSTRAINED VOLATILITY SURFACE ]</div>
-      Waiting...
-    </div>
     
-    <div class="mmr-card" id="box-surface-adj">
-      <div class="mmr-card-title">[ VOLATILITY SURFACE CONSISTENCY ]</div>
-      Waiting...
-    </div>
 
   </div>
   
@@ -225,7 +217,7 @@ async function runMMR(){
   }
 
   if (![0,1].includes(payload.fac)) {
-    return showError("Fac must be 0 or 1");
+    return showError("Opt. Type must be 0 or 1");
   }
 
   /* ===== LOADING STATE (PRO UI) ===== */
@@ -239,15 +231,7 @@ async function runMMR(){
     Running model...
   `
 
-  document.getElementById("box-surface-raw").innerHTML = `
-    <div class="mmr-card-title">[ UNCONSTRAINED VOLATILITY SURFACE ]</div>
-    Loading...
-  `;
-
-  document.getElementById("box-surface-adj").innerHTML = `
-    <div class="mmr-card-title">[ VOLATILITY SURFACE CONSISTENCY ]</div>
-    Loading...
-  `;
+  
 
   
 
@@ -273,56 +257,32 @@ async function runMMR(){
       Strike Diff: ${payload.strikeDiff}<br>
       Rate: ${payload.rate}<br>
       DTE: ${payload.dte}
-      Mag. Factor: ${payload.fac}<br>
     `;
 
     /* ===== MODEL ===== */
 
     // 🎯 COLOR BASED ON CALIB SIGN
-    let residualColor;
+    //let residualColor;
     
-    if (json.calib_sign === 1) {
-      residualColor = "#22c55e";   // GREEN
-    } else if (json.calib_sign === -1) {
-      residualColor = "#ef4444";   // RED
-    } else {
-      residualColor = "#facc15";   // YELLOW
-    }
-    const signSymbol = json.calib_sign === 1 ? "▼/●" :
-                   json.calib_sign === -1 ? "▲" : "●";
+    //if (json.calib_sign === 1) {
+      //residualColor = "#22c55e";   // GREEN
+    //} else if (json.calib_sign === -1) {
+      //residualColor = "#ef4444";   // RED
+    //} else {
+      //residualColor = "#facc15";   // YELLOW
+    //}
+    //const signSymbol = json.calib_sign === 1 ? "▼/●" :
+                   //json.calib_sign === -1 ? "▲" : "●";
     
     document.getElementById("box-model").innerHTML = `
       <div class="mmr-card-title">[ MODEL OUTPUT ]</div>
       Iteration: ${json.iteration}<br>
-      Strike: ${json.strike_final}<br>
-      MMR Vol: ${json.mmr_pct.toFixed(3)}<br>
-      <div style="color:#facc15;">[ CALIBRATION RESIDUAL ]</div>
-      <div style="color:${residualColor}; font-weight:600;">
-        L1 Error: ${json.delta.toFixed(6)} ${signSymbol}
-      </div>
+      Strike: ${json.strike_final} | Type: ${json.option_type}<br>
+      Option Price: ${json.option_price}<br>
+      Min. Points: ${json.profit_points.min} | Max. Points: ${json.profit_points.max}<br>
     `;
 
-    /* ===== UNCONSTRAINED SURFACE ===== */
-    document.getElementById("box-surface-raw").innerHTML = `
-      <div class="mmr-card-title">[ UNCONSTRAINED VOLATILITY SURFACE ]</div>
     
-      Call Model: ${Number(json.call_model).toFixed(3)}<br>
-      Put Model: ${Number(json.put_model).toFixed(3)}<br>
-      Call IV (%): ${Number(json.call_iv).toFixed(3)}<br>
-      Put IV (%): ${Number(json.put_iv).toFixed(3)}<br>
-      SF(F*): ${Number(json.sf).toFixed(3)}
-    `;
-    
-    /* ===== CONSISTENT SURFACE ===== */
-    document.getElementById("box-surface-adj").innerHTML = `
-      <div class="mmr-card-title">[ VOLATILITY SURFACE CONSISTENCY ]</div>
-    
-      Call Model Adj: ${Number(json.call_model).toFixed(3)}<br>
-      Put Model Adj: ${Number(json.put_model_adj).toFixed(3)}<br>
-      Call IV Adj (%): ${Number(json.call_iv).toFixed(3)}<br>
-      Put IV Adj (%): ${Number(json.iv_put_adj).toFixed(3)}<br>
-      SF Adj(F**): ${Number(json.sf_adj).toFixed(3)}
-    `;
     
 
   }catch(e){
