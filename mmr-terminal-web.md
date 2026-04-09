@@ -51,8 +51,29 @@ permalink: /mmr-terminal-web/
           <label>Manual Strike</label>
           <input id="manualStrike" type="number" placeholder="Enter strike" disabled>
         </div>
-          <div class="field"><label>Rate %</label><input id="rate" type="number" placeholder="e.g. 6"></div>
-          <div class="field"><label>DTE</label><input id="dte" type="number" placeholder="Days to Expiry"></div>
+         <div class="full-width">
+          <div class="triple-row">
+        
+            <div class="field">
+              <label>Rate %</label>
+              <input id="rate" type="number" placeholder="e.g. 6">
+            </div>
+        
+            <div class="field">
+              <label>DTE</label>
+              <input id="dte" type="number" placeholder="Days to Expiry">
+            </div>
+        
+            <div class="field">
+              <label>Mag Factor</label>
+              <select id="fac">
+                <option value="0">0</option>
+                <option value="1">1</option>
+              </select>
+            </div>
+        
+          </div>
+        </div>
         </div>
 
       <button class="run-btn" onclick="runMMR()">Run MMR Terminal</button>
