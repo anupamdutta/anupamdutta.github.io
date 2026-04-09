@@ -535,3 +535,19 @@ input:checked + .slider:before {
 .mmr-right .mmr-card br {
   margin-bottom: 4px;
 }
+
+/* ===== TRIPLE INPUT ROW ===== */
+.full-width {
+  grid-column: span 2;
+}
+
+.triple-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+@media (max-width: 768px) {
+  .triple-row {
+    grid-template-columns: 1fr;
+  }
+}
