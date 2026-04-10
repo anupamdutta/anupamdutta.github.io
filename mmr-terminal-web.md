@@ -280,7 +280,6 @@ async function runMMR(){
       Iteration: ${json.iteration ?? "—"}<br>
       Strike: ${json.strike} | Type: ${json.option_type}<br>
       Option Price: ${json.option_price}<br>
-      Min. Points: ${json.profit_points.min} | Max. Points: ${json.profit_points.max}<br>
       Implied Forward (F*): ${json.sf}<br>
     
       <br>
