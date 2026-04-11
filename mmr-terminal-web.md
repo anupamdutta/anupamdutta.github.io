@@ -201,8 +201,8 @@ async function runMMR(){
   if (!payload.strikeDiff || payload.strikeDiff <= 0)
     return showError("Strike Diff must be greater than 0");
   
-  if (!payload.rate || payload.rate <= 0)
-    return showError("Rate must be greater than 0");
+  if (!payload.rate || payload.rate < 0)
+    return showError("Rate must be greater than or equal to 0");
   
   if (!payload.dte || payload.dte <= 0)
     return showError("DTE must be greater than 0");
