@@ -278,8 +278,9 @@ async function runMMR(){
       <div class="mmr-card-title">[ MODEL OUTPUT ]</div>
     
       Iteration: ${json.iteration ?? "—"}<br>
+      MMR (Annualized %): ${json.mmr_vol ?? "—"}<br>
       Strike: ${json.strike} | Type: ${json.option_type}<br>
-      Option Price: ${json.option_price}<br>
+      Estimated Option Price: ${json.option_price}<br>
       Implied Forward (F*): ${json.sf}<br>
     
       <br>
