@@ -34,7 +34,7 @@ permalink: /iv-finder/
         <div class="iv-grid">
 
           <div class="field">
-            <label>Spot</label>
+            <label>Synthetic Future</label>
             <input id="spot" type="number" placeholder="e.g. 17427.95">
           </div>
 
@@ -134,7 +134,7 @@ async function runIV() {
     /* ===== INPUT BOX ===== */
     document.getElementById("box-input").innerHTML = `
       <div class="mmr-card-title">[ INPUT PARAMETERS ]</div>
-      Spot: ${S}<br>
+      SF: ${S}<br>
       Strike: ${K}<br>
       DTE: ${DTE}<br>
       Option Price: ${P}<br>
