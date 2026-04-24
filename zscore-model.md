@@ -184,8 +184,7 @@ async function runZ(){
       IV Type: ${json.ivType}<br>
       Strike: ${json.strike}<br>
 
-      Call Price: ${json.call_price}<br>
-      Put Price: ${json.put_price}<br>
+      ${json.ivType.toUpperCase()} Price: ${json.option_price} <br>
 
       Call Delta: ${json.call_delta.toFixed(4)}<br>
       Put Delta: ${json.put_delta.toFixed(4)}<br>
