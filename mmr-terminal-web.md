@@ -64,14 +64,6 @@ permalink: /mmr-terminal-web/
               <input id="dte" type="number" placeholder="Days to Expiry">
             </div>
         
-            <div class="field">
-              <label>Option Type</label>
-              <select id="fac">
-                <option value="0">Put</option>
-                <option value="1">Call</option>
-              </select>
-            </div>
-        
           </div>
         </div>
         </div>
@@ -186,8 +178,7 @@ async function runMMR(){
     dte: Number(document.getElementById("dte").value),
   
     autoStrike: isAutoStrike,
-    strike: isAutoStrike ? null : manualStrikeVal,
-    fac: Number(document.getElementById("fac").value)
+    strike: isAutoStrike ? null : manualStrikeVal
   };
 
   // ===== VALIDATION =====
@@ -216,9 +207,7 @@ async function runMMR(){
     }
   }
 
-  if (![0,1].includes(payload.fac)) {
-    return showError("Opt. Type must be 0 or 1");
-  }
+  
 
   /* ===== LOADING STATE (PRO UI) ===== */
   document.getElementById("box-input").innerHTML = `
@@ -280,8 +269,7 @@ async function runMMR(){
       Iteration: ${json.iteration ?? "—"}<br>
       MMR (Annualized %): ${json.mmr_vol ?? "—"}<br>
       Strike: ${json.strike} | Type: ${json.option_type}<br>
-      Estimated Option Price: ${json.option_price}<br>
-      Implied Forward (F*): ${json.sf}<br>
+      ${json.option_type} Price: ${json.option_price}<br>
     
       <br>
       <div style="font-size:12px; color:#facc15; line-height:1.4;">
