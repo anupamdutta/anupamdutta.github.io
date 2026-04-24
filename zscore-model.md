@@ -187,8 +187,8 @@ async function runZ(){
       Call Price: ${json.call_price}<br>
       Put Price: ${json.put_price}<br>
 
-      Call Delta: ${json.call_delta}<br>
-      Put Delta: ${json.put_delta}<br>
+      Call Delta: ${json.call_delta.toFixed(4)}<br>
+      Put Delta: ${json.put_delta.toFixed(4)}<br>
     `;
 
   } catch (e) {
