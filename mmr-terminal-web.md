@@ -11,7 +11,7 @@ permalink: /mmr-terminal-web/
     <div class="iv-container">
 
       <p class="subtext">
-        Auth Protected Option Pricing Engine
+        Market Maker Risk Engine
       </p>
 
       <!-- AUTH -->
