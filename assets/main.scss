@@ -543,8 +543,12 @@ input:checked + .slider:before {
 
 .triple-row {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+}
+.triple-row .field {
+  width: 100%;
 }
 @media (max-width: 768px) {
   .triple-row {
