@@ -47,6 +47,11 @@ body {
   text-shadow: 0 0 10px #38bdf8;
 }
 
+.site-nav {
+  position: relative;
+  z-index: 10000;
+}
+
 .site-nav a {
   color: #94a3b8 !important;
   transition: 0.2s;
@@ -561,4 +566,8 @@ input:checked + .slider:before {
     background-size: cover;
     background-position: center top;
   }
+}
+.site-header {
+  position: relative;
+  z-index: 9999;
 }
