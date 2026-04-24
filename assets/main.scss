@@ -551,3 +551,10 @@ input:checked + .slider:before {
     grid-template-columns: 1fr;
   }
 }
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+    background-size: cover;
+    background-position: center top;
+  }
+}
