@@ -55,8 +55,8 @@ permalink: /mmr-terminal-web/
           <div class="triple-row">
         
             <div class="field">
-              <label>Rate %</label>
-              <input id="rate" type="number" placeholder="e.g. 6">
+              <label>Funding Rate %</label>
+              <input id="rate" type="number" placeholder="e.g. 6.667">
             </div>
         
             <div class="field">
