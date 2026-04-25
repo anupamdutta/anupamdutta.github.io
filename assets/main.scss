@@ -83,13 +83,14 @@ body {
 
   min-width: 200px;
   z-index: 9999;
+  padding: 6px 0;
 }
 
 /* dropdown links */
 .nav-dropdown a {
   display: block;
   padding: 10px 14px;
-  font-size: 13px;
+  white-space: nowrap;   /* 🔥 prevents inline collapse */
 }
 
 /* show dropdown */
@@ -116,16 +117,16 @@ body {
 
 @media (max-width: 768px) {
 
-  .nav-group {
-    display: block;
-  }
-
   .nav-dropdown {
+    display: none;
     position: static;
-    display: block;
     border: none;
     background: transparent;
     backdrop-filter: none;
+  }
+
+  .nav-group.active .nav-dropdown {
+    display: block;
   }
 
 }
