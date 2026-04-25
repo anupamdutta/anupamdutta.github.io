@@ -78,24 +78,24 @@ body{
 #table th{
     background:#102a4d;
     color:#cbd5e1;
-    padding:4px;
+    padding:4px 6px;
     text-align:center;
     font-weight:500;
 }
 
 /* CELLS */
 #table td{
-    padding:4px;
+    padding:4px 6px;
     text-align:center;
     color:#e6edf3;
 }
 
-/* NO STRIPES — SINGLE COLOR */
+/* FORCE DARK (override Jekyll safely) */
 #table tr{
-    background:#020c1b;
+    background:#020c1b !important;
 }
 
-/* ATM */
+/* ATM ROW */
 #table tr.atm{
     background:#1f6f4a !important;
     color:white;
@@ -105,17 +105,16 @@ body{
 #table .pos{ color:#4ade80; }
 #table .neg{ color:#f87171; }
 
-/* SUBTLE DIVIDER LIKE PYTHON */
+/* SEPARATORS (like Python) */
 #table td:nth-child(5),
 #table th:nth-child(5){
-    border-right:1px solid rgba(255,255,255,0.06);
+    border-right:1px solid rgba(255,255,255,0.08);
 }
 
 #table td:nth-child(6),
 #table th:nth-child(6){
-    border-right:1px solid rgba(255,255,255,0.06);
+    border-right:1px solid rgba(255,255,255,0.08);
 }
-
 </style>
 
 <div class="card">
@@ -248,7 +247,7 @@ function render(meta, rows){
         `;
     });
 
-    document.getElementById("table").innerHTML = "<tbody>" + html + "</tbody>";
+    document.getElementById("table").innerHTML = html;
 }
 
 async function load(){
