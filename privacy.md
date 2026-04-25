@@ -77,4 +77,5 @@ This policy may be updated without prior notice.
 For queries:
 
 **Anupam Dutta**  
-Email: anupam.dutta@lynqverse.com
+Email: dutta.anupam.02@gmail.com
+Phone: +91-8240775462
