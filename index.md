@@ -47,6 +47,32 @@ layout: home
 
 ---
 
+## Today’s Market Snapshot
+
+<div style="margin-top:20px; text-align:center;">
+
+  <img src="/assets/daily/{{ site.data.latest.image }}"
+       style="
+         width:100%;
+         max-width:520px;
+         border-radius:12px;
+         box-shadow:0 10px 30px rgba(0,0,0,0.6);
+         border:1px solid rgba(56,189,248,0.2);
+       ">
+
+  <p style="
+      margin-top:10px;
+      font-size:14px;
+      color:#94a3b8;
+      font-family:monospace;
+    ">
+    Nifty50 Option Chain on {{ site.data.latest.date }} :3
+  </p>
+
+</div>
+<br>
+---
+
 ## What I actually study
 
 I don’t predict direction.  
