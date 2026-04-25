@@ -71,7 +71,7 @@ layout: home
 
 </div>
 <br>
----
+
 
 ## What I actually study
 
