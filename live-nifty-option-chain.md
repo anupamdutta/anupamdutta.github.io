@@ -5,22 +5,20 @@ title: Live Nifty Option Chain
 
 <style>
 body{
-    background:#020c1b;
-    color:white;
+    background:#020c1b !important;
+    color:white !important;
     font-family:monospace;
 }
 
 .container{
     max-width:520px;
-    margin:20px auto;
+    margin:40px auto;
     background:#031326;
     padding:15px;
     border-radius:12px;
     box-shadow:0 0 20px rgba(0,0,0,0.6);
     position:relative;
 }
-
-
 
 /* header */
 .title{
@@ -57,44 +55,46 @@ canvas{
     margin-top:10px;
 }
 
-/* table */
+/* ===== FORCE DARK TABLE (OVERRIDE JEKYLL) ===== */
 table{
     width:100%;
     border-collapse:collapse;
     margin-top:10px;
     font-size:11px;
+    background:#031326 !important;
+    color:white !important;
 }
 
 th{
-    background:#1f3b5c;
+    background:#1f3b5c !important;
+    color:white !important;
     padding:6px;
 }
 
 td{
     padding:4px;
     text-align:center;
+    color:white !important;
+}
+
+tr{
+    background:#031326 !important;
 }
 
 tr:nth-child(even){
-    background:#0a1a33;
+    background:#0a1a33 !important;
 }
 
 .atm{
     background:#1e6f3d !important;
 }
 
-.pos{ color:#22c55e; }
-.neg{ color:#ef4444; }
+.pos{ color:#22c55e !important; }
+.neg{ color:#ef4444 !important; }
 
-.footer{
-    text-align:center;
-    margin-top:10px;
-    font-size:10px;
-    color:#64748b;
-}
 </style>
 
-<div class="container" id="capture">
+<div class="container">
 
 <button class="btn" onclick="load()">Refresh</button>
 
@@ -102,11 +102,11 @@ tr:nth-child(even){
 <div class="subtitle">Precision Options Trading, Systems, and Insights</div>
 
 <div class="meta" id="meta"></div>
+
 <div style="
     margin-top:10px;
     font-size:12px;
     color:#9fb3c8;
-    font-family:monospace;
 ">
     Net Gamma Exposure (GEX) by Strike
 </div>
@@ -114,7 +114,6 @@ tr:nth-child(even){
 <canvas id="chart" height="120"></canvas>
 
 <table id="table"></table>
-
 
 </div>
 
@@ -131,15 +130,26 @@ function format(n){
 
 let chart;
 
+function formatTime(ts){
+    const d = new Date(ts);
+    return d.toLocaleString('en-IN', {
+        day:'2-digit',
+        month:'short',
+        year:'numeric',
+        hour:'2-digit',
+        minute:'2-digit'
+    });
+}
+
 function render(meta, rows){
 
-    // META
+    // META (FIXED TIME FORMAT)
     document.getElementById("meta").innerHTML =
     `${meta.symbol} | Exp: ${meta.expiry}<br>
     Spot ${meta.spot.toFixed(2)} | ATM ${meta.atm} | SF ${meta.sf.toFixed(2)} | IV ${meta.iv}%<br>
-    ${meta.timestamp}`;
+    ${formatTime(meta.timestamp)}`;
 
-    // CHART DATA
+    // CHART
     const strikes = rows.map(r=>r.strike);
     const net = rows.map(r=>r.net_gex);
 
@@ -157,17 +167,23 @@ function render(meta, rows){
         options:{
             plugins:{legend:{display:false}},
             scales:{
-                x:{ticks:{color:'#9fb3c8',font:{size:8}}},
-                y:{ticks:{
-                    color:'#9fb3c8',
-                    font:{size:8},
-                    callback:val=>format(val)
-                }}
+                x:{
+                    ticks:{color:'#9fb3c8',font:{size:8}},
+                    grid:{display:false}
+                },
+                y:{
+                    ticks:{
+                        color:'#9fb3c8',
+                        font:{size:8},
+                        callback:val=>format(val)
+                    },
+                    grid:{color:'rgba(255,255,255,0.05)'}
+                }
             }
         }
     });
 
-    // TABLE
+    // TABLE (YOUR FORMAT PRESERVED)
     let html = `
     <tr>
         <th colspan="5">CALL</th>
