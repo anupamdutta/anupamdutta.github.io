@@ -92,29 +92,45 @@ tr:nth-child(even){
 .pos{ color:#22c55e !important; }
 .neg{ color:#ef4444 !important; }
 
+.table-wrap{
+    width:100%;
+    max-width:1000px;
+    margin:20px auto;
+    padding:0 10px;
+}
+
+/* mobile scroll */
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    min-width:700px; /* prevents crush */
+}
+
 </style>
 
 <div class="container">
 
-<button class="btn" onclick="load()">Refresh</button>
+    <button class="btn" onclick="load()">Refresh</button>
 
-<div class="title">GammaGrid Insights</div>
-<div class="subtitle">Precision Options Trading, Systems, and Insights</div>
+    <div class="title">GammaGrid Insights</div>
+    <div class="subtitle">Precision Options Trading, Systems, and Insights</div>
 
-<div class="meta" id="meta"></div>
+    <div class="meta" id="meta"></div>
 
-<div style="
-    margin-top:10px;
-    font-size:12px;
-    color:#9fb3c8;
-">
-    Net Gamma Exposure (GEX) by Strike
+    <div style="margin-top:10px;font-size:12px;color:#9fb3c8;">
+        Net Gamma Exposure (GEX) by Strike
+    </div>
+
+    <canvas id="chart" height="120"></canvas>
+
 </div>
 
-<canvas id="chart" height="120"></canvas>
-
-<table id="table"></table>
-
+<!-- 🔥 TABLE OUTSIDE -->
+<div class="table-wrap">
+    <table id="table"></table>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
