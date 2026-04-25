@@ -66,8 +66,25 @@ layout: home
       color:#94a3b8;
       font-family:monospace;
     ">
-    Nifty50 Option Chain on {{ site.data.latest.date }} :3
+    EOD Nifty50 Option Chain on {{ site.data.latest.date }}
   </p>
+  <div style="margin-top:12px;">
+  <a href="/live-nifty-option-chain.html"
+     style="
+       display:inline-block;
+       background:#020617;
+       border:1px solid #38bdf8;
+       color:#38bdf8;
+       padding:8px 16px;
+       border-radius:8px;
+       text-decoration:none;
+       font-family:monospace;
+       font-size:13px;
+       box-shadow:0 0 10px rgba(56,189,248,0.3);
+     ">
+     View Live Nifty Option Chain →
+  </a>
+</div>
 
 </div>
 <br>
