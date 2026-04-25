@@ -60,22 +60,62 @@ table{
     width:100%;
     border-collapse:collapse;
     margin-top:10px;
-    font-size:11px;
-    background:#031326 !important;
-    color:white !important;
+    font-size:10px;              /* tighter */
+    table-layout:fixed;          /* 🔥 KEY FIX */
+}
+
+th, td{
+    padding:3px 2px;             /* tighter spacing */
+    text-align:center;
+    white-space:nowrap;          /* prevent expansion */
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
 th{
+    font-size:10px;
     background:#1f3b5c !important;
-    color:white !important;
-    padding:6px;
 }
 
 td{
-    padding:4px;
-    text-align:center;
-    color:white !important;
+    font-size:10px;
 }
+
+/* column widths */
+table th:nth-child(6),
+table td:nth-child(6){
+    width:48px;   /* STRIKE */
+}
+
+table th:nth-child(5),
+table td:nth-child(5),
+table th:nth-child(11),
+table td:nth-child(11){
+    width:60px;   /* GEX */
+}
+
+table th:nth-child(1),
+table th:nth-child(2),
+table th:nth-child(3),
+table td:nth-child(1),
+table td:nth-child(2),
+table td:nth-child(3),
+table th:nth-child(7),
+table th:nth-child(8),
+table th:nth-child(9),
+table td:nth-child(7),
+table td:nth-child(8),
+table td:nth-child(9){
+    width:42px;   /* Bid/LTP/Ask */
+}
+
+table th:nth-child(4),
+table td:nth-child(4),
+table th:nth-child(10),
+table td:nth-child(10){
+    width:52px;   /* OI */
+}
+
 
 tr{
     background:#031326 !important;
@@ -148,12 +188,26 @@ let chart;
 
 function formatTime(ts){
     const d = new Date(ts);
+
     return d.toLocaleString('en-IN', {
+        timeZone: 'Asia/Kolkata',
         day:'2-digit',
         month:'short',
         year:'numeric',
         hour:'2-digit',
-        minute:'2-digit'
+        minute:'2-digit',
+        hour12:true
+    });
+}
+
+function formatDate(ts){
+    const d = new Date(ts);
+
+    return d.toLocaleDateString('en-IN', {
+        timeZone: 'Asia/Kolkata',
+        day:'2-digit',
+        month:'short',
+        year:'numeric'
     });
 }
 
@@ -161,7 +215,7 @@ function render(meta, rows){
 
     // META (FIXED TIME FORMAT)
     document.getElementById("meta").innerHTML =
-    `${meta.symbol} | Exp: ${meta.expiry}<br>
+    `${meta.symbol} | Exp: ${formatDate(meta.expiry)}<br>
     Spot ${meta.spot.toFixed(2)} | ATM ${meta.atm} | SF ${meta.sf.toFixed(2)} | IV ${meta.iv}%<br>
     ${formatTime(meta.timestamp)}`;
 
