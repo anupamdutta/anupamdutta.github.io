@@ -51,3 +51,10 @@
     </nav>
   </div>
 </header>
+<script>
+document.querySelectorAll('.nav-group > span').forEach(el => {
+  el.addEventListener('click', () => {
+    el.parentElement.classList.toggle('active');
+  });
+});
+</script>
