@@ -6,42 +6,43 @@ title: Live Nifty Option Chain
 <style>
 body{
     background:#020c1b !important;
-    color:white !important;
-    font-family:monospace;
+    font-family: 'JetBrains Mono', monospace;
+    color:#e6edf3;
 }
 
-.container{
+/* CARD */
+.card{
     max-width:520px;
     margin:40px auto;
-    background:#031326;
-    padding:15px;
-    border-radius:12px;
-    box-shadow:0 0 20px rgba(0,0,0,0.6);
+    border:1px solid #0f2a4d;
+    border-radius:10px;
+    padding:12px;
+    background:#020c1b;
     position:relative;
 }
 
-/* header */
+/* HEADER */
 .title{
-    color:#38bdf8;
-    font-size:18px;
+    color:#4cc9f0;
+    font-size:14px;
 }
 .subtitle{
-    font-size:11px;
-    color:#9fb3c8;
+    font-size:9px;
+    color:#7fa7c7;
 }
 
-/* meta */
+/* META */
 .meta{
-    margin-top:10px;
-    font-size:12px;
-    color:#cbd5e1;
+    font-size:10px;
+    margin-top:8px;
+    text-align:right;
 }
 
-/* button */
+/* BUTTON */
 .btn{
     position:absolute;
-    right:15px;
-    top:15px;
+    top:10px;
+    right:10px;
     background:#1f4aa8;
     border:none;
     color:white;
@@ -50,108 +51,58 @@ body{
     cursor:pointer;
 }
 
-/* chart */
-canvas{
-    margin-top:10px;
+/* CHART */
+.chart-title{
+    font-size:9px;
+    color:#7fa7c7;
+    margin-top:6px;
 }
 
-/* ===== FORCE DARK TABLE (OVERRIDE JEKYLL) ===== */
-table{
-    width:100%;
-    border-collapse:collapse;
-    margin-top:10px;
-    font-size:10px;              /* tighter */
-    table-layout:fixed;          /* 🔥 KEY FIX */
-}
-
-th, td{
-    padding:3px 2px;             /* tighter spacing */
-    text-align:center;
-    white-space:nowrap;          /* prevent expansion */
-    overflow:hidden;
-    text-overflow:ellipsis;
-}
-
-th{
-    font-size:10px;
-    background:#1f3b5c !important;
-}
-
-td{
-    font-size:10px;
-}
-
-/* column widths */
-table th:nth-child(6),
-table td:nth-child(6){
-    width:48px;   /* STRIKE */
-}
-
-table th:nth-child(5),
-table td:nth-child(5),
-table th:nth-child(11),
-table td:nth-child(11){
-    width:60px;   /* GEX */
-}
-
-table th:nth-child(1),
-table th:nth-child(2),
-table th:nth-child(3),
-table td:nth-child(1),
-table td:nth-child(2),
-table td:nth-child(3),
-table th:nth-child(7),
-table th:nth-child(8),
-table th:nth-child(9),
-table td:nth-child(7),
-table td:nth-child(8),
-table td:nth-child(9){
-    width:42px;   /* Bid/LTP/Ask */
-}
-
-table th:nth-child(4),
-table td:nth-child(4),
-table th:nth-child(10),
-table td:nth-child(10){
-    width:52px;   /* OI */
-}
-
-
-tr{
-    background:#031326 !important;
-}
-
-tr:nth-child(even){
-    background:#0a1a33 !important;
-}
-
-.atm{
-    background:#1e6f3d !important;
-}
-
-.pos{ color:#22c55e !important; }
-.neg{ color:#ef4444 !important; }
-
+/* TABLE */
 .table-wrap{
-    width:100%;
-    max-width:1000px;
+    max-width:900px;
     margin:20px auto;
-    padding:0 10px;
-}
-
-/* mobile scroll */
-.table-wrap{
     overflow-x:auto;
 }
 
 table{
     width:100%;
-    min-width:700px; /* prevents crush */
+    border-collapse:collapse;
+    font-size:10px;
+    background:#020c1b;
 }
 
+th{
+    background:#102a4d;
+    padding:5px;
+}
+
+td{
+    padding:4px;
+    text-align:center;
+}
+
+tr:nth-child(even){
+    background:#0a1a33;
+}
+
+.atm{
+    background:#1f6f4a;
+}
+
+.pos{ color:#4ade80; }
+.neg{ color:#f87171; }
+
+/* subtle separators */
+td:nth-child(5), th:nth-child(5){
+    border-right:1px solid rgba(255,255,255,0.08);
+}
+td:nth-child(6), th:nth-child(6){
+    border-right:1px solid rgba(255,255,255,0.08);
+}
 </style>
 
-<div class="container">
+<div class="card">
 
     <button class="btn" onclick="load()">Refresh</button>
 
@@ -160,15 +111,11 @@ table{
 
     <div class="meta" id="meta"></div>
 
-    <div style="margin-top:10px;font-size:12px;color:#9fb3c8;">
-        Net Gamma Exposure (GEX) by Strike
-    </div>
-
+    <div class="chart-title">Net Gamma Exposure (GEX) by Strike</div>
     <canvas id="chart" height="120"></canvas>
 
 </div>
 
-<!-- 🔥 TABLE OUTSIDE -->
 <div class="table-wrap">
     <table id="table"></table>
 </div>
@@ -178,19 +125,17 @@ table{
 <script>
 const URL = "https://script.google.com/macros/s/AKfycbzOzfuXYAtNPqzmkZSabUPY_ed2x7TVzVKcSD-wfGRZn3TWcaEQSbMAYqC269r4DNfv/exec";
 
+let chart;
+
 function format(n){
     if(Math.abs(n)>=1e6) return (n/1e6).toFixed(1)+'M';
     if(Math.abs(n)>=1e3) return (n/1e3).toFixed(1)+'K';
-    return n;
+    return Math.round(n);
 }
 
-let chart;
-
 function formatTime(ts){
-    const d = new Date(ts);
-
-    return d.toLocaleString('en-IN', {
-        timeZone: 'Asia/Kolkata',
+    return new Date(ts).toLocaleString('en-IN', {
+        timeZone:'Asia/Kolkata',
         day:'2-digit',
         month:'short',
         year:'numeric',
@@ -201,10 +146,8 @@ function formatTime(ts){
 }
 
 function formatDate(ts){
-    const d = new Date(ts);
-
-    return d.toLocaleDateString('en-IN', {
-        timeZone: 'Asia/Kolkata',
+    return new Date(ts).toLocaleDateString('en-IN', {
+        timeZone:'Asia/Kolkata',
         day:'2-digit',
         month:'short',
         year:'numeric'
@@ -213,7 +156,7 @@ function formatDate(ts){
 
 function render(meta, rows){
 
-    // META (FIXED TIME FORMAT)
+    // META
     document.getElementById("meta").innerHTML =
     `${meta.symbol} | Exp: ${formatDate(meta.expiry)}<br>
     Spot ${meta.spot.toFixed(2)} | ATM ${meta.atm} | SF ${meta.sf.toFixed(2)} | IV ${meta.iv}%<br>
@@ -253,7 +196,7 @@ function render(meta, rows){
         }
     });
 
-    // TABLE (YOUR FORMAT PRESERVED)
+    // TABLE
     let html = `
     <tr>
         <th colspan="5">CALL</th>
@@ -268,7 +211,8 @@ function render(meta, rows){
     `;
 
     rows.forEach(r=>{
-        const atm = r.strike == meta.atm ? "atm" : "";
+        const atm = r.strike === meta.atm ? "atm" : "";
+
         html += `
         <tr class="${atm}">
             <td>${r.call_bid.toFixed(2)}</td>
@@ -277,7 +221,7 @@ function render(meta, rows){
             <td>${format(r.call_oi)}</td>
             <td class="pos">${format(r.call_gex)}</td>
 
-            <td>${r.strike}</td>
+            <td><b>${r.strike}</b></td>
 
             <td>${r.put_bid.toFixed(2)}</td>
             <td>${r.put_ltp.toFixed(2)}</td>
