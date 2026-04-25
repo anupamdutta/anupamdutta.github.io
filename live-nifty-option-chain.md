@@ -106,6 +106,16 @@ body{
 #table th:nth-child(6){
     border-right:1px solid rgba(255,255,255,0.08);
 }
+
+.disclaimer{
+    max-width:900px;
+    margin:10px auto 30px auto;
+    font-size:10px;
+    color:#64748b;
+    text-align:center;
+    font-family:monospace;
+    line-height:1.6;
+}
 </style>
 
 <div class="card">
@@ -125,6 +135,8 @@ body{
 <div class="table-wrap">
     <table id="table"></table>
 </div>
+
+<div class="disclaimer" id="disclaimer"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -234,6 +246,10 @@ function render(meta, rows){
     html += `</tbody>`;
 
     document.getElementById("table").innerHTML = html;
+    document.getElementById("disclaimer").innerHTML = `
+    ⚠️ Data may be delayed. Last updated: ${formatTime(meta.timestamp)}<br>
+    Not financial advice. For informational and educational purposes only.
+    `;
 }
 
 async function load(){
