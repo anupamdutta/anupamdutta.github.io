@@ -6,7 +6,7 @@ title: Live Nifty Option Chain
 <style>
 body{
     background:#020c1b !important;
-    font-family: 'JetBrains Mono', monospace;
+    font-family:monospace;
     color:#e6edf3;
 }
 
@@ -22,14 +22,8 @@ body{
 }
 
 /* HEADER */
-.title{
-    color:#4cc9f0;
-    font-size:14px;
-}
-.subtitle{
-    font-size:9px;
-    color:#7fa7c7;
-}
+.title{ color:#4cc9f0; font-size:14px; }
+.subtitle{ font-size:9px; color:#7fa7c7; }
 
 /* META */
 .meta{
@@ -58,18 +52,17 @@ body{
     margin-top:6px;
 }
 
-/* TABLE */
-/* HARD RESET */
-#table, #table *{
-    all: unset;
-    box-sizing: border-box;
+/* TABLE WRAP */
+.table-wrap{
+    max-width:900px;
+    margin:20px auto;
+    overflow-x:auto;
 }
 
 /* TABLE */
 #table{
     width:100%;
     border-collapse:collapse;
-    font-family:monospace;
     font-size:10px;
     color:#e6edf3;
 }
@@ -80,32 +73,30 @@ body{
     color:#cbd5e1;
     padding:4px 6px;
     text-align:center;
-    font-weight:500;
 }
 
 /* CELLS */
 #table td{
     padding:4px 6px;
     text-align:center;
-    color:#e6edf3;
 }
 
-/* FORCE DARK (override Jekyll safely) */
+/* ROW COLOR (NO STRIPES) */
 #table tr{
     background:#020c1b !important;
 }
 
-/* ATM ROW */
+/* ATM */
 #table tr.atm{
     background:#1f6f4a !important;
     color:white;
 }
 
 /* COLORS */
-#table .pos{ color:#4ade80; }
-#table .neg{ color:#f87171; }
+.pos{ color:#4ade80; }
+.neg{ color:#f87171; }
 
-/* SEPARATORS (like Python) */
+/* DIVIDERS */
 #table td:nth-child(5),
 #table th:nth-child(5){
     border-right:1px solid rgba(255,255,255,0.08);
@@ -119,15 +110,15 @@ body{
 
 <div class="card">
 
-    <button class="btn" onclick="load()">Refresh</button>
+<button class="btn" onclick="load()">Refresh</button>
 
-    <div class="title">GammaGrid Insights</div>
-    <div class="subtitle">Precision Options Trading, Systems, and Insights</div>
+<div class="title">GammaGrid Insights</div>
+<div class="subtitle">Precision Options Trading, Systems, and Insights</div>
 
-    <div class="meta" id="meta"></div>
+<div class="meta" id="meta"></div>
 
-    <div class="chart-title">Net Gamma Exposure (GEX) by Strike</div>
-    <canvas id="chart" height="120"></canvas>
+<div class="chart-title">Net Gamma Exposure (GEX) by Strike</div>
+<canvas id="chart" height="120"></canvas>
 
 </div>
 
@@ -149,7 +140,7 @@ function format(n){
 }
 
 function formatTime(ts){
-    return new Date(ts).toLocaleString('en-IN', {
+    return new Date(ts).toLocaleString('en-IN',{
         timeZone:'Asia/Kolkata',
         day:'2-digit',
         month:'short',
@@ -161,7 +152,7 @@ function formatTime(ts){
 }
 
 function formatDate(ts){
-    return new Date(ts).toLocaleDateString('en-IN', {
+    return new Date(ts).toLocaleDateString('en-IN',{
         timeZone:'Asia/Kolkata',
         day:'2-digit',
         month:'short',
@@ -171,13 +162,11 @@ function formatDate(ts){
 
 function render(meta, rows){
 
-    // META
     document.getElementById("meta").innerHTML =
     `${meta.symbol} | Exp: ${formatDate(meta.expiry)}<br>
     Spot ${meta.spot.toFixed(2)} | ATM ${meta.atm} | SF ${meta.sf.toFixed(2)} | IV ${meta.iv}%<br>
     ${formatTime(meta.timestamp)}`;
 
-    // CHART
     const strikes = rows.map(r=>r.strike);
     const net = rows.map(r=>r.net_gex);
 
@@ -195,24 +184,17 @@ function render(meta, rows){
         options:{
             plugins:{legend:{display:false}},
             scales:{
-                x:{
-                    ticks:{color:'#9fb3c8',font:{size:8}},
-                    grid:{display:false}
-                },
+                x:{ticks:{color:'#9fb3c8',font:{size:8}},grid:{display:false}},
                 y:{
-                    ticks:{
-                        color:'#9fb3c8',
-                        font:{size:8},
-                        callback:val=>format(val)
-                    },
+                    ticks:{color:'#9fb3c8',font:{size:8},callback:v=>format(v)},
                     grid:{color:'rgba(255,255,255,0.05)'}
                 }
             }
         }
     });
 
-    // TABLE
     let html = `
+    <thead>
     <tr>
         <th colspan="5">CALL</th>
         <th>STRIKE</th>
@@ -223,6 +205,8 @@ function render(meta, rows){
         <th></th>
         <th>Bid</th><th>LTP</th><th>Ask</th><th>OI</th><th>GEX</th>
     </tr>
+    </thead>
+    <tbody>
     `;
 
     rows.forEach(r=>{
@@ -246,6 +230,8 @@ function render(meta, rows){
         </tr>
         `;
     });
+
+    html += `</tbody>`;
 
     document.getElementById("table").innerHTML = html;
 }
