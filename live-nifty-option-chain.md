@@ -59,47 +59,63 @@ body{
 }
 
 /* TABLE */
-.table-wrap{
-    max-width:900px;
-    margin:20px auto;
-    overflow-x:auto;
+/* HARD RESET */
+#table, #table *{
+    all: unset;
+    box-sizing: border-box;
 }
 
-table{
+/* TABLE */
+#table{
     width:100%;
     border-collapse:collapse;
+    font-family:monospace;
     font-size:10px;
+    color:#e6edf3;
+}
+
+/* HEAD */
+#table th{
+    background:#102a4d;
+    color:#cbd5e1;
+    padding:4px;
+    text-align:center;
+    font-weight:500;
+}
+
+/* CELLS */
+#table td{
+    padding:4px;
+    text-align:center;
+    color:#e6edf3;
+}
+
+/* NO STRIPES — SINGLE COLOR */
+#table tr{
     background:#020c1b;
 }
 
-th{
-    background:#102a4d;
-    padding:5px;
+/* ATM */
+#table tr.atm{
+    background:#1f6f4a !important;
+    color:white;
 }
 
-td{
-    padding:4px;
-    text-align:center;
+/* COLORS */
+#table .pos{ color:#4ade80; }
+#table .neg{ color:#f87171; }
+
+/* SUBTLE DIVIDER LIKE PYTHON */
+#table td:nth-child(5),
+#table th:nth-child(5){
+    border-right:1px solid rgba(255,255,255,0.06);
 }
 
-tr:nth-child(even){
-    background:#0a1a33;
+#table td:nth-child(6),
+#table th:nth-child(6){
+    border-right:1px solid rgba(255,255,255,0.06);
 }
 
-.atm{
-    background:#1f6f4a;
-}
-
-.pos{ color:#4ade80; }
-.neg{ color:#f87171; }
-
-/* subtle separators */
-td:nth-child(5), th:nth-child(5){
-    border-right:1px solid rgba(255,255,255,0.08);
-}
-td:nth-child(6), th:nth-child(6){
-    border-right:1px solid rgba(255,255,255,0.08);
-}
 </style>
 
 <div class="card">
@@ -232,7 +248,7 @@ function render(meta, rows){
         `;
     });
 
-    document.getElementById("table").innerHTML = html;
+    document.getElementById("table").innerHTML = "<tbody>" + html + "</tbody>";
 }
 
 async function load(){
