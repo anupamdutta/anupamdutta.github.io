@@ -4,7 +4,6 @@ title: Disclaimer
 permalink: /disclaimer/
 ---
 
-## Disclaimer
 
 This platform is intended for educational and informational purposes only.
 
