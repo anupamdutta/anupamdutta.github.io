@@ -61,6 +61,15 @@ body {
   color: #38bdf8 !important;
 }
 
+.nav-group > span {
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.nav-group > span:hover {
+  color: #38bdf8;
+}
+
 /* ===== NAV GROUP DROPDOWN ===== */
 
 .nav-group {
