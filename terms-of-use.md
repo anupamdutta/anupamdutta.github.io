@@ -4,7 +4,6 @@ title: Terms of Use
 permalink: /terms-of-use/
 ---
 
-## Terms of Use
 
 By accessing this platform, you agree to the following:
 
