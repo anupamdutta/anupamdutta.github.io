@@ -1,0 +1,53 @@
+<header class="site-header" role="banner">
+  <div class="wrapper">
+
+    <!-- SITE TITLE -->
+    <a class="site-title" rel="author" href="{{ "/" | relative_url }}">
+      {{ site.title }}
+    </a>
+
+    <!-- NAV -->
+    <nav class="site-nav">
+
+      <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+      <label for="nav-trigger">
+        <span class="menu-icon">☰</span>
+      </label>
+
+      <div class="trigger">
+
+        <!-- ABOUT -->
+        <a class="page-link {% if page.url == '/about/' %}active{% endif %}" href="/about/">
+          About
+        </a>
+
+        <!-- FREE TOOLS -->
+        <div class="nav-group">
+          <span class="page-link">Free Tools ▾</span>
+          <div class="nav-dropdown">
+            <a class="{% if page.url == '/iv-finder/' %}active{% endif %}" href="/iv-finder/">
+              IV Finder
+            </a>
+            <a class="{% if page.url == '/price-finder/' %}active{% endif %}" href="/price-finder/">
+              Price Finder
+            </a>
+          </div>
+        </div>
+
+        <!-- PREMIUM TOOLS -->
+        <div class="nav-group">
+          <span class="page-link">🔒 Premium Tools ▾</span>
+          <div class="nav-dropdown">
+            <a class="{% if page.url == '/mmr-terminal-web/' %}active{% endif %}" href="/mmr-terminal-web/">
+              🔒 MMR Terminal Web
+            </a>
+            <a class="{% if page.url == '/zscore-model/' %}active{% endif %}" href="/zscore-model/">
+              🔒 Model Z Score
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </nav>
+  </div>
+</header>
