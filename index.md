@@ -47,7 +47,7 @@ layout: home
 
 ---
 
-## Today’s Market Snapshot
+## Net GEX Flow Analytics
 
 <div style="margin-top:20px; text-align:center;">
 
