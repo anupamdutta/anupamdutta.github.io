@@ -25,23 +25,27 @@ title: Live Nifty Option Chain
 
   <div class="oc-disclaimer" id="disclaimer"></div>
 
-  <div class="gex-panel">
+  
 
-  <h2>Understanding Gamma Exposure (GEX)</h2>
+</div>
+
+<div class="gex-panel">
+
+  <h2>Understanding Net Gamma Exposure (Net GEX)</h2>
 
   <p>
-    Gamma Exposure (GEX) measures how market makers (dealers) are positioned in options.
+    Gamma Exposure (Net GEX) measures how market makers (dealers) are positioned in options.
     It helps identify key levels where price may stabilize or become volatile.
   </p>
 
-  <h3>🟢 Positive GEX (Dealer Long Gamma)</h3>
+  <h3>🟢 Positive Net GEX (Dealer Long Gamma)</h3>
   <ul>
     <li>Dealers hedge by <b>selling into rallies</b> and <b>buying dips</b></li>
     <li>Market becomes <b>range-bound</b> and stable</li>
     <li>Volatility is typically <b>low</b></li>
   </ul>
 
-  <h3>🔴 Negative GEX (Dealer Short Gamma)</h3>
+  <h3>🔴 Negative Net GEX (Dealer Short Gamma)</h3>
   <ul>
     <li>Dealers hedge by <b>buying into rallies</b> and <b>selling dips</b></li>
     <li>Market becomes <b>directional / trending</b></li>
@@ -57,8 +61,8 @@ title: Live Nifty Option Chain
 
   <h3>📊 How to Use</h3>
   <ul>
-    <li>Trade ranges when GEX is positive</li>
-    <li>Expect breakouts when GEX is negative</li>
+    <li>Trade ranges when Net GEX is positive</li>
+    <li>Expect breakouts when Net GEX is negative</li>
     <li>Watch Flip level for regime change</li>
   </ul>
 
@@ -67,8 +71,6 @@ title: Live Nifty Option Chain
     Learn advanced GEX strategies, dealer positioning models, and real trade setups.<br>
     <b>Join the GammaGrid course → Coming Soon</b>
   </div>
-
-</div>
 
 </div>
 
