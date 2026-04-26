@@ -153,12 +153,14 @@ title: Live Nifty Option Chain
 /* CALL / PUT GEX */
 .call-gex{
   color:#22c55e;
-  font-weight:500;
+  font-weight:600;
+  text-shadow:0 0 6px rgba(34,197,94,0.5);
 }
 
 .put-gex{
   color:#ef4444;
-  font-weight:500;
+  font-weight:600;
+  text-shadow:0 0 6px rgba(239,68,68,0.5);
 }
 
 /* DIVIDERS */
