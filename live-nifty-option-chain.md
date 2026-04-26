@@ -16,7 +16,7 @@ title: Live Nifty Option Chain
 
   <div class="oc-chart">
     <div class="oc-chart-title">Net Gamma Exposure (GEX) by Strike</div>
-    <canvas id="chart" height="120"></canvas>
+    <canvas id="chart"></canvas>
   </div>
 
   <div class="table-wrap">
@@ -132,6 +132,17 @@ title: Live Nifty Option Chain
   font-size:11px;
   color:#64748b;
   margin-bottom:6px;
+}
+
+.oc-chart {
+  position: relative;
+  height: 300px; /* desktop */
+}
+
+@media (max-width:768px){
+  .oc-chart {
+    height: 420px; /* 🔥 increase for mobile */
+  }
 }
 
 /* ===== TABLE ===== */
@@ -387,6 +398,8 @@ function render(meta, rows){
             }]
         },
         options:{
+            responsive: true,              // ✅ ADD THIS
+            maintainAspectRatio: false,
             plugins:{legend:{display:false}},
             scales:{
                 x:{ticks:{color:'#94a3b8',font:{size:10}},grid:{display:false}},
