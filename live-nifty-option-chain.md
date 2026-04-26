@@ -387,8 +387,31 @@ function render(meta, rows){
     Spot ${meta.spot.toFixed(2)} | ATM ${meta.atm} | SF ${meta.sf.toFixed(2)} | ATM IV ${meta.iv}%<br>
     ${formatTime(meta.timestamp)}`;
 
+    if(maxStrike !== null){
+        document.getElementById("meta").innerHTML +=
+        `<br><b style="color:#facc15">${levelType}: ${maxStrike}</b>`;
+    }
+
     const strikes = rows.map(r=>r.strike);
     const net = rows.map(r=>r.net_gex);
+
+    // 🔥 FIND MAX +VE GEX
+    const positiveRows = rows.filter(r => r.net_gex > 0);
+    
+    let maxGexRow = null;
+    
+    if (positiveRows.length > 0) {
+        maxGexRow = positiveRows.reduce((a, b) =>
+            a.net_gex > b.net_gex ? a : b
+        );
+    }
+    
+    const maxStrike = maxGexRow ? maxGexRow.strike : null;
+    const maxIndex = maxStrike !== null ? strikes.indexOf(maxStrike) : -1;
+    
+    const levelType = maxStrike !== null
+        ? (maxStrike < meta.sf ? "Support" : "Resistance")
+        : "";
 
     if(chart) chart.destroy();
 
@@ -396,10 +419,15 @@ function render(meta, rows){
         type:'bar',
         data:{
             labels:strikes,
-            datasets:[{
-                data:net,
-                backgroundColor: net.map(x=> x>0?'#22c55e':'#ef4444')
-            }]
+            datasets:[
+            {
+                data: net,
+                backgroundColor: net.map((x, i) => {
+                    if (i === maxIndex) return '#facc15'; // 🔥 highlight max bar
+                    return x > 0 ? '#22c55e' : '#ef4444';
+                })
+            }
+            ]
         },
         options:{
             responsive: true,              // ✅ ADD THIS
