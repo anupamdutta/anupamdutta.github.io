@@ -1,142 +1,164 @@
 ---
-layout: default
+layout: page
 title: Live Nifty Option Chain
 ---
 
-<style>
-body{
-    background:#020c1b !important;
-    font-family:monospace;
-    color:#e6edf3;
-}
+<div class="option-chain-page">
 
-/* CARD */
-.card{
-    max-width:520px;
-    margin:40px auto;
-    border:1px solid #0f2a4d;
-    border-radius:10px;
-    padding:12px;
-    background:#020c1b;
-    position:relative;
+  <div class="oc-header">
+    <button class="oc-btn" onclick="load()">Refresh</button>
+
+    <div class="oc-title">GammaGrid Insights</div>
+    <div class="oc-subtitle">Precision Options Trading, Systems, and Insights</div>
+
+    <div class="oc-meta" id="meta"></div>
+  </div>
+
+  <div class="oc-chart">
+    <div class="oc-chart-title">Net Gamma Exposure (GEX) by Strike</div>
+    <canvas id="chart" height="120"></canvas>
+  </div>
+
+  <div class="table-wrap">
+    <table id="table"></table>
+  </div>
+
+  <div class="oc-disclaimer" id="disclaimer"></div>
+
+</div>
+
+<!-- ===== STYLES (SCOPED ONLY) ===== -->
+<style>
+.option-chain-page{
+  max-width:1200px;
+  margin:auto;
+  font-family:"JetBrains Mono", monospace;
+  color:#cbd5e1;
 }
 
 /* HEADER */
-.title{ color:#4cc9f0; font-size:14px; }
-.subtitle{ font-size:9px; color:#7fa7c7; }
+.oc-header{
+  position:relative;
+  margin-bottom:20px;
+}
 
-/* META */
-.meta{
-    font-size:10px;
-    margin-top:8px;
-    text-align:right;
+.oc-title{
+  color:#38bdf8;
+  font-size:18px;
+  font-weight:600;
+}
+
+.oc-subtitle{
+  font-size:12px;
+  color:#64748b;
+  margin-bottom:6px;
+}
+
+.oc-meta{
+  font-size:11px;
+  color:#94a3b8;
 }
 
 /* BUTTON */
-.btn{
-    position:absolute;
-    top:10px;
-    right:10px;
-    background:#1f4aa8;
-    border:none;
-    color:white;
-    padding:6px 10px;
-    border-radius:6px;
-    cursor:pointer;
+.oc-btn{
+  position:absolute;
+  right:0;
+  top:0;
+  background:#020617;
+  border:1px solid #38bdf8;
+  color:#38bdf8;
+  padding:6px 10px;
+  border-radius:6px;
+  cursor:pointer;
+}
+.oc-btn:hover{
+  box-shadow:0 0 10px rgba(56,189,248,0.5);
 }
 
 /* CHART */
-.chart-title{
-    font-size:9px;
-    color:#7fa7c7;
-    margin-top:6px;
+.oc-chart{
+  margin-bottom:20px;
 }
 
-/* TABLE WRAP */
-.table-wrap{
-    max-width:900px;
-    margin:20px auto;
-    overflow-x:auto;
+.oc-chart-title{
+  font-size:11px;
+  color:#64748b;
+  margin-bottom:6px;
 }
 
 /* TABLE */
-#table{
-    width:100%;
-    border-collapse:collapse;
-    font-size:10px;
-    color:#e6edf3;
+.table-wrap{
+  overflow-x:auto;
 }
 
-/* HEAD */
-#table th{
-    background:#102a4d;
-    color:#cbd5e1;
-    padding:4px 6px;
-    text-align:center;
+#table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:11px;
+}
+
+/* HEADER */
+#table thead th{
+  font-size:10px;
+  color:#64748b;
+  padding:6px 8px;
+  border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+#table thead tr:first-child th{
+  color:#38bdf8;
+  border-bottom:1px solid rgba(56,189,248,0.2);
 }
 
 /* CELLS */
 #table td{
-    padding:4px 6px;
-    text-align:center;
+  padding:5px 8px;
+  border-bottom:1px solid rgba(255,255,255,0.04);
 }
 
-/* ROW COLOR (NO STRIPES) */
-#table tr{
-    background:#020c1b !important;
+/* ROW HOVER */
+#table tbody tr:hover{
+  background:rgba(56,189,248,0.05);
 }
 
 /* ATM */
 #table tr.atm{
-    background:#1f6f4a !important;
-    color:white;
+  background:rgba(34,197,94,0.12);
+}
+
+/* STRIKE COLUMN */
+#table td:nth-child(6){
+  color:#38bdf8;
+  font-weight:600;
 }
 
 /* COLORS */
-.pos{ color:#4ade80; }
-.neg{ color:#f87171; }
+.pos{
+  color:#22c55e;
+}
+.neg{
+  color:#ef4444;
+}
 
 /* DIVIDERS */
 #table td:nth-child(5),
 #table th:nth-child(5){
-    border-right:1px solid rgba(255,255,255,0.08);
+  border-right:1px solid rgba(255,255,255,0.06);
 }
 
 #table td:nth-child(6),
 #table th:nth-child(6){
-    border-right:1px solid rgba(255,255,255,0.08);
+  border-right:1px solid rgba(255,255,255,0.08);
 }
 
-.disclaimer{
-    max-width:900px;
-    margin:10px auto 30px auto;
-    font-size:10px;
-    color:#64748b;
-    text-align:center;
-    font-family:monospace;
-    line-height:1.6;
+/* DISCLAIMER */
+.oc-disclaimer{
+  margin-top:20px;
+  font-size:11px;
+  color:#64748b;
+  text-align:center;
 }
 </style>
-
-<div class="card">
-
-<button class="btn" onclick="load()">Refresh</button>
-
-<div class="title">GammaGrid Insights</div>
-<div class="subtitle">Precision Options Trading, Systems, and Insights</div>
-
-<div class="meta" id="meta"></div>
-
-<div class="chart-title">Net Gamma Exposure (GEX) by Strike</div>
-<canvas id="chart" height="120"></canvas>
-
-</div>
-
-<div class="table-wrap">
-    <table id="table"></table>
-</div>
-
-<div class="disclaimer" id="disclaimer"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -196,9 +218,9 @@ function render(meta, rows){
         options:{
             plugins:{legend:{display:false}},
             scales:{
-                x:{ticks:{color:'#9fb3c8',font:{size:8}},grid:{display:false}},
+                x:{ticks:{color:'#94a3b8',font:{size:10}},grid:{display:false}},
                 y:{
-                    ticks:{color:'#9fb3c8',font:{size:8},callback:v=>format(v)},
+                    ticks:{color:'#94a3b8',callback:v=>format(v)},
                     grid:{color:'rgba(255,255,255,0.05)'}
                 }
             }
@@ -246,10 +268,10 @@ function render(meta, rows){
     html += `</tbody>`;
 
     document.getElementById("table").innerHTML = html;
-    document.getElementById("disclaimer").innerHTML = `
-    ⚠️ Data may be delayed. Last updated: ${formatTime(meta.timestamp)}<br>
-    Not financial advice. For informational and educational purposes only.
-    `;
+
+    document.getElementById("disclaimer").innerHTML =
+    `⚠️ Data may be delayed. Last updated: ${formatTime(meta.timestamp)}<br>
+     Not financial advice. For informational purposes only.`;
 }
 
 async function load(){
