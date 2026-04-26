@@ -25,6 +25,51 @@ title: Live Nifty Option Chain
 
   <div class="oc-disclaimer" id="disclaimer"></div>
 
+  <div class="gex-panel">
+
+  <h2>Understanding Gamma Exposure (GEX)</h2>
+
+  <p>
+    Gamma Exposure (GEX) measures how market makers (dealers) are positioned in options.
+    It helps identify key levels where price may stabilize or become volatile.
+  </p>
+
+  <h3>🟢 Positive GEX (Dealer Long Gamma)</h3>
+  <ul>
+    <li>Dealers hedge by <b>selling into rallies</b> and <b>buying dips</b></li>
+    <li>Market becomes <b>range-bound</b> and stable</li>
+    <li>Volatility is typically <b>low</b></li>
+  </ul>
+
+  <h3>🔴 Negative GEX (Dealer Short Gamma)</h3>
+  <ul>
+    <li>Dealers hedge by <b>buying into rallies</b> and <b>selling dips</b></li>
+    <li>Market becomes <b>directional / trending</b></li>
+    <li>Volatility expands quickly</li>
+  </ul>
+
+  <h3>📍 Key Concepts</h3>
+  <ul>
+    <li><b>Call Wall:</b> Strike with highest call OI/GEX → resistance</li>
+    <li><b>Put Wall:</b> Strike with highest put OI/GEX → support</li>
+    <li><b>Gamma Flip:</b> Level where total GEX shifts from +ve to -ve</li>
+  </ul>
+
+  <h3>📊 How to Use</h3>
+  <ul>
+    <li>Trade ranges when GEX is positive</li>
+    <li>Expect breakouts when GEX is negative</li>
+    <li>Watch Flip level for regime change</li>
+  </ul>
+
+  <div class="gex-cta">
+    🚀 Want to go deeper?
+    Learn advanced GEX strategies, dealer positioning models, and real trade setups.<br>
+    <b>Join the GammaGrid course → Coming Soon</b>
+  </div>
+
+</div>
+
 </div>
 
 <style>
@@ -239,6 +284,50 @@ title: Live Nifty Option Chain
   #table td, #table th{
     text-align:center;
   }
+}
+
+.gex-panel{
+  margin-top:30px;
+  padding:20px;
+  border-radius:12px;
+
+  background:rgba(2,6,23,0.85);
+  border:1px solid rgba(56,189,248,0.15);
+
+  font-size:13px;
+  line-height:1.6;
+  color:#cbd5e1;
+}
+
+.gex-panel h2{
+  color:#38bdf8;
+  margin-bottom:10px;
+}
+
+.gex-panel h3{
+  margin-top:18px;
+  color:#94a3b8;
+  font-size:13px;
+}
+
+.gex-panel ul{
+  margin:6px 0 0 18px;
+}
+
+.gex-panel li{
+  margin-bottom:4px;
+}
+
+.gex-cta{
+  margin-top:20px;
+  padding:12px;
+  border-radius:8px;
+
+  background:rgba(34,197,94,0.1);
+  border:1px solid rgba(34,197,94,0.3);
+
+  color:#4ade80;
+  font-weight:500;
 }
 </style>
 
