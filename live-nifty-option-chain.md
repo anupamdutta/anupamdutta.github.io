@@ -287,6 +287,20 @@ function formatDate(ts){
     });
 }
 
+function fixMobileHeader(){
+  if(window.innerWidth <= 768){
+    const firstRow = document.querySelector("#table thead tr:first-child th");
+
+    // CALL
+    document.querySelector("#table thead tr:first-child th:nth-child(1)")
+      .setAttribute("colspan","3");
+
+    // PUT
+    document.querySelector("#table thead tr:first-child th:nth-child(3)")
+      .setAttribute("colspan","3");
+  }
+}
+
 function render(meta, rows){
 
     document.getElementById("meta").innerHTML =
@@ -361,6 +375,7 @@ function render(meta, rows){
     html += `</tbody>`;
 
     document.getElementById("table").innerHTML = html;
+    fixMobileHeader();
 
     document.getElementById("disclaimer").innerHTML = `
     ⚠️ Data may be delayed. Last updated: ${formatTime(meta.timestamp)}<br>
