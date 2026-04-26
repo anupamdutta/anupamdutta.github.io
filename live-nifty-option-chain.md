@@ -214,20 +214,22 @@ title: Live Nifty Option Chain
 }
 
 /* CALL / PUT GEX */
-.call-gex{
-  color:#22c55e;
+.call-gex,
+.put-gex{
   font-weight:600;
+}
+
+.gex-pos{
+  color:#22c55e;
   text-shadow:0 0 6px rgba(34,197,94,0.5);
 }
 
-.put-gex{
+.gex-neg{
   color:#ef4444;
-  font-weight:600;
   text-shadow:0 0 6px rgba(239,68,68,0.5);
 }
 
-.call-gex{ color:#00ff00 !important; }
-.put-gex{ color:#ff0000 !important; }
+
 
 /* DIVIDERS */
 #table td:nth-child(5),
@@ -469,6 +471,8 @@ function render(meta, rows){
 
     rows.forEach(r=>{
         const atm = r.strike === meta.atm ? "atm" : "";
+        const callClass = r.call_gex >= 0 ? "gex-pos" : "gex-neg";
+        const putClass  = r.put_gex  >= 0 ? "gex-pos" : "gex-neg";
 
         if(isMobile){
 
@@ -476,13 +480,13 @@ function render(meta, rows){
             <tr class="${atm}">
                 <td>${r.call_ltp.toFixed(2)}</td>
                 <td>${format(r.call_oi)}</td>
-                <td class="call-gex">${format(r.call_gex)}</td>
+                <td class="call-gex ${callClass}">${format(r.call_gex)}</td>
 
                 <td><b>${r.strike}</b></td>
 
                 <td>${r.put_ltp.toFixed(2)}</td>
                 <td>${format(r.put_oi)}</td>
-                <td class="put-gex">${format(r.put_gex)}</td>
+                <td class="put-gex ${putClass}">${format(r.put_gex)}</td>
             </tr>
             `;
 
@@ -494,7 +498,7 @@ function render(meta, rows){
                 <td>${r.call_ltp.toFixed(2)}</td>
                 <td class="ask">${r.call_ask.toFixed(2)}</td>
                 <td>${format(r.call_oi)}</td>
-                <td class="call-gex">${format(r.call_gex)}</td>
+                <td class="call-gex ${callClass}">${format(r.call_gex)}</td>
 
                 <td><b>${r.strike}</b></td>
 
@@ -502,7 +506,7 @@ function render(meta, rows){
                 <td>${r.put_ltp.toFixed(2)}</td>
                 <td class="ask">${r.put_ask.toFixed(2)}</td>
                 <td>${format(r.put_oi)}</td>
-                <td class="put-gex">${format(r.put_gex)}</td>
+                <td class="put-gex ${putClass}">${format(r.put_gex)}</td>
             </tr>
             `;
         }
