@@ -248,6 +248,9 @@ function format(n){
 function formatTime(ts){
     return new Date(ts).toLocaleString('en-IN',{
         timeZone:'Asia/Kolkata',
+        day:'2-digit',
+        month:'short',
+        year:'numeric',
         hour:'2-digit',
         minute:'2-digit',
         hour12:true
@@ -256,8 +259,10 @@ function formatTime(ts){
 
 function formatDate(ts){
     return new Date(ts).toLocaleDateString('en-IN',{
+        timeZone:'Asia/Kolkata',
         day:'2-digit',
-        month:'short'
+        month:'short',
+        year:'numeric'
     });
 }
 
@@ -265,7 +270,7 @@ function render(meta, rows){
 
     document.getElementById("meta").innerHTML =
     `${meta.symbol} | Exp: ${formatDate(meta.expiry)}<br>
-    Spot ${meta.spot.toFixed(2)} | ATM ${meta.atm} | IV ${meta.iv}%<br>
+    Spot ${meta.spot.toFixed(2)} | ATM ${meta.atm} | ATM IV ${meta.iv}%<br>
     ${formatTime(meta.timestamp)}`;
 
     const strikes = rows.map(r=>r.strike);
