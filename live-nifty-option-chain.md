@@ -34,6 +34,11 @@ title: Live Nifty Option Chain
   margin:auto;
   font-family:"JetBrains Mono", monospace;
   color:#cbd5e1;
+
+  background: rgba(2,6,23,0.88);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(56,189,248,0.15);
 }
 
 /* HEADER */
@@ -95,6 +100,8 @@ title: Live Nifty Option Chain
   width:100%;
   border-collapse:collapse;
   font-size:11px;
+
+  background: rgba(2,6,23,0.65);
 }
 
 /* HEADER */
@@ -114,6 +121,10 @@ title: Live Nifty Option Chain
 #table td{
   padding:5px 8px;
   border-bottom:1px solid rgba(255,255,255,0.04);
+}
+
+#table tbody tr{
+  background: rgba(2,6,23,0.45);
 }
 
 /* ROW HOVER */
