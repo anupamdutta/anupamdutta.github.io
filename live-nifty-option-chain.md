@@ -121,6 +121,8 @@ title: Live Nifty Option Chain
 #table td{
   padding:5px 8px;
   border-bottom:1px solid rgba(255,255,255,0.04);
+
+  color: #e2e8f0;   /* 🔥 FIX: bright readable text */
 }
 
 #table tbody tr{
