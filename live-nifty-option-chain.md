@@ -200,6 +200,20 @@ title: Live Nifty Option Chain
 /* ===== MOBILE ===== */
 @media (max-width:768px){
 
+  /* ❌ HIDE BID & ASK (CALL SIDE) */
+  #table th:nth-child(1),
+  #table td:nth-child(1),
+  #table th:nth-child(3),
+  #table td:nth-child(3),
+  
+  /* ❌ HIDE BID & ASK (PUT SIDE) */
+  #table th:nth-child(7),
+  #table td:nth-child(7),
+  #table th:nth-child(9),
+  #table td:nth-child(9){
+    display:none;
+  }
+
   .oc-page{
     padding:12px;
   }
@@ -219,6 +233,7 @@ title: Live Nifty Option Chain
   .oc-subtitle{
     font-size:10px;
   }
+  
 
 }
 
@@ -228,6 +243,12 @@ title: Live Nifty Option Chain
   font-size:11px;
   color:#64748b;
   text-align:center;
+}
+
+@media (max-width:768px){
+  #table td, #table th{
+    text-align:center;
+  }
 }
 
 </style>
@@ -270,7 +291,7 @@ function render(meta, rows){
 
     document.getElementById("meta").innerHTML =
     `${meta.symbol} | Exp: ${formatDate(meta.expiry)}<br>
-    Spot ${meta.spot.toFixed(2)} | ATM ${meta.atm} | ATM IV ${meta.iv}%<br>
+    Spot ${meta.spot.toFixed(2)} | ATM ${meta.atm} | SF ${meta.sf.toFixed(2)} | ATM IV ${meta.iv}%<br>
     ${formatTime(meta.timestamp)}`;
 
     const strikes = rows.map(r=>r.strike);
