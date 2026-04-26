@@ -141,7 +141,13 @@ title: Live Nifty Option Chain
 
 /* ATM ROW */
 #table tr.atm{
-  background:rgba(34,197,94,0.15);
+  background:rgba(34,197,94,0.25);   /* stronger base */
+  box-shadow: inset 0 0 0 1px rgba(34,197,94,0.6); /* crisp border */
+}
+
+#table tr.atm td{
+  border-top:1px solid rgba(34,197,94,0.6);
+  border-bottom:1px solid rgba(34,197,94,0.6);
 }
 
 /* STRIKE */
@@ -330,8 +336,10 @@ function render(meta, rows){
 
     document.getElementById("table").innerHTML = html;
 
-    document.getElementById("disclaimer").innerHTML =
-    `⚠️ Data may be delayed. Last updated: ${formatTime(meta.timestamp)}`;
+    document.getElementById("disclaimer").innerHTML = `
+    ⚠️ Data may be delayed. Last updated: ${formatTime(meta.timestamp)}<br>
+    Not financial advice. For informational and educational purposes only.
+    `;
 }
 
 async function load(){
