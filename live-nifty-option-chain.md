@@ -3,7 +3,7 @@ layout: page
 title: Live Nifty Option Chain
 ---
 
-<div class="option-chain-page">
+<div class="oc-page">
 
   <div class="oc-header">
     <button class="oc-btn" onclick="load()">Refresh</button>
@@ -27,21 +27,23 @@ title: Live Nifty Option Chain
 
 </div>
 
-<!-- ===== STYLES (SCOPED ONLY) ===== -->
 <style>
-.option-chain-page{
+
+/* ===== PAGE ===== */
+.oc-page{
   max-width:1200px;
   margin:auto;
-  font-family:"JetBrains Mono", monospace;
-  color:#cbd5e1;
+  padding:20px;
+  border-radius:12px;
 
-  background: rgba(2,6,23,0.88);
-  padding: 20px;
-  border-radius: 12px;
-  border: 1px solid rgba(56,189,248,0.15);
+  background:rgba(2,6,23,0.9);
+  border:1px solid rgba(56,189,248,0.15);
+
+  font-family:"JetBrains Mono", monospace;
+  color:#e2e8f0;
 }
 
-/* HEADER */
+/* ===== HEADER ===== */
 .oc-header{
   position:relative;
   margin-bottom:20px;
@@ -56,12 +58,12 @@ title: Live Nifty Option Chain
 .oc-subtitle{
   font-size:12px;
   color:#64748b;
-  margin-bottom:6px;
 }
 
 .oc-meta{
   font-size:11px;
   color:#94a3b8;
+  margin-top:6px;
 }
 
 /* BUTTON */
@@ -69,18 +71,15 @@ title: Live Nifty Option Chain
   position:absolute;
   right:0;
   top:0;
-  background:#020617;
-  border:1px solid #38bdf8;
-  color:#38bdf8;
   padding:6px 10px;
   border-radius:6px;
+  border:1px solid #38bdf8;
+  background:#020617;
+  color:#38bdf8;
   cursor:pointer;
 }
-.oc-btn:hover{
-  box-shadow:0 0 10px rgba(56,189,248,0.5);
-}
 
-/* CHART */
+/* ===== CHART ===== */
 .oc-chart{
   margin-bottom:20px;
 }
@@ -91,24 +90,29 @@ title: Live Nifty Option Chain
   margin-bottom:6px;
 }
 
-/* TABLE */
+/* ===== TABLE ===== */
 .table-wrap{
   overflow-x:auto;
 }
 
+/* MAIN TABLE */
 #table{
   width:100%;
-  border-collapse:collapse;
-  font-size:11px;
+  border-collapse:separate;
+  border-spacing:0;
 
-  background: rgba(2,6,23,0.65);
+  background:rgba(2,6,23,0.7);
+  border-radius:10px;
+  overflow:hidden;
+
+  font-size:11px;
 }
 
 /* HEADER */
 #table thead th{
-  font-size:10px;
-  color:#64748b;
   padding:6px 8px;
+  font-size:10px;
+  color:#94a3b8;
   border-bottom:1px solid rgba(255,255,255,0.1);
 }
 
@@ -120,48 +124,91 @@ title: Live Nifty Option Chain
 /* CELLS */
 #table td{
   padding:5px 8px;
+  color:#e2e8f0;
   border-bottom:1px solid rgba(255,255,255,0.04);
-
-  color: #e2e8f0;   /* 🔥 FIX: bright readable text */
+  white-space:nowrap;
 }
 
+/* ROWS */
 #table tbody tr{
-  background: rgba(2,6,23,0.45);
+  background:rgba(2,6,23,0.5);
+  transition:0.15s;
 }
 
-/* ROW HOVER */
 #table tbody tr:hover{
-  background:rgba(56,189,248,0.05);
+  background:rgba(56,189,248,0.06);
 }
 
-/* ATM */
+/* ATM ROW */
 #table tr.atm{
-  background:rgba(34,197,94,0.12);
+  background:rgba(34,197,94,0.15);
 }
 
-/* STRIKE COLUMN */
+/* STRIKE */
 #table td:nth-child(6){
   color:#38bdf8;
   font-weight:600;
 }
 
-/* COLORS */
-.pos{
+/* CALL / PUT GEX */
+.call-gex{
   color:#22c55e;
+  font-weight:500;
 }
-.neg{
+
+.put-gex{
   color:#ef4444;
+  font-weight:500;
 }
 
 /* DIVIDERS */
 #table td:nth-child(5),
 #table th:nth-child(5){
-  border-right:1px solid rgba(255,255,255,0.06);
+  border-right:1px solid rgba(255,255,255,0.05);
 }
 
 #table td:nth-child(6),
 #table th:nth-child(6){
   border-right:1px solid rgba(255,255,255,0.08);
+}
+
+/* ROUNDED CORNERS FIX */
+#table thead tr:first-child th:first-child {
+  border-top-left-radius:10px;
+}
+#table thead tr:first-child th:last-child {
+  border-top-right-radius:10px;
+}
+#table tbody tr:last-child td:first-child {
+  border-bottom-left-radius:10px;
+}
+#table tbody tr:last-child td:last-child {
+  border-bottom-right-radius:10px;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width:768px){
+
+  .oc-page{
+    padding:12px;
+  }
+
+  #table{
+    font-size:10px;
+  }
+
+  #table td, #table th{
+    padding:4px 6px;
+  }
+
+  .oc-title{
+    font-size:14px;
+  }
+
+  .oc-subtitle{
+    font-size:10px;
+  }
+
 }
 
 /* DISCLAIMER */
@@ -171,6 +218,7 @@ title: Live Nifty Option Chain
   color:#64748b;
   text-align:center;
 }
+
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -189,9 +237,6 @@ function format(n){
 function formatTime(ts){
     return new Date(ts).toLocaleString('en-IN',{
         timeZone:'Asia/Kolkata',
-        day:'2-digit',
-        month:'short',
-        year:'numeric',
         hour:'2-digit',
         minute:'2-digit',
         hour12:true
@@ -200,10 +245,8 @@ function formatTime(ts){
 
 function formatDate(ts){
     return new Date(ts).toLocaleDateString('en-IN',{
-        timeZone:'Asia/Kolkata',
         day:'2-digit',
-        month:'short',
-        year:'numeric'
+        month:'short'
     });
 }
 
@@ -211,7 +254,7 @@ function render(meta, rows){
 
     document.getElementById("meta").innerHTML =
     `${meta.symbol} | Exp: ${formatDate(meta.expiry)}<br>
-    Spot ${meta.spot.toFixed(2)} | ATM ${meta.atm} | SF ${meta.sf.toFixed(2)} | IV ${meta.iv}%<br>
+    Spot ${meta.spot.toFixed(2)} | ATM ${meta.atm} | IV ${meta.iv}%<br>
     ${formatTime(meta.timestamp)}`;
 
     const strikes = rows.map(r=>r.strike);
@@ -265,7 +308,7 @@ function render(meta, rows){
             <td>${r.call_ltp.toFixed(2)}</td>
             <td>${r.call_ask.toFixed(2)}</td>
             <td>${format(r.call_oi)}</td>
-            <td class="pos">${format(r.call_gex)}</td>
+            <td class="call-gex">${format(r.call_gex)}</td>
 
             <td><b>${r.strike}</b></td>
 
@@ -273,7 +316,7 @@ function render(meta, rows){
             <td>${r.put_ltp.toFixed(2)}</td>
             <td>${r.put_ask.toFixed(2)}</td>
             <td>${format(r.put_oi)}</td>
-            <td class="neg">${format(r.put_gex)}</td>
+            <td class="put-gex">${format(r.put_gex)}</td>
         </tr>
         `;
     });
@@ -283,8 +326,7 @@ function render(meta, rows){
     document.getElementById("table").innerHTML = html;
 
     document.getElementById("disclaimer").innerHTML =
-    `⚠️ Data may be delayed. Last updated: ${formatTime(meta.timestamp)}<br>
-     Not financial advice. For informational purposes only.`;
+    `⚠️ Data may be delayed. Last updated: ${formatTime(meta.timestamp)}`;
 }
 
 async function load(){
