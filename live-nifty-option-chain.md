@@ -163,6 +163,9 @@ title: Live Nifty Option Chain
   text-shadow:0 0 6px rgba(239,68,68,0.5);
 }
 
+.call-gex{ color:#00ff00 !important; }
+.put-gex{ color:#ff0000 !important; }
+
 /* DIVIDERS */
 #table td:nth-child(5),
 #table th:nth-child(5){
