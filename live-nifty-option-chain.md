@@ -289,15 +289,21 @@ function formatDate(ts){
 
 function fixMobileHeader(){
   if(window.innerWidth <= 768){
-    const firstRow = document.querySelector("#table thead tr:first-child th");
 
-    // CALL
-    document.querySelector("#table thead tr:first-child th:nth-child(1)")
-      .setAttribute("colspan","3");
+    const firstRow = document.querySelector("#table thead tr:first-child");
+    if(!firstRow) return;
 
-    // PUT
-    document.querySelector("#table thead tr:first-child th:nth-child(3)")
-      .setAttribute("colspan","3");
+    const ths = firstRow.querySelectorAll("th");
+
+    if(ths.length >= 3){
+      // CALL
+      ths[0].setAttribute("colspan","3");
+
+      // STRIKE stays 1
+
+      // PUT
+      ths[2].setAttribute("colspan","3");
+    }
   }
 }
 
