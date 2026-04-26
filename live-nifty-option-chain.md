@@ -199,17 +199,8 @@ title: Live Nifty Option Chain
 /* ===== MOBILE ===== */
 @media (max-width:768px){
 
-  /* ❌ HIDE BID & ASK (CALL SIDE) */
-  #table th:nth-child(1),
-  #table td:nth-child(1),
-  #table th:nth-child(3),
-  #table td:nth-child(3),
-  
-  /* ❌ HIDE BID & ASK (PUT SIDE) */
-  #table th:nth-child(7),
-  #table td:nth-child(7),
-  #table th:nth-child(9),
-  #table td:nth-child(9){
+  .bid,
+  .ask{
     display:none;
   }
 
@@ -350,9 +341,17 @@ function render(meta, rows){
             <th colspan="5">PUT</th>
         </tr>
         <tr>
-            <th>Bid</th><th>LTP</th><th>Ask</th><th>OI</th><th>GEX</th>
-            <th></th>
-            <th>Bid</th><th>LTP</th><th>Ask</th><th>OI</th><th>GEX</th>
+            <th class="bid">Bid</th>
+            <th>LTP</th>
+            <th class="ask">Ask</th>
+            <th>OI</th>
+            <th class="gex">GEX</th>
+            <th></th>             
+            <th class="bid">Bid</th>
+            <th>LTP</th>
+            <th class="ask">Ask</th>
+            <th>OI</th>
+            <th class="gex">GEX</th>
         </tr>
         </thead>
         <tbody>
@@ -382,17 +381,17 @@ function render(meta, rows){
 
             html += `
             <tr class="${atm}">
-                <td>${r.call_bid.toFixed(2)}</td>
+                <td class="bid">${r.call_bid.toFixed(2)}</td>
                 <td>${r.call_ltp.toFixed(2)}</td>
-                <td>${r.call_ask.toFixed(2)}</td>
+                <td class="ask">${r.call_ask.toFixed(2)}</td>
                 <td>${format(r.call_oi)}</td>
                 <td class="call-gex">${format(r.call_gex)}</td>
 
                 <td><b>${r.strike}</b></td>
 
-                <td>${r.put_bid.toFixed(2)}</td>
+                <td class="bid">${r.put_bid.toFixed(2)}</td>
                 <td>${r.put_ltp.toFixed(2)}</td>
-                <td>${r.put_ask.toFixed(2)}</td>
+                <td class="ask">${r.put_ask.toFixed(2)}</td>
                 <td>${format(r.put_oi)}</td>
                 <td class="put-gex">${format(r.put_gex)}</td>
             </tr>
