@@ -28,7 +28,6 @@ title: Live Nifty Option Chain
 </div>
 
 <style>
-
 /* ===== PAGE ===== */
 .oc-page{
   max-width:1200px;
@@ -250,7 +249,6 @@ title: Live Nifty Option Chain
     text-align:center;
   }
 }
-
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -287,26 +285,6 @@ function formatDate(ts){
     });
 }
 
-function fixMobileHeader(){
-  if(window.innerWidth <= 768){
-
-    const firstRow = document.querySelector("#table thead tr:first-child");
-    if(!firstRow) return;
-
-    const ths = firstRow.querySelectorAll("th");
-
-    if(ths.length >= 3){
-      // CALL
-      ths[0].setAttribute("colspan","3");
-
-      // STRIKE stays 1
-
-      // PUT
-      ths[2].setAttribute("colspan","3");
-    }
-  }
-}
-
 function render(meta, rows){
 
     document.getElementById("meta").innerHTML =
@@ -340,48 +318,91 @@ function render(meta, rows){
         }
     });
 
-    let html = `
-    <thead>
-    <tr>
-        <th colspan="5">CALL</th>
-        <th>STRIKE</th>
-        <th colspan="5">PUT</th>
-    </tr>
-    <tr>
-        <th>Bid</th><th>LTP</th><th>Ask</th><th>OI</th><th>GEX</th>
-        <th></th>
-        <th>Bid</th><th>LTP</th><th>Ask</th><th>OI</th><th>GEX</th>
-    </tr>
-    </thead>
-    <tbody>
-    `;
+    let isMobile = window.innerWidth <= 768;
+
+    let html = "";
+
+    if(isMobile){
+
+        html = `
+        <thead>
+        <tr>
+            <th colspan="3">CALL</th>
+            <th>STRIKE</th>
+            <th colspan="3">PUT</th>
+        </tr>
+        <tr>
+            <th>LTP</th><th>OI</th><th>GEX</th>
+            <th></th>
+            <th>LTP</th><th>OI</th><th>GEX</th>
+        </tr>
+        </thead>
+        <tbody>
+        `;
+
+    } else {
+
+        html = `
+        <thead>
+        <tr>
+            <th colspan="5">CALL</th>
+            <th>STRIKE</th>
+            <th colspan="5">PUT</th>
+        </tr>
+        <tr>
+            <th>Bid</th><th>LTP</th><th>Ask</th><th>OI</th><th>GEX</th>
+            <th></th>
+            <th>Bid</th><th>LTP</th><th>Ask</th><th>OI</th><th>GEX</th>
+        </tr>
+        </thead>
+        <tbody>
+        `;
+    }
 
     rows.forEach(r=>{
         const atm = r.strike === meta.atm ? "atm" : "";
 
-        html += `
-        <tr class="${atm}">
-            <td>${r.call_bid.toFixed(2)}</td>
-            <td>${r.call_ltp.toFixed(2)}</td>
-            <td>${r.call_ask.toFixed(2)}</td>
-            <td>${format(r.call_oi)}</td>
-            <td class="call-gex">${format(r.call_gex)}</td>
+        if(isMobile){
 
-            <td><b>${r.strike}</b></td>
+            html += `
+            <tr class="${atm}">
+                <td>${r.call_ltp.toFixed(2)}</td>
+                <td>${format(r.call_oi)}</td>
+                <td class="call-gex">${format(r.call_gex)}</td>
 
-            <td>${r.put_bid.toFixed(2)}</td>
-            <td>${r.put_ltp.toFixed(2)}</td>
-            <td>${r.put_ask.toFixed(2)}</td>
-            <td>${format(r.put_oi)}</td>
-            <td class="put-gex">${format(r.put_gex)}</td>
-        </tr>
-        `;
+                <td><b>${r.strike}</b></td>
+
+                <td>${r.put_ltp.toFixed(2)}</td>
+                <td>${format(r.put_oi)}</td>
+                <td class="put-gex">${format(r.put_gex)}</td>
+            </tr>
+            `;
+
+        } else {
+
+            html += `
+            <tr class="${atm}">
+                <td>${r.call_bid.toFixed(2)}</td>
+                <td>${r.call_ltp.toFixed(2)}</td>
+                <td>${r.call_ask.toFixed(2)}</td>
+                <td>${format(r.call_oi)}</td>
+                <td class="call-gex">${format(r.call_gex)}</td>
+
+                <td><b>${r.strike}</b></td>
+
+                <td>${r.put_bid.toFixed(2)}</td>
+                <td>${r.put_ltp.toFixed(2)}</td>
+                <td>${r.put_ask.toFixed(2)}</td>
+                <td>${format(r.put_oi)}</td>
+                <td class="put-gex">${format(r.put_gex)}</td>
+            </tr>
+            `;
+        }
     });
 
     html += `</tbody>`;
 
     document.getElementById("table").innerHTML = html;
-    fixMobileHeader();
 
     document.getElementById("disclaimer").innerHTML = `
     ⚠️ Data may be delayed. Last updated: ${formatTime(meta.timestamp)}<br>
