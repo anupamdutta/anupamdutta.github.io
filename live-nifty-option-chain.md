@@ -141,7 +141,7 @@ title: Live Nifty Option Chain
 
 @media (max-width:768px){
   .oc-chart {
-    height: 420px; /* 🔥 increase for mobile */
+    height: 300px; /* 🔥 increase for mobile */
   }
 }
 
