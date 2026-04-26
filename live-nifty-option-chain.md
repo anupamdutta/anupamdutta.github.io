@@ -402,9 +402,14 @@ function render(meta, rows){
         options:{
             responsive: true,              // ✅ ADD THIS
             maintainAspectRatio: false,
+            layout: {
+                padding: {
+                    bottom: 25   // 🔥 THIS FIXES YOUR ISSUE
+                }
+            },
             plugins:{legend:{display:false}},
             scales:{
-                x:{ticks:{color:'#94a3b8',font:{size:10}},grid:{display:false}},
+                x:{ticks:{color:'#94a3b8',font:{size:10}, padding:8},grid:{display:false}},
                 y:{
                     ticks:{color:'#94a3b8',callback:v=>format(v)},
                     grid:{color:'rgba(255,255,255,0.05)'}
