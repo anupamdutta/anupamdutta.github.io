@@ -387,10 +387,7 @@ function render(meta, rows){
     Spot ${meta.spot.toFixed(2)} | ATM ${meta.atm} | SF ${meta.sf.toFixed(2)} | ATM IV ${meta.iv}%<br>
     ${formatTime(meta.timestamp)}`;
 
-    if(maxStrike !== null){
-        document.getElementById("meta").innerHTML +=
-        `<br><b style="color:#facc15">${levelType}: ${maxStrike}</b>`;
-    }
+    
 
     const strikes = rows.map(r=>r.strike);
     const net = rows.map(r=>r.net_gex);
@@ -413,6 +410,11 @@ function render(meta, rows){
         ? (maxStrike < meta.sf ? "Support" : "Resistance")
         : "";
 
+    if(maxStrike !== null){
+        document.getElementById("meta").innerHTML +=
+        `<br><b style="color:#facc15">${levelType}: ${maxStrike}</b>`;
+    }
+  
     if(chart) chart.destroy();
 
     chart = new Chart(document.getElementById('chart'), {
