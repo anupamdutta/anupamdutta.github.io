@@ -123,7 +123,7 @@ async function runIV() {
 
   document.getElementById("box-input").innerHTML = "Loading...";
   document.getElementById("box-result").innerHTML = "";
-  document.getElementById("box-dist").innerHTML = "Loading...";
+  document.getElementById("prob-grid").innerHTML = "Loading...";
 
   try {
 
