@@ -221,6 +221,7 @@ function renderChart(pdfData, spot) {
 
   const labels = pdfData.map(p => p.price);
   const raw = pdfData.map(p => p.density);
+
   const max = Math.max(...raw);
   const values = raw.map(v => v / max);
 
@@ -228,26 +229,58 @@ function renderChart(pdfData, spot) {
 
   const ctx = document.getElementById("pdfChart").getContext("2d");
 
+  // ===== GRADIENT =====
+  const gradient = ctx.createLinearGradient(0, 0, 0, 200);
+  gradient.addColorStop(0, "rgba(56,189,248,0.4)");
+  gradient.addColorStop(1, "rgba(56,189,248,0)");
+
   chart = new Chart(ctx, {
     type: "line",
     data: {
       labels: labels,
       datasets: [{
-        label: "Probability Density",
         data: values,
-        borderWidth: 2,
+        borderColor: "#38bdf8",
+        backgroundColor: gradient,
+        fill: true,
+        tension: 0.4,
         pointRadius: 0,
-        tension: 0.3
+        borderWidth: 2
       }]
     },
     options: {
       responsive: true,
+      interaction: {
+        mode: "index",
+        intersect: false
+      },
       plugins: {
-        legend: { display: false }
+        legend: { display: false },
+        tooltip: {
+          enabled: true,
+          backgroundColor: "#020617",
+          borderColor: "#38bdf8",
+          borderWidth: 1,
+          titleColor: "#38bdf8",
+          bodyColor: "#cbd5e1",
+          callbacks: {
+            title: (ctx) => `Price: ${ctx[0].label}`,
+            label: (ctx) => {
+              const prob = (ctx.raw * 100).toFixed(2);
+              return `Density: ${prob}%`;
+            }
+          }
+        }
       },
       scales: {
         x: {
-          ticks: { maxTicksLimit: 8 }
+          ticks: {
+            maxTicksLimit: 6,
+            color: "#64748b"
+          },
+          grid: {
+            color: "rgba(255,255,255,0.05)"
+          }
         },
         y: {
           display: false
