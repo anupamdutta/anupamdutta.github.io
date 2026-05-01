@@ -269,7 +269,7 @@ function renderTable(data) {
     html += `
       <div class="${cls}">
         <div>${row.label}</div>
-        <div>${Math.round(row.strike)}</div>
+        <div>${Math.round(row.value)}</div>
         <div>${(row.probBelow * 100).toFixed(1)}%</div>
         <div>${(row.touchProb * 100).toFixed(1)}%</div>
       </div>
