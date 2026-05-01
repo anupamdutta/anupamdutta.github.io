@@ -78,7 +78,7 @@ permalink: /iv-finder/
       </div>
     </div>
   </div>
-  <div class="mmr-card" id="box-about">
+  <div class="mmr-card mmr-about" id="box-about">
   <div class="mmr-card-title">[ ABOUT ]</div>
 
   <div class="about-content">
