@@ -245,7 +245,7 @@ function renderTable(data) {
   let html = `
     <div class="prob-header">
       <div>Level</div>
-      <div>Strike</div>
+      <div>Value</div>
       <div>Below</div>
       <div>Touch</div>
     </div>
@@ -269,7 +269,7 @@ function renderTable(data) {
     html += `
       <div class="${cls}">
         <div>${row.label}</div>
-        <div>${row.strike}</div>
+        <div>${Math.round(row.strike)}</div>
         <div>${(row.probBelow * 100).toFixed(1)}%</div>
         <div>${(row.touchProb * 100).toFixed(1)}%</div>
       </div>
