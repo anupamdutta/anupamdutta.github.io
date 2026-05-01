@@ -21,9 +21,9 @@ permalink: /iv-finder/
         Run solver to see IV
       </div>
 
-      <div class="mmr-card" id="box-dist">
+      <div class="mmr-card">
         <div class="mmr-card-title">[ PROBABILITY TABLE ]</div>
-        Waiting for data...
+        <div id="prob-grid">Waiting for data...</div>
       </div>
       
       <div class="mmr-card">
@@ -163,10 +163,16 @@ async function runIV() {
     `;
 
     /* ===== PROBABILITY TABLE ===== */
-    renderTable(json.distribution, S);
-
+    if (json.distribution) {
+      renderTable(json.distribution, S);
+    } else {
+      document.getElementById("prob-grid").innerHTML = "No distribution data";
+    }
+    
     /* ===== PDF CHART ===== */
-    renderChart(json.pdf, S);
+    if (json.pdf) {
+      renderChart(json.pdf, S);
+    }
 
   } catch (err) {
     showError("Connection error");
@@ -214,7 +220,9 @@ function renderTable(data, spot) {
 function renderChart(pdfData, spot) {
 
   const labels = pdfData.map(p => p.price);
-  const values = pdfData.map(p => p.density);
+  const raw = pdfData.map(p => p.density);
+  const max = Math.max(...raw);
+  const values = raw.map(v => v / max);
 
   if (chart) chart.destroy();
 
