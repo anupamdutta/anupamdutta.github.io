@@ -1,6 +1,6 @@
 ---
 layout: page
-title: IV Finder
+title: IV Finder + Decoder
 permalink: /iv-finder/
 ---
 
