@@ -77,8 +77,97 @@ permalink: /iv-finder/
 
       </div>
     </div>
+  </div>
+  <div class="mmr-card" id="box-about">
+  <div class="mmr-card-title">[ ABOUT ]</div>
+
+  <div class="about-content">
+
+    <p><b>Implied Volatility (IV)</b></p>
+    <p>
+      I don’t treat IV as just another number on the screen. For me, IV is the
+      market’s collective expectation of future movement. It reflects how much
+      traders believe price can expand or contract before expiry.
+    </p>
+    <p>
+      When IV is elevated, the market is pricing in larger swings, uncertainty,
+      or event-driven moves. When IV is low, it is expecting stability and range-bound behavior.
+      So instead of asking “is IV high or low”, I ask “what kind of move is being priced in?”
+    </p>
+
+    <p><b>Range (SF^ and SF^^)</b></p>
+    <p>
+      The levels shown above are not traditional support or resistance zones.
+      They are statistically derived ranges based on current volatility.
+    </p>
+    <p>
+      SF^ represents roughly the expected lower bound, and SF^^ represents the upper bound
+      for the given time to expiry. Most of the time, price tends to remain within this range,
+      not because it must, but because that is what the current volatility implies.
+    </p>
+    <p>
+      Think of this as a probability envelope. Price can break it, but when it does,
+      you are entering tail-event territory.
+    </p>
+
+    <p><b>Probability Table</b></p>
+    <p>
+      Instead of predicting direction, I focus on distribution. The table maps where price
+      is likely to end up and how far it is likely to travel.
+    </p>
+    <p>
+      “Below” tells you the probability of expiry finishing below a certain level.
+      “Touch” tells you the probability of price reaching that level at any point
+      before expiry, even if it does not stay there.
+    </p>
+    <p>
+      This distinction is critical. Markets often travel further than where they finally settle.
+      Understanding this difference is where most traders gain or lose edge.
+    </p>
+
+    <p><b>Real Use in Trading</b></p>
+    <p>
+      I don’t use this to guess direction. I use it to understand structure.
+    </p>
+    <p>
+      If touch probability is high, I assume price can reach that level and plan risk accordingly.
+      If it is low, I treat that zone as a tail event, useful for positioning or hedging.
+    </p>
+    <p>
+      This framework helps in strike selection, premium selling, and risk management.
+      Instead of reacting to price, I operate within a probabilistic map.
+    </p>
+
+    <p><b>How to Think About It</b></p>
+    <p>
+      Most traders ask, “Will the market go up or down?”  
+      I ask, “How far can the market move, and what is the probability of that move?”
+    </p>
+    <p>
+      That shift, from direction to distribution, is where consistency starts to build.
+    </p>
+
+    <hr>
+
+    <p><b>Want to Go Deeper?</b></p>
+    <p>
+      If you want to truly understand how IV translates into real trades, how probability
+      interacts with option pricing, and how to structure positions based on expectation,
+      I cover all of this step by step in my premium IV Decoding course.
+    </p>
+    <p>
+      This is not theory-heavy content. It is built around practical application,
+      real market behavior, and decision-making frameworks.
+    </p>
+
+    <p>
+      To join or learn more:<br>
+      <b>Anupam Dutta</b><br>
+      📞 +91-8240775462
+    </p>
 
   </div>
+</div>
 
 </div>
 
