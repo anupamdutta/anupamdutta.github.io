@@ -169,9 +169,20 @@ async function runIV() {
   if (!DTE || DTE <= 0) return showError("DTE must be greater than 0");
   if (!P || P <= 0) return showError("Invalid Option Price");
 
-  document.getElementById("box-input").innerHTML = "Loading...";
-  document.getElementById("box-result").innerHTML = "";
+  // ===== RESET ALL PANELS =====
+  document.getElementById("box-input").innerHTML = "Fetching Input Data...";
+  document.getElementById("box-result").innerHTML = "Calculating...";
   document.getElementById("prob-grid").innerHTML = "Loading...";
+  
+  // 🔥 DESTROY OLD CHART IMMEDIATELY
+  if (chart) {
+    chart.destroy();
+    chart = null;
+  }
+  
+  // 🔥 CLEAR CANVAS (important)
+  const ctx = document.getElementById("pdfChart").getContext("2d");
+  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
   try {
 
