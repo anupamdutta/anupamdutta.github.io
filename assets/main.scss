@@ -492,19 +492,20 @@ label {
   align-items: start;
 }
 
-/* LEFT OUTPUT 
+/* LEFT OUTPUT */
 .iv-page .iv-output-panel {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
-}*/
+}
 
+/*
 .iv-page .iv-output-panel {
   display: grid;
   grid-template-columns: 1fr;
   gap: 16px;
 }
-
+*/
 /* RIGHT INPUT */
 .iv-page .iv-input-panel {
   width: 100%;
