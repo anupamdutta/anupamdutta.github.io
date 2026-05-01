@@ -181,31 +181,30 @@ async function runIV() {
 
 
 /* ================= TABLE ================= */
-function renderTable(data, spot) {
-
-  const filtered = data.filter(r => Math.abs(r.d2) <= 2.5);
+function renderTable(data) {
 
   let html = `
     <div class="prob-header">
+      <div>Level</div>
       <div>Strike</div>
-      <div>σ</div>
       <div>Below</div>
       <div>Touch</div>
     </div>
   `;
 
-  filtered.forEach(row => {
+  data.forEach(row => {
 
     let cls = "prob-row";
 
-    if (Math.abs(row.d2) < 0.1) cls += " atm";
-    else if (Math.abs(row.d2) <= 1) cls += " zone";
-    else if (Math.abs(row.d2) >= 2) cls += " tail";
+    // Highlight center
+    if (row.label === "0σ") cls += " atm";
+    else if (row.label === "+1σ" || row.label === "-1σ") cls += " zone";
+    else cls += " tail";
 
     html += `
       <div class="${cls}">
+        <div>${row.label}</div>
         <div>${row.strike}</div>
-        <div>${row.d2.toFixed(2)}</div>
         <div>${(row.probBelow * 100).toFixed(1)}%</div>
         <div>${(row.touchProb * 100).toFixed(1)}%</div>
       </div>
@@ -214,7 +213,6 @@ function renderTable(data, spot) {
 
   document.getElementById("prob-grid").innerHTML = html;
 }
-
 
 /* ================= CHART ================= */
 function renderChart(pdfData, spot) {
