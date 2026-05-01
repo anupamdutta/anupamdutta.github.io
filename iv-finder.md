@@ -164,7 +164,7 @@ async function runIV() {
 
     /* ===== PROBABILITY TABLE ===== */
     if (json.distribution) {
-      renderTable(json.distribution, S);
+      renderTable(json.distribution);
     } else {
       document.getElementById("prob-grid").innerHTML = "No distribution data";
     }
