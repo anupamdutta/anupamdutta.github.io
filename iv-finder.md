@@ -256,9 +256,15 @@ function renderTable(data) {
     let cls = "prob-row";
 
     // Highlight center
-    if (row.label === "0σ") cls += " atm";
-    else if (row.label === "+1σ" || row.label === "-1σ") cls += " zone";
-    else cls += " tail";
+    if (row.label === "0σ↓" || row.label === "0σ↑") {
+      cls += " atm";
+    } 
+    else if (row.label === "+1σ" || row.label === "-1σ") {
+      cls += " zone";
+    } 
+    else {
+      cls += " tail";
+    }
 
     html += `
       <div class="${cls}">
