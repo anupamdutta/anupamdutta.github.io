@@ -21,6 +21,16 @@ permalink: /iv-finder/
         Run solver to see IV
       </div>
 
+      <div class="mmr-card" id="box-dist">
+        <div class="mmr-card-title">[ PROBABILITY TABLE ]</div>
+        Waiting for data...
+      </div>
+      
+      <div class="mmr-card">
+        <div class="mmr-card-title">[ DISTRIBUTION CURVE ]</div>
+        <canvas id="pdfChart" height="120"></canvas>
+      </div>
+
     </div>
 
     <!-- ================= RIGHT INPUT ================= -->
@@ -80,6 +90,8 @@ permalink: /iv-finder/
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script>
 
 /* ================= MODAL ================= */
@@ -92,6 +104,9 @@ function closeModal() {
   document.getElementById("errorModal").style.display = "none";
 }
 
+/* ================= CHART INSTANCE ================= */
+let chart = null;
+
 /* ================= MAIN ================= */
 async function runIV() {
 
@@ -101,16 +116,14 @@ async function runIV() {
   let P = parseFloat(document.getElementById("price").value);
   let type = document.getElementById("type").value.toLowerCase();
 
-  // ===== VALIDATION =====
   if (!S || S <= 0) return showError("Invalid Spot value");
   if (!K || K <= 0) return showError("Invalid Strike value");
   if (!DTE || DTE <= 0) return showError("DTE must be greater than 0");
   if (!P || P <= 0) return showError("Invalid Option Price");
-  if (DTE > 3650) return showError("DTE too large (check input)");
 
-  // ===== LOADING STATE =====
   document.getElementById("box-input").innerHTML = "Loading...";
   document.getElementById("box-result").innerHTML = "";
+  document.getElementById("box-dist").innerHTML = "Loading...";
 
   try {
 
@@ -128,10 +141,10 @@ async function runIV() {
     const json = await res.json();
 
     if (!json.iv || isNaN(json.iv)) {
-      return showError("IV calculation failed. Check inputs.");
+      return showError("IV calculation failed");
     }
 
-    /* ===== INPUT BOX ===== */
+    /* ===== INPUT ===== */
     document.getElementById("box-input").innerHTML = `
       <div class="mmr-card-title">[ INPUT PARAMETERS ]</div>
       SF: ${S}<br>
@@ -141,21 +154,101 @@ async function runIV() {
       Type: ${type.toUpperCase()}
     `;
 
-    /* ===== RESULT BOX ===== */
-    const color = json.iv > 0 ? "#22c55e" : "#ef4444";
-
+    /* ===== RESULT ===== */
     document.getElementById("box-result").innerHTML = `
       <div class="mmr-card-title">[ RESULT ]</div>
-      <div style="color:${color}; font-size:18px;">
-        IV: ${json.iv.toFixed(4)} % <br>
-        Risk Level* (SF^): ${json.risk_level.toFixed(2)} <br>
-        Risk Level** (SF^^): ${json.risk_level_1.toFixed(2)} <br>
-      </div>
+      IV: ${json.iv.toFixed(4)} % <br>
+      Risk Level* (SF^): ${json.risk_level.toFixed(2)} <br>
+      Risk Level** (SF^^): ${json.risk_level_1.toFixed(2)}
     `;
 
+    /* ===== PROBABILITY TABLE ===== */
+    renderTable(json.distribution, S);
+
+    /* ===== PDF CHART ===== */
+    renderChart(json.pdf, S);
+
   } catch (err) {
-    showError("Connection error. Try again.");
+    showError("Connection error");
   }
+}
+
+
+/* ================= TABLE ================= */
+function renderTable(data, spot) {
+
+  let html = `
+    <div class="mmr-card-title">[ PROBABILITY TABLE ]</div>
+    <table style="width:100%; font-size:12px;">
+      <tr>
+        <th>Strike</th>
+        <th>d2</th>
+        <th>Below</th>
+        <th>Above</th>
+        <th>Touch</th>
+      </tr>
+  `;
+
+  data.forEach(row => {
+
+    const highlight = Math.abs(row.strike - spot) < 25
+      ? "background:#111;"
+      : "";
+
+    html += `
+      <tr style="${highlight}">
+        <td>${row.strike}</td>
+        <td>${row.d2.toFixed(2)}</td>
+        <td>${(row.probBelow * 100).toFixed(1)}%</td>
+        <td>${(row.probAbove * 100).toFixed(1)}%</td>
+        <td>${(row.touchProb * 100).toFixed(1)}%</td>
+      </tr>
+    `;
+  });
+
+  html += "</table>";
+
+  document.getElementById("box-dist").innerHTML = html;
+}
+
+
+/* ================= CHART ================= */
+function renderChart(pdfData, spot) {
+
+  const labels = pdfData.map(p => p.price);
+  const values = pdfData.map(p => p.density);
+
+  if (chart) chart.destroy();
+
+  const ctx = document.getElementById("pdfChart").getContext("2d");
+
+  chart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: labels,
+      datasets: [{
+        label: "Probability Density",
+        data: values,
+        borderWidth: 2,
+        pointRadius: 0,
+        tension: 0.3
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false }
+      },
+      scales: {
+        x: {
+          ticks: { maxTicksLimit: 8 }
+        },
+        y: {
+          display: false
+        }
+      }
+    }
+  });
 }
 
 </script>
