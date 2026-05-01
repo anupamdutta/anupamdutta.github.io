@@ -38,7 +38,7 @@ permalink: /iv-finder/
       <div class="iv-container">
 
         <p class="subtext">
-          This is a precision Implied Volatility solver designed for index options like Nifty50.
+          This is a precision and proprietary Implied Volatility solver + decoder designed for Index options like Nifty50.
         </p>
 
         <div class="iv-grid">
