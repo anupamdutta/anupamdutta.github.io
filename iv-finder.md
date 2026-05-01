@@ -307,7 +307,7 @@ function renderChart(pdfData, spot) {
     },
     options: {
       responsive: true,
-      maintainAspectRatio: false,
+      maintainAspectRatio: true,
       interaction: {
         mode: "index",
         intersect: false
