@@ -177,38 +177,36 @@ async function runIV() {
 /* ================= TABLE ================= */
 function renderTable(data, spot) {
 
+  const filtered = data.filter(r => Math.abs(r.d2) <= 2.5);
+
   let html = `
-    <div class="mmr-card-title">[ PROBABILITY TABLE ]</div>
-    <table style="width:100%; font-size:12px;">
-      <tr>
-        <th>Strike</th>
-        <th>d2</th>
-        <th>Below</th>
-        <th>Above</th>
-        <th>Touch</th>
-      </tr>
+    <div class="prob-header">
+      <div>Strike</div>
+      <div>σ</div>
+      <div>Below</div>
+      <div>Touch</div>
+    </div>
   `;
 
-  data.forEach(row => {
+  filtered.forEach(row => {
 
-    const highlight = Math.abs(row.strike - spot) < 25
-      ? "background:#111;"
-      : "";
+    let cls = "prob-row";
+
+    if (Math.abs(row.d2) < 0.1) cls += " atm";
+    else if (Math.abs(row.d2) <= 1) cls += " zone";
+    else if (Math.abs(row.d2) >= 2) cls += " tail";
 
     html += `
-      <tr style="${highlight}">
-        <td>${row.strike}</td>
-        <td>${row.d2.toFixed(2)}</td>
-        <td>${(row.probBelow * 100).toFixed(1)}%</td>
-        <td>${(row.probAbove * 100).toFixed(1)}%</td>
-        <td>${(row.touchProb * 100).toFixed(1)}%</td>
-      </tr>
+      <div class="${cls}">
+        <div>${row.strike}</div>
+        <div>${row.d2.toFixed(2)}</div>
+        <div>${(row.probBelow * 100).toFixed(1)}%</div>
+        <div>${(row.touchProb * 100).toFixed(1)}%</div>
+      </div>
     `;
   });
 
-  html += "</table>";
-
-  document.getElementById("box-dist").innerHTML = html;
+  document.getElementById("prob-grid").innerHTML = html;
 }
 
 
