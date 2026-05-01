@@ -28,7 +28,7 @@ permalink: /iv-finder/
       
       <div class="mmr-card">
         <div class="mmr-card-title">[ DISTRIBUTION CURVE ]</div>
-        <canvas id="pdfChart" height="120"></canvas>
+        <canvas id="pdfChart" height="100"></canvas>
       </div>
 
     </div>
