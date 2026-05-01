@@ -256,7 +256,7 @@ function renderTable(data) {
     let cls = "prob-row";
 
     // Highlight center
-    if (row.label === "0σ↓" || row.label === "0σ↑") {
+    if (row.label === "0σ") {
       cls += " atm";
     } 
     else if (row.label === "+1σ" || row.label === "-1σ") {
