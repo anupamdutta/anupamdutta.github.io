@@ -1,6 +1,6 @@
 ---
 layout: page
-title: IV Finder + Decoder
+title: IV Finder
 permalink: /iv-finder/
 ---
 
@@ -49,7 +49,7 @@ permalink: /iv-finder/
           </div>
 
           <div class="field">
-            <label>Strike</label>
+            <label>ATM Strike</label>
             <input id="strike" type="number" placeholder="e.g. 17350">
           </div>
 
@@ -207,7 +207,7 @@ async function runIV() {
     document.getElementById("box-input").innerHTML = `
       <div class="mmr-card-title">[ INPUT PARAMETERS ]</div>
       SF: ${S}<br>
-      Strike: ${K}<br>
+      ATM Strike: ${K}<br>
       DTE: ${DTE}<br>
       Option Price: ${P}<br>
       Type: ${type.toUpperCase()}
@@ -269,7 +269,7 @@ function renderTable(data) {
     html += `
       <div class="${cls}">
         <div>${row.label}</div>
-        <div>${Math.round(row.value)}</div>
+        <div>${row.value.toFixed(2)}</div>
         <div>${(row.probBelow * 100).toFixed(1)}%</div>
         <div>${(row.touchProb * 100).toFixed(1)}%</div>
       </div>
