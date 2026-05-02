@@ -751,3 +751,16 @@ input:checked + .slider:before {
   border-top: 1px solid rgba(255,255,255,0.08);
   margin: 12px 0;
 }
+
+.mmr-curve-note {
+  margin-top: 10px;
+  padding-top: 8px;
+
+  border-top: 1px solid rgba(56,189,248,0.15);
+
+  font-size: 12px;
+  line-height: 1.4;
+
+  color: #9ca3af;
+  opacity: 0.85;
+}
