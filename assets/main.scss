@@ -679,19 +679,30 @@ input:checked + .slider:before {
 /* HEADER */
 .iv-page .prob-header {
   display: grid;
-  grid-template-columns: 1fr 0.6fr 1fr 1fr;
+  grid-template-columns: 1fr 1.2fr 1fr 1fr;
+  column-gap: 12px;
   padding: 6px 8px;
   border-bottom: 1px solid rgba(56,189,248,0.2);
   color: #38bdf8;
   font-weight: 600;
 }
 
-/* ROW */
 .iv-page .prob-row {
   display: grid;
-  grid-template-columns: 1fr 0.6fr 1fr 1fr;
+  grid-template-columns: 1fr 1.2fr 1fr 1fr;
+  column-gap: 12px;
   padding: 6px 8px;
   transition: 0.15s ease;
+}
+
+.iv-page .prob-row div,
+.iv-page .prob-header div {
+  text-align: right;
+}
+
+.iv-page .prob-row div:first-child,
+.iv-page .prob-header div:first-child {
+  text-align: left;
 }
 
 /* HOVER */
