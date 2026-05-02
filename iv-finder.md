@@ -39,7 +39,7 @@ permalink: /iv-finder/
       <div class="iv-container">
 
         <p class="subtext">
-          This is a proprietary Implied Volatility decoder designed for Index options like Nifty50.
+          This is a proprietary Implied Volatility decoder designed for Index options like Nifty50 and SENSEX.
         </p>
 
         <div class="iv-grid">
