@@ -29,6 +29,7 @@ permalink: /iv-finder/
       <div class="mmr-card">
         <div class="mmr-card-title">[ DISTRIBUTION CURVE ]</div>
         <canvas id="pdfChart" height="100"></canvas>
+        <div class="mmr-curve-note"></div>
       </div>
 
     </div>
@@ -173,6 +174,7 @@ async function runIV() {
   document.getElementById("box-input").innerHTML = "Fetching Input Data...";
   document.getElementById("box-result").innerHTML = "Calculating...";
   document.getElementById("prob-grid").innerHTML = "Loading...";
+  document.querySelector(".mmr-curve-note").innerHTML = "";
   
   // 🔥 DESTROY OLD CHART IMMEDIATELY
   if (chart) {
@@ -352,6 +354,13 @@ function renderChart(pdfData, spot) {
       }
     }
   });
+  const note = document.querySelector(".mmr-curve-note");
+
+  if (note) {
+    note.innerHTML = `
+      Peak = most probable zone, not direction.<br>
+      Tails = where risk is underpriced.
+    `;
 }
 
 </script>
