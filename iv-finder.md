@@ -361,6 +361,7 @@ function renderChart(pdfData, spot) {
       Peak = most probable zone, not direction.<br>
       Tails = where risk is underpriced.
     `;
+  }
 }
 
 </script>
