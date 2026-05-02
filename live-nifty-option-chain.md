@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Live Nifty Option Chain
+permalink: /live-nifty-option-chain/
 ---
 
 <div class="oc-page">
