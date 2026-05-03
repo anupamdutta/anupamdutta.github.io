@@ -71,6 +71,13 @@ permalink: /iv-finder/
               <option value="put">Put</option>
             </select>
           </div>
+          <div class="field">
+            <label>Mode</label>
+            <select id="mode">
+              <option value="n" selected>Next Session</option>
+              <option value="e">Expiry</option>
+            </select>
+          </div>
 
         </div>
 
@@ -164,6 +171,7 @@ async function runIV() {
   let DTE = parseFloat(document.getElementById("dte").value);
   let P = parseFloat(document.getElementById("price").value);
   let type = document.getElementById("type").value.toLowerCase();
+  let mode = document.getElementById("mode").value;
 
   if (!S || S <= 0) return showError("Invalid Spot value");
   if (!K || K <= 0) return showError("Invalid Strike value");
@@ -195,7 +203,8 @@ async function runIV() {
         strike: K,
         dte: DTE,
         price: P,
-        type: type
+        type: type,
+        mode: mode
       })
     });
 
@@ -221,6 +230,7 @@ async function runIV() {
       IV: ${json.iv.toFixed(4)} % <br>
       Risk Level* (SF^): ${json.risk_level.toFixed(2)} <br>
       Risk Level** (SF^^): ${json.risk_level_1.toFixed(2)}
+      Mode: ${mode === "n" ? "Next Session" : "Expiry"}
     `;
 
     /* ===== PROBABILITY TABLE ===== */
