@@ -229,7 +229,7 @@ async function runIV() {
       <div class="mmr-card-title">[ RESULT ]</div>
       IV: ${json.iv.toFixed(4)} % <br>
       Risk Level* (SF^): ${json.risk_level.toFixed(2)} <br>
-      Risk Level** (SF^^): ${json.risk_level_1.toFixed(2)}
+      Risk Level** (SF^^): ${json.risk_level_1.toFixed(2)}<br>
       Mode: ${mode === "n" ? "Next Session" : "Expiry"}
     `;
 
