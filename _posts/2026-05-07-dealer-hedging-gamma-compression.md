@@ -63,29 +63,17 @@ Not statistically different.
 
 Structurally different.
 
-
-
 ---
 
 ## Liquidity is not continuous
 
-Most pricing models assume smooth liquidity.
+Most pricing models assume liquidity behaves smoothly across the option chain. In reality, it rarely does, especially near heavily traded ATM strikes where dealer positioning becomes concentrated.
 
-Real markets do not behave that way.
+Strikes are discrete, inventory is unevenly distributed, and hedging activity does not occur continuously. Dealers adjust exposure incrementally as spot moves through regions with high gamma sensitivity. Under short gamma conditions, this creates a reflexive structure where each directional move forces additional hedge flow into the market.
 
-Strikes are discrete.
+As spot approaches concentrated strikes, those hedge adjustments begin influencing premium behavior directly. Option prices stop responding purely to directional movement and start reacting to dealer inventory pressure, strike positioning, and liquidity concentration across neighboring contracts.
 
-Dealer inventories cluster unevenly.
-
-Hedging happens in intervals.
-
-Liquidity becomes fragmented across the chain.
-
-And under short gamma conditions, every move in spot forces additional hedge adjustment.
-
-Those hedge adjustments then feed back into premiums themselves.
-
-That reflexive loop is what creates violent premium expansion near certain strikes.
+This is why premiums can expand aggressively even when spot movement itself appears relatively controlled. The movement is no longer being driven only by price discovery. It is increasingly being driven by hedging pressure feeding back into the chain itself.
 
 ---
 
@@ -115,15 +103,11 @@ It describes the minimum structural displacement required before dealer hedging 
 
 ## Why prime order?
 
-Because liquidity fragmentation across the option chain is not uniform.
+The prime constraint did not come from abstract mathematics. It came from observing how liquidity distributes itself across the option chain during periods of concentrated dealer positioning. Liquidity fragmentation is rarely uniform. Some strikes become tightly connected through overlapping hedge exposure while others behave relatively independently. During volatile sessions, dealer hedging pressure often clusters aggressively across nearby strikes instead of spreading evenly through the chain.
 
-Composite structures create overlapping hedge behavior.
+Composite intervals tend to create overlapping hedge relationships where multiple strikes begin reacting to the same flow structure, making premium behavior noisy and structurally entangled. Prime intervals, however, isolate cleaner fragmentation layers. The relationships become less redundant and the displacement structure becomes easier to separate mathematically.
 
-Prime fragmentation isolates cleaner liquidity intervals.
-
-In practice, this means certain strike relationships behave more independently while others become structurally entangled through dealer positioning.
-
-The prime constraint was my way of modeling cleaner separation inside the chain.
+In practical terms, the prime constraint acts as a simplified way of modeling cleaner segmentation inside the liquidity structure. It attempts to capture how certain strike intervals absorb dealer flow independently while others become tightly coupled through gamma exposure and reflexive hedge adjustment behavior.
 
 ---
 
