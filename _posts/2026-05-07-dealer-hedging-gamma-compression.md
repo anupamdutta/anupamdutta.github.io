@@ -6,19 +6,6 @@ date: 2026-05-07
 tags: [Options, Gamma, Market Microstructure, Volatility, Dealer Hedging]
 ---
 
-<script>
-window.MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\\(', '\\)']]
-  }
-};
-</script>
-
-<script
-id="MathJax-script"
-async
-src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-</script>
 
 ## Most option traders think price moves premiums.
 
