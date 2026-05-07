@@ -1,4 +1,4 @@
-```md
+
 ---
 layout: post
 title: "Dealer Hedging, Gamma Compression, and the Hidden Structure of Option Premiums"
@@ -250,4 +250,4 @@ Sometimes the market is dealers reacting to themselves.
 And when enough short gamma pressure builds near concentrated strikes, the option chain starts behaving less like a smooth pricing system and more like a reflexive feedback structure driven by inventory stress, liquidity fragmentation, and hedge acceleration.
 
 That is the behavior this framework attempts to describe.
-```
+
