@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title: "Dealer Hedging, Gamma Compression, and the Hidden Structure of Option Premiums"
