@@ -764,3 +764,19 @@ input:checked + .slider:before {
   color: #9ca3af;
   opacity: 0.85;
 }
+
+/* ===== RESEARCH POST IMAGES ===== */
+
+.post-content img {
+  width: 75%;
+  max-width: 950px;
+
+  display: block;
+  margin: 30px auto;
+
+  border-radius: 10px;
+}
+
+.post-content img:hover {
+  transform: none;
+}
