@@ -173,6 +173,38 @@ Meaning:
 
 That is the core idea behind the framework.
 
+
+---
+
+## Visualizing the displacement framework
+
+To study how the functional behaves under increasing liquidity fragmentation, I plotted:
+
+$$
+f(p)=\left(\frac{p}{2(p+1)}\right)k
+$$
+
+across the first 200 prime numbers.
+
+The behavior is interesting.
+
+Initially, the displacement curve rises aggressively, reflecting how concentrated dealer hedging can rapidly expand option premiums near unstable gamma regions. Over time, however, the rate of expansion slows and gradually converges toward a bounded asymptote:
+
+$$
+\lim_{p\to\infty}f(p)=\frac{k}{2}
+$$
+
+This suggests that increasing liquidity fragmentation contributes progressively less incremental premium displacement, creating a natural compression effect inside the option chain.
+
+### NIFTY50 Structure
+
+![Prime Normalized Gamma Compression Functional for NIFTY50](/assets/nifty50_asymptote.png)
+
+### SENSEX Structure
+
+![Prime Normalized Gamma Compression Functional for SENSEX](/assets/sensex_asymptote.png)
+
+
 ---
 
 ## What this means in practice
