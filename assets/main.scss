@@ -780,3 +780,15 @@ input:checked + .slider:before {
 .post-content img:hover {
   transform: none;
 }
+
+/* ===== MOBILE IMAGE FIX ===== */
+
+@media (max-width: 768px) {
+
+  .post-content img {
+    width: 100%;
+    max-width: 100%;
+    margin: 20px auto;
+  }
+
+}
