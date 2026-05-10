@@ -6,6 +6,9 @@ tags: [Options, Gamma, Market Microstructure, Volatility, Dealer Hedging]
 ---
 
 
+![Dealer Hedging Gamma Compression Concept by Anupam Dutta](/assets/dealer_hedging_gamma_compression_concept_anupam_dutta.png)
+
+
 ## Most option traders think price moves premiums.
 
 Sometimes it does.
