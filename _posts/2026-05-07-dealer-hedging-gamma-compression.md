@@ -240,6 +240,13 @@ This creates a bounded reflexive system where dealer hedging initially amplifies
 
 The difference between NIFTY50 and SENSEX is also meaningful. Since SENSEX operates with wider strike spacing, the initial decay intensity is larger. This suggests that products with larger strike intervals may experience stronger early premium sensitivity during concentrated dealer hedging conditions.
 
+## Applying the framework to real option spreads
+
+I later extended this framework into a more practical market structure interpretation focused specifically on NIFTY50 option spreads, dealer hedging corridors, and gamma compression behavior inside fragmented strike intervals.
+
+Read here:
+
+👉 [Dealer Hedging, Gamma Compression, and the Internal Structure of Option Spreads](https://anupamdutta.github.io/2026/05/09/dealer-hedging-and-the-internal-structure-of-option-spreads.html)
 
 ---
 
