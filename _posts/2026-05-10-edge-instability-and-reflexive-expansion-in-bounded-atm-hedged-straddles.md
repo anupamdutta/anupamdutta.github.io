@@ -55,29 +55,48 @@ Example:
 - short 22200 CE
 - long 22300 CE
 
-This creates a bounded strike corridor around the ATM equilibrium region.
+This creates a bounded dealer hedging corridor around the ATM equilibrium strike.
 
-For NIFTY50:
+In NIFTY50:
 
 $$
 k=50
 $$
 
-therefore total corridor width becomes:
+The distance between adjacent strikes becomes:
 
 $$
 2k=100
 $$
 
-That means the spread structure itself has finite convexity.
+Since the structure is hedged on both sides, the full bounded corridor expands across both edges:
 
-The spread cannot expand infinitely.
+$$
+4k=200
+$$
 
-Maximum spread valuation is structurally bounded by the strike interval itself.
+That means:
 
-That part is simple.
+- lower half-corridor = 100 points
+- upper half-corridor = 100 points
+- total bounded convexity corridor = 200 points
 
-The interesting behavior comes from how dealer hedging evolves *inside* the corridor.
+Inside this structure, dealer gamma behavior becomes asymmetric.
+
+Near the ATM region, dealers are typically long gamma, which stabilizes movement and suppresses nonlinear premium expansion.
+
+Near the corridor edges, dealer positioning gradually transitions into short gamma exposure. Once synthetic futures migrate toward the hedge boundaries, dealer hedging can become increasingly reflexive and destabilizing.
+
+This creates two very different internal environments:
+
+- center stabilization
+- edge instability
+
+The important point is that the overall spread remains bounded even while edge options themselves may temporarily experience violent nonlinear expansion.
+
+That distinction is central to the framework.
+
+![Dealer Gamma Profile Inside a Bounded ATM Hedged Straddle](/assets/dealer_gamma_profile.png)
 
 ---
 
