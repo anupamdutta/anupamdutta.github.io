@@ -204,6 +204,42 @@ This suggests that increasing liquidity fragmentation contributes progressively 
 
 ![Prime Normalized Gamma Compression Functional for SENSEX](/assets/sensex_asymptote.png)
 
+---
+
+## Derivative decay and gamma compression dynamics
+
+The asymptotic behavior becomes even more apparent when observing the first derivative of the displacement functional:
+
+$$
+\frac{df}{dp}=\frac{k}{2(p+1)^2}
+$$
+
+The derivative remains positive:
+
+$$
+\frac{df}{dp}>0
+$$
+
+but rapidly decays toward zero:
+
+$$
+\lim_{p\to\infty}\frac{df}{dp}=0
+$$
+
+To examine this behavior structurally, I plotted the decay curve for both NIFTY50 and SENSEX strike intervals across the first 200 prime liquidity orders.
+
+![Gamma Compression Decay Structure](/assets/decay.png)
+
+The result is important.
+
+At low prime liquidity orders, the derivative is extremely large, meaning small increases in liquidity fragmentation can produce disproportionately large changes in premium displacement. In practical market terms, this corresponds to the early stages of aggressive dealer hedging where short gamma exposure amplifies premium responsiveness near concentrated at the money regions.
+
+However, the decay collapses rapidly after the initial phase. As liquidity fragmentation increases across neighboring strikes, each additional layer of dealer positioning contributes progressively less incremental premium acceleration. The option chain begins absorbing part of the hedging pressure itself.
+
+This creates a bounded reflexive system where dealer hedging initially amplifies instability, but eventually transitions into structural compression as liquidity becomes increasingly distributed across the chain.
+
+The difference between NIFTY50 and SENSEX is also meaningful. Since SENSEX operates with wider strike spacing, the initial decay intensity is larger. This suggests that products with larger strike intervals may experience stronger early premium sensitivity during concentrated dealer hedging conditions.
+
 
 ---
 
