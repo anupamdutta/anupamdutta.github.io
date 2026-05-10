@@ -136,6 +136,8 @@ That means dealers become:
 
 This changes the internal behavior of the spread completely.
 
+![Dealer Hedging Gamma Compression Trade Setup](/assets/dealer_hedging_gamma_compression_trade_setup.png)
+
 ---
 
 ## The center behaves differently from the boundaries
