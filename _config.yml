@@ -1,6 +1,6 @@
 theme: minima
 title: GammaGrid Insights
-description: Precision Options Trading, Systems, and Insights 
+description: Precision Options Trading, Systems, and Insights  
 markdown: kramdown
 header_pages:
   - about.md
