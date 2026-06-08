@@ -43,7 +43,7 @@ It is a risk-adjusted option pricing tool (European style) that internally estim
 Unlike standard models, it focuses on **structural consistency, volatility alignment, and pricing distortions**.
 
 <div style="margin-top:12px;">
-  <a href="/mmr-terminal/"
+  <a href="/mmr-terminal-web/"
      style="
        background:#020617;
        border:1px solid #38bdf8;
@@ -76,8 +76,7 @@ But a process can be built.
 
 ---
 
-## Work
+## Contact
+- ☎️ +91-8240775462
 
-- 🌐 [Lynqverse Research](https://lynqverse.com)  
-- 🌐 [GammaGrid Web Platform](https://www.gammagrid.lynqverse.com)  
-- 📧 [anupam.dutta@lynqverse.com](mailto:anupam.dutta@lynqverse.com)
+- 📧 [dutta.anupam.02@gmail.com](mailto:dutta.anupam.02@gmail.com)
