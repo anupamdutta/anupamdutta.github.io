@@ -5,7 +5,7 @@ permalink: /about/
 ---
 
 
-I am Anupam Dutta. This is not a blog. This is a Quant Research Lab.
+I am **Anupam Dutta**. This is not a blog. This is a Quant Research Lab.
 
 Trading is not just what I do. It is how I think.
 
@@ -27,20 +27,19 @@ My work focuses on:
 
 Over time, this evolved into structured frameworks like:
 
-**NCP40 → GammaGrid Option Engine**
-
-These were not built in theory.  
-They came from screen time, mistakes, and pressure-tested learning.
-
 ---
 
 ### MMR Terminal
 
 I built the **MMR Terminal** as an extension of this research.
 
-It is a risk-adjusted option pricing tool (European style) that internally estimates implied volatility to reflect real market conditions.
+Its purpose is simple:
 
-Unlike standard models, it focuses on **structural consistency, volatility alignment, and pricing distortions**.
+To quantify **Market Maker Risk (MMR)** through the volatility implied by option prices.
+
+Instead of treating implied volatility as just another market statistic, the framework interprets it as a measure of the risk market makers must assume when quoting and hedging options.
+
+This provides a market-maker-centric view of expected volatility, risk perception, and option pricing distortions.
 
 <div style="margin-top:12px;">
   <a href="/mmr-terminal-web/"
@@ -57,6 +56,7 @@ Unlike standard models, it focuses on **structural consistency, volatility align
      Explore MMR Terminal →
   </a>
 </div>
+
 <br>
 
 ---
