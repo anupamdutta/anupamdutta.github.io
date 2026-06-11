@@ -68,6 +68,7 @@ layout: home
     ">
     EOD Nifty50 Option Chain on {{ site.data.latest.date }}
   </p>
+  <!--
   <div style="margin-top:12px;">
   <a href="/live-nifty-option-chain/"
      style="
@@ -85,6 +86,7 @@ layout: home
      View Live Nifty Option Chain →
   </a>
 </div>
+-->
 
 </div>
 <br>
