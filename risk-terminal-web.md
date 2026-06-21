@@ -215,7 +215,7 @@ async function runRiskTerminal(){
 
     try{
 
-        const res=await fetch("YOUR_APPS_SCRIPT_URL",{
+        const res=await fetch("https://script.google.com/macros/s/AKfycbwLoAn4ROpQ3ZwwIdVcoUyF6qegaFnMJ8wonTxV0FTzpO6v-0Olu0Yu4P9uJ15HHlfcmA/exec",{
 
             method:"POST",
             body:JSON.stringify(payload)
