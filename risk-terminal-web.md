@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Risk Strike Terminal
+title: Risk Terminal Web
 permalink: /risk-terminal-web/
 ---
 
@@ -12,7 +12,7 @@ permalink: /risk-terminal-web/
     <div class="iv-container">
 
       <p class="subtext">
-        Risk Strike Terminal
+        Risk Strike Estimation Engine
       </p>
 
       <!-- AUTH -->
