@@ -41,7 +41,7 @@ permalink: /risk-terminal-web/
       <div class="iv-grid">
       
         <div class="full-width">
-          <div class="triple-row">
+          <div class="risk-two-row">
       
             <div class="field">
               <label>Spot Future</label>
@@ -57,7 +57,7 @@ permalink: /risk-terminal-web/
         </div>
       
         <div class="full-width">
-          <div class="triple-row">
+          <div class="risk-two-row">
       
             <div class="field">
               <label>ATM Option Type</label>
@@ -76,7 +76,7 @@ permalink: /risk-terminal-web/
         </div>
       
         <div class="full-width">
-          <div class="triple-row">
+          <div class="risk-two-row">
       
             <div class="field">
               <label>Strike Difference</label>
