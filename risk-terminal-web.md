@@ -39,39 +39,58 @@ permalink: /risk-terminal-web/
 
       <!-- INPUTS -->
       <div class="iv-grid">
-
-        <div class="field">
-          <label>Spot Future</label>
-          <input id="sf" type="number">
+      
+        <div class="full-width">
+          <div class="triple-row">
+      
+            <div class="field">
+              <label>Spot Future</label>
+              <input id="sf" type="number">
+            </div>
+      
+            <div class="field">
+              <label>ATM Strike</label>
+              <input id="atm" type="number">
+            </div>
+      
+          </div>
         </div>
-
-        <div class="field">
-          <label>ATM Strike</label>
-          <input id="atm" type="number">
+      
+        <div class="full-width">
+          <div class="triple-row">
+      
+            <div class="field">
+              <label>ATM Option Type</label>
+              <select id="kind">
+                <option>PUT</option>
+                <option>CALL</option>
+              </select>
+            </div>
+      
+            <div class="field">
+              <label>ATM Option Premium</label>
+              <input id="premium" type="number">
+            </div>
+      
+          </div>
         </div>
-
-        <div class="field">
-          <label>ATM Option Type</label>
-
-          <select id="kind">
-            <option>PUT</option>
-            <option>CALL</option>
-          </select>
-
+      
+        <div class="full-width">
+          <div class="triple-row">
+      
+            <div class="field">
+              <label>Strike Difference</label>
+              <input id="diff" type="number" value="50">
+            </div>
+      
+            <div class="field">
+              <!-- spacer -->
+            </div>
+      
+          </div>
         </div>
-
-        <div class="field">
-          <label>ATM Option Premium</label>
-          <input id="premium" type="number">
-        </div>
-
-        <div class="field">
-          <label>Strike Difference</label>
-          <input id="diff" type="number" value="50">
-        </div>
-
+      
       </div>
-
       <button class="run-btn" onclick="runRiskTerminal()">
         Calculate Risk Strike
       </button>
