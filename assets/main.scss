@@ -792,3 +792,31 @@ input:checked + .slider:before {
   }
 
 }
+
+.risk-two-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+}
+
+.risk-two-row .field {
+  width: 100%;
+}
+
+/* KEEP TWO COLUMNS EVEN ON MOBILE */
+@media (max-width: 768px) {
+  .risk-two-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .risk-two-row label {
+    font-size: 10px;
+  }
+
+  .risk-two-row input,
+  .risk-two-row select {
+    font-size: 13px;
+  }
+}
