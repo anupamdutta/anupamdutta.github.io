@@ -131,38 +131,37 @@ permalink: /risk-terminal-web/
 
   <div class="mmr-about-box">
 
+    
     <div class="mmr-about-title">
       [ ABOUT RISK TERMINAL ]
     </div>
-
+    
     <p>
-      <b>Risk Strike Terminal</b> is a proprietary quantitative research tool developed to estimate the <b>Risk Strike</b> that option market makers are implicitly expecting while quoting option premiums. Rather than forecasting market direction, the terminal derives a risk-adjusted strike level from observed option prices using a proprietary mathematical framework designed for advanced options analysis.
+      <b>Risk Strike Terminal</b> is a proprietary quantitative research tool developed to estimate the <b>Risk Strike</b> that option market makers are implicitly pricing while quoting option premiums. It derives a risk-adjusted strike level using a proprietary mathematical framework designed for advanced options analysis.
     </p>
     
     <p>
-      The Risk Strike Terminal is intended to be used alongside the <b>MMR Terminal</b>. While the MMR Terminal helps estimate market maker risk and implied pricing dynamics, the Risk Strike Terminal extends that analysis by identifying the expected risk-adjusted strike, corresponding option values, synthetic forward level, and overall market risk zone. Together, both tools provide a comprehensive quantitative framework for option market analysis.
+      The terminal is designed to complement the <b>MMR Terminal</b>. While the MMR Terminal estimates market maker risk, the Risk Strike Terminal identifies the expected risk-adjusted strike, synthetic forward, and market risk zone, providing a more complete quantitative view of the options market.
     </p>
     
     <p>
-      To interpret the outputs meaningfully, users should have a solid understanding of <b>Option Pricing Theory</b>, including the <b>Black-Scholes Model</b>, <b>Put-Call Parity</b>, and <b>Implied Volatility</b>. These concepts are essential for practical application of the results in real-world option trading and quantitative research.
+      Meaningful interpretation of the results requires a sound understanding of <b>Option Pricing Theory</b>, including <b>Black-Scholes</b>, <b>Implied Volatility</b>, and <b>Put-Call Parity</b>. Users seeking a deeper understanding of the methodology and practical applications are encouraged to join my training program.
     </p>
     
     <p>
-      If you are new to quantitative options or would like a deeper understanding of the methodology behind these tools, you are encouraged to join my training program, where the underlying theory, mathematical foundations, and practical market applications are explained in detail using live examples.
-    </p>
-    
-    <p>
-      Access to the terminal requires a valid <b>App Key</b> and <b>App Token</b>, available through subscription.
+      Access requires a valid <b>App Key</b> and <b>App Token</b>, available through subscription.
     </p>
     
     <p style="color:#facc15;">
-      ⚠ This software is provided strictly for educational and research purposes. It should not be interpreted as financial advice or a recommendation to buy or sell any financial instrument.
+      ⚠ Educational and research purposes only. This tool does not constitute financial or investment advice.
     </p>
     
     <p>
       <b>Developer:</b> Anupam Dutta<br>
       📞 +91-8240775462
     </p>
+
+
 
   </div>
 
