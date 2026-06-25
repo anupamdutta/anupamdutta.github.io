@@ -77,16 +77,17 @@ permalink: /risk-terminal-web/
       
         <div class="full-width">
           <div class="risk-two-row">
-      
+        
             <div class="field">
               <label>Strike Difference</label>
               <input id="diff" type="number" value="50">
             </div>
-      
+        
             <div class="field">
-              <!-- spacer -->
+              <label>Expected OTM Premium</label>
+              <input id="eop" type="number">
             </div>
-      
+        
           </div>
         </div>
       
@@ -217,13 +218,14 @@ async function runRiskTerminal(){
 
         appKey:document.getElementById("appKey").value.trim(),
         appToken:document.getElementById("appToken").value.trim(),
-
+    
         sf:Number(document.getElementById("sf").value),
         atm:Number(document.getElementById("atm").value),
         premium:Number(document.getElementById("premium").value),
         diff:Number(document.getElementById("diff").value),
+        eop:Number(document.getElementById("eop").value),
         kind:document.getElementById("kind").value
-
+    
     };
 
     if(!payload.appKey) return showError("App Key required");
@@ -265,8 +267,9 @@ async function runRiskTerminal(){
         ATM Strike : ${payload.atm}<br>
         Option Type : ${payload.kind}<br>
         Premium : ${payload.premium}<br>
-        Strike Difference : ${payload.diff}
-
+        Strike Difference : ${payload.diff}<br>
+        Expected OTM Premium : ${payload.eop}
+        
         `;
 
         let color="#22c55e";
