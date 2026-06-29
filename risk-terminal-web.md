@@ -288,23 +288,25 @@ async function runRiskTerminal(){
         <div class="mmr-card-title">
         [ RISK ADJUSTED LEVELS ]
         </div>
-
+        
         Risk Strike : ${json.riskStrike}<br>
         Put Price : ${json.putPrice}<br>
         Call Price : ${json.callPrice}<br>
-        Synthetic Forward : ${json.syntheticForward}<br><br>
-
+        Synthetic Forward : ${json.syntheticForward}<br>
+        ATM Call : ${json.atmCall}<br>
+        ATM Put : ${json.atmPut}<br><br>
+        
         <b style="color:${color}">
         Risk Zone : ${json.zone}
         </b>
-
+        
         <br><br>
-
+        
         <div style="font-size:12px;color:#facc15">
         Educational purposes only.<br>
         Not financial advice.
         </div>
-
+        
         `;
 
     }
