@@ -83,11 +83,6 @@ permalink: /risk-terminal-web/
               <input id="diff" type="number" value="50">
             </div>
         
-            <div class="field">
-              <label>Expected OTM Premium</label>
-              <input id="eop" type="number">
-            </div>
-        
           </div>
         </div>
       
@@ -223,7 +218,6 @@ async function runRiskTerminal(){
         atm:Number(document.getElementById("atm").value),
         premium:Number(document.getElementById("premium").value),
         diff:Number(document.getElementById("diff").value),
-        eop:Number(document.getElementById("eop").value),
         kind:document.getElementById("kind").value
     
     };
@@ -267,8 +261,7 @@ async function runRiskTerminal(){
         ATM Strike : ${payload.atm}<br>
         Option Type : ${payload.kind}<br>
         Premium : ${payload.premium}<br>
-        Strike Difference : ${payload.diff}<br>
-        Expected OTM Premium : ${payload.eop}
+        Strike Difference : ${payload.diff}
         
         `;
 
