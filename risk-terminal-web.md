@@ -266,26 +266,24 @@ async function runRiskTerminal(){
 
         if(json.zone==="MODERATE")
             color="#facc15";
-
+        
         if(json.zone==="HIGH")
             color="#fb923c";
-
+        
         if(json.zone==="EXTREME")
             color="#ef4444";
-
-        let atmCallMark = "";
-        let atmPutMark  = "";
+        
+        let atmCallLine = "";
+        let atmPutLine  = "";
         
         if(payload.kind === "CALL"){
-          atmCallMark = ` <span style="color:#ef4444">✗</span>`;
-          atmPutMark  = ` <span style="color:#22c55e">←</span>`;
+            atmPutLine = `Estimated ATM Put : ${json.atmPut}<br>`;
         }else{
-          atmPutMark  = ` <span style="color:#ef4444">✗</span>`;
-          atmCallMark = ` <span style="color:#22c55e">←</span>`;
+            atmCallLine = `Estimated ATM Call : ${json.atmCall}<br>`;
         }
-
+        
         document.getElementById("box-model").innerHTML=`
-
+        
         <div class="mmr-card-title">
         [ RISK ADJUSTED LEVELS ]
         </div>
@@ -293,9 +291,7 @@ async function runRiskTerminal(){
         Risk Strike : ${json.riskStrike}<br>
         BOM : ${json.itm_level}<br>
         Synthetic Forward : ${json.syntheticForward}<br>
-        ATM Call : ${json.atmCall}${atmCallMark}<br>
-        ATM Put : ${json.atmPut}${atmPutMark}<br>
-        <b style="color:${color}">
+        ${atmCallLine}${atmPutLine}<b style="color:${color}">
         Risk Zone : ${json.zone}
         </b><br>
         <div style="font-size:12px;color:#facc15">
@@ -303,7 +299,6 @@ async function runRiskTerminal(){
         </div>
         
         `;
-
     }
 
     catch(e){
