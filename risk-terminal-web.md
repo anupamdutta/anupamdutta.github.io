@@ -82,6 +82,11 @@ permalink: /risk-terminal-web/
               <label>Strike Difference</label>
               <input id="diff" type="number" value="50">
             </div>
+
+            <div class="field">
+              <label>Expected Premium</label>
+              <input id="eop" type="number">
+            </div>
         
           </div>
         </div>
@@ -218,6 +223,7 @@ async function runRiskTerminal(){
         atm:Number(document.getElementById("atm").value),
         premium:Number(document.getElementById("premium").value),
         diff:Number(document.getElementById("diff").value),
+        eop:Number(document.getElementById("eop").value),
         kind:document.getElementById("kind").value
     
     };
@@ -261,7 +267,8 @@ async function runRiskTerminal(){
         ATM Strike : ${payload.atm}<br>
         Option Type : ${payload.kind}<br>
         Premium : ${payload.premium}<br>
-        Strike Difference : ${payload.diff}
+        Strike Difference : ${payload.diff}<br>
+        Expected Premium : ${payload.eop}
         
         `;
 
@@ -287,17 +294,12 @@ async function runRiskTerminal(){
         Call Price : ${json.callPrice}<br>
         Synthetic Forward : ${json.syntheticForward}<br>
         ATM Call : ${json.atmCall}<br>
-        ATM Put : ${json.atmPut}<br><br>
-        
+        ATM Put : ${json.atmPut}<br>
         <b style="color:${color}">
         Risk Zone : ${json.zone}
-        </b>
-        
-        <br><br>
-        
+        </b><br>
         <div style="font-size:12px;color:#facc15">
-        Educational purposes only.<br>
-        Not financial advice.
+        Educational purposes only. Not financial advice.
         </div>
         
         `;
