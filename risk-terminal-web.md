@@ -283,6 +283,17 @@ async function runRiskTerminal(){
         if(json.zone==="EXTREME")
             color="#ef4444";
 
+        let atmCallMark = "";
+        let atmPutMark  = "";
+        
+        if(payload.kind === "CALL"){
+          atmCallMark = ` <span style="color:#ef4444">✗</span>`;
+          atmPutMark  = ` <span style="color:#22c55e">←</span>`;
+        }else{
+          atmPutMark  = ` <span style="color:#ef4444">✗</span>`;
+          atmCallMark = ` <span style="color:#22c55e">←</span>`;
+        }
+
         document.getElementById("box-model").innerHTML=`
 
         <div class="mmr-card-title">
@@ -293,8 +304,8 @@ async function runRiskTerminal(){
         Put Price : ${json.putPrice}<br>
         Call Price : ${json.callPrice}<br>
         Synthetic Forward : ${json.syntheticForward}<br>
-        ATM Call : ${json.atmCall}<br>
-        ATM Put : ${json.atmPut}<br>
+        ATM Call : ${json.atmCall}${atmCallMark}<br>
+        ATM Put : ${json.atmPut}${atmPutMark}<br>
         <b style="color:${color}">
         Risk Zone : ${json.zone}
         </b><br>
