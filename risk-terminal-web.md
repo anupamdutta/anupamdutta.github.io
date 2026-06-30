@@ -301,8 +301,7 @@ async function runRiskTerminal(){
         </div>
         
         Risk Strike : ${json.riskStrike}<br>
-        Put Price : ${json.putPrice}<br>
-        Call Price : ${json.callPrice}<br>
+        BOM : ${json.itm_level}<br>
         Synthetic Forward : ${json.syntheticForward}<br>
         ATM Call : ${json.atmCall}${atmCallMark}<br>
         ATM Put : ${json.atmPut}${atmPutMark}<br>
