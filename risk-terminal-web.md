@@ -74,14 +74,7 @@ permalink: /risk-terminal-web/
           </div>
         </div>
       
-        /*<div class="full-width">
-          <div class="risk-two-row">
-            <div class="field">
-              <label>Expected Premium</label>
-              <input id="eop" type="number">
-            </div>
-          </div>
-        </div>*/
+        
       
       </div>
       <button class="run-btn" onclick="runRiskTerminal()">
