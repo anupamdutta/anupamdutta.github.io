@@ -74,14 +74,14 @@ permalink: /risk-terminal-web/
           </div>
         </div>
       
-        <div class="full-width">
+        /*<div class="full-width">
           <div class="risk-two-row">
             <div class="field">
               <label>Expected Premium</label>
               <input id="eop" type="number">
             </div>
           </div>
-        </div>
+        </div>*/
       
       </div>
       <button class="run-btn" onclick="runRiskTerminal()">
@@ -214,7 +214,7 @@ async function runRiskTerminal(){
         sf:Number(document.getElementById("sf").value),
         atm:Number(document.getElementById("atm").value),
         diff:Number(document.getElementById("diff").value),
-        eop:Number(document.getElementById("eop").value),
+        /*eop:Number(document.getElementById("eop").value),*/
         kind:document.getElementById("kind").value
     
     };
@@ -257,8 +257,7 @@ async function runRiskTerminal(){
         Spot Future : ${payload.sf}<br>
         ATM Strike : ${payload.atm}<br>
         Option Type : ${payload.kind}<br>
-        Strike Difference : ${payload.diff}<br>
-        Expected Premium : ${payload.eop}
+        Strike Difference : ${payload.diff}
         
         `;
 
