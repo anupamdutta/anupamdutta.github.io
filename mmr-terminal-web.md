@@ -270,6 +270,7 @@ async function runMMR(){
       MMR (Annualized %): ${json.mmr_vol ?? "—"}<br>
       Strike: ${json.strike} | Type: ${json.option_type}<br>
       ${json.option_type} Price: ${json.option_price}<br>
+      Additional: ${json.op_1} | ${json.op_2}<br>
     
       <br>
       <div style="font-size:12px; color:#facc15; line-height:1.4;">
