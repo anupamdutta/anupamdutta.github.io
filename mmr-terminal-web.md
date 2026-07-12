@@ -263,21 +263,32 @@ async function runMMR(){
     //const signSymbol = json.calib_sign === 1 ? "▼/●" :
                    //json.calib_sign === -1 ? "▲" : "●";
     
-    document.getElementById("box-model").innerHTML = `
-      <div class="mmr-card-title">[ MODEL OUTPUT ]</div>
+    if (json.error) {
+
+      document.getElementById("box-model").innerHTML = `
+        <div class="mmr-card-title">[ ERROR ]</div>
     
-      Iteration: ${json.iteration ?? "—"}<br>
-      MMR (Annualized %): ${json.mmr_vol ?? "—"}<br>
-      Strike: ${json.strike} | Type: ${json.option_type}<br>
-      ${json.option_type} Price: ${json.option_price}<br>
-      Additional: ${json.op_1} | ${json.op_2}<br>
+        <div style="color:#f87171; font-size:13px; line-height:1.4;">
+          ${json.message}
+        </div>
+      `;
     
-      <br>
-      <div style="font-size:12px; color:#facc15; line-height:1.4;">
-        ⚠ Model output is for educational purposes only.<br>
-        ${json.iteration > 0 ? "⚠ Iteration > 0: model estimates may be unreliable." : ""}
-      </div>
-    `;
+    } else {
+    
+      document.getElementById("box-model").innerHTML = `
+        <div class="mmr-card-title">[ MODEL OUTPUT ]</div>
+    
+        Strike: ${json.strike} | Type: ${json.option_type}<br>
+        MMR (Annualized %): ${json.mmr_vol ?? "—"}<br>
+        Call Price: ${json.call} | Put Price: ${json.put}<br>
+        Profit Points | Min: ${json.profit_points.min} | Max: ${json.profit_points.max}<br>
+    
+        <br>
+        <div style="font-size:12px; color:#facc15; line-height:1.4;">
+          ⚠ Model output is for educational purposes only.
+        </div>
+      `;
+    }
 
     
     
