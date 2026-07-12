@@ -17,14 +17,13 @@ permalink: /mmr-terminal-web/
       <!-- AUTH -->
       <div class="iv-grid">
         <div class="field">
-          <label>App Key</label>
-          <input id="appKey">
+          <label>App Key <span style="color:#f87171;">*</span></label>
+          <input id="appKey" required autocomplete="off">
         </div>
-
         <div class="field">
-          <label>App Token</label>
+          <label>App Token <span style="color:#f87171;">*</span></label>
           <div class="auth-row">
-            <input id="appToken" type="password">
+            <input id="appToken" type="password" required autocomplete="off">
             <button class="btn-small" onclick="toggleToken(event)">Show</button>
           </div>
         </div>
@@ -36,37 +35,28 @@ permalink: /mmr-terminal-web/
       <div class="iv-grid">
         <div class="field"><label>Spot/SF</label><input id="spot" type="number" placeholder="e.g. 23190.40"></div>
         <div class="field"><label>Strike Diff</label><input id="strikeDiff" type="number" placeholder="e.g. 50"></div>
+
         <div class="field">
-          <label>Auto Strike</label>
-          <div class="toggle-row">
-            <label class="switch">
-              <input type="checkbox" id="autoStrike" checked onchange="toggleStrikeInput()">
-              <span class="slider"></span>
-            </label>
-            <span id="toggleLabel">ON</span>
-          </div>
+          <label>Expected Risk Level</label>
+          <input id="riskLevel" type="number" placeholder="Enter strike">
         </div>
-        
-        <div class="field">
-          <label>Manual Strike</label>
-          <input id="manualStrike" type="number" placeholder="Enter strike" disabled>
-        </div>
-         <div class="full-width">
+
+        <div class="full-width">
           <div class="triple-row">
-        
+
             <div class="field">
               <label>Funding Rate %</label>
               <input id="rate" type="number" placeholder="e.g. 6.667">
             </div>
-        
+
             <div class="field">
               <label>DTE</label>
               <input id="dte" type="number" placeholder="Days to Expiry">
             </div>
-        
+
           </div>
         </div>
-        </div>
+      </div>
 
       <button class="run-btn" onclick="runMMR()">Run MMR Terminal</button>
 
@@ -86,14 +76,14 @@ permalink: /mmr-terminal-web/
       Waiting for model to run...
     </div>
 
-    
+
 
   </div>
-  
+
 </div>
 <div class="mmr-about-full">
   <div class="mmr-about-box">
-    
+
     <div class="mmr-about-title">[ ABOUT MMR TERMINAL ]</div>
 
     <p>MMR Terminal is a high-precision Market Maker Risk (MMR) based option pricing engine 
@@ -123,21 +113,18 @@ permalink: /mmr-terminal-web/
 
 <script>
 
-function toggleStrikeInput() {
-  const isAuto = document.getElementById("autoStrike").checked;
-  const manualField = document.getElementById("manualStrike");
-  const label = document.getElementById("toggleLabel");
+/* ================= DEFAULT STATE ================= */
+function resetOutputPanels(){
+  document.getElementById("box-input").innerHTML = `
+    <div class="mmr-card-title">[ INPUT PARAMETERS ]</div>
+    Waiting for input...
+  `;
 
-  if (isAuto) {
-    manualField.disabled = true;
-    label.innerText = "ON";
-  } else {
-    manualField.disabled = false;
-    label.innerText = "OFF";
-  }
+  document.getElementById("box-model").innerHTML = `
+    <div class="mmr-card-title">[ MODEL OUTPUT ]</div>
+    Waiting for model to run...
+  `;
 }
-
-  
 
 /* ================= TOKEN TOGGLE ================= */
 function toggleToken(event){
@@ -157,6 +144,7 @@ function toggleToken(event){
 function showError(msg){
   document.getElementById("modalText").innerText = msg
   document.getElementById("errorModal").style.display = "flex"
+  resetOutputPanels()
 }
 
 function closeModal(){
@@ -166,9 +154,8 @@ function closeModal(){
 /* ================= MAIN ================= */
 async function runMMR(){
 
-  const isAutoStrike = document.getElementById("autoStrike").checked;
-  const manualStrikeVal = Number(document.getElementById("manualStrike").value);
-  
+  const riskLevelVal = Number(document.getElementById("riskLevel").value);
+
   const payload = {
     appKey: document.getElementById("appKey").value.trim(),
     appToken: document.getElementById("appToken").value.trim(),
@@ -176,38 +163,33 @@ async function runMMR(){
     strikeDiff: Number(document.getElementById("strikeDiff").value),
     rate: Number(document.getElementById("rate").value),
     dte: Number(document.getElementById("dte").value),
-  
-    autoStrike: isAutoStrike,
-    strike: isAutoStrike ? null : manualStrikeVal
+
+    strike: riskLevelVal
   };
 
   // ===== VALIDATION =====
   if (!payload.appKey) return showError("App Key required");
   if (!payload.appToken) return showError("Token required");
-  
+
   if (!payload.spot || payload.spot <= 0)
     return showError("Spot must be greater than 0");
-  
-  
+
+
   if (!payload.strikeDiff || payload.strikeDiff <= 0)
     return showError("Strike Diff must be greater than 0");
-  
+
   if (payload.rate < 0)
     return showError("Rate must be greater than or equal to 0");
-  
+
   if (!payload.dte || payload.dte <= 0)
     return showError("DTE must be greater than 0");
-  
+
   if (payload.dte > 3650)
     return showError("DTE too large (check input)");
 
-  if (!isAutoStrike) {
-    if (!manualStrikeVal || manualStrikeVal <= 0) {
-      return showError("Manual Strike must be greater than 0");
-    }
+  if (!riskLevelVal || riskLevelVal <= 0) {
+    return showError("Expected Risk Level must be greater than 0");
   }
-
-  
 
   /* ===== LOADING STATE (PRO UI) ===== */
   document.getElementById("box-input").innerHTML = `
@@ -219,10 +201,6 @@ async function runMMR(){
     <div class="mmr-card-title">[ MODEL OUTPUT ]</div>
     Running model...
   `
-
-  
-
-  
 
   try{
 
@@ -242,58 +220,28 @@ async function runMMR(){
     document.getElementById("box-input").innerHTML = `
       <div class="mmr-card-title">[ INPUT PARAMETERS ]</div>
       Spot/SF: ${payload.spot}<br>
-      ${!payload.autoStrike ? `Strike: ${payload.strike}<br>` : ""}
+      Risk Level: ${payload.strike}<br>
       Strike Diff: ${payload.strikeDiff}<br>
       Rate: ${payload.rate}<br>
       DTE: ${payload.dte}
     `;
 
     /* ===== MODEL ===== */
+    document.getElementById("box-model").innerHTML = `
+      <div class="mmr-card-title">[ MODEL OUTPUT ]</div>
 
-    // 🎯 COLOR BASED ON CALIB SIGN
-    //let residualColor;
-    
-    //if (json.calib_sign === 1) {
-      //residualColor = "#22c55e";   // GREEN
-    //} else if (json.calib_sign === -1) {
-      //residualColor = "#ef4444";   // RED
-    //} else {
-      //residualColor = "#facc15";   // YELLOW
-    //}
-    //const signSymbol = json.calib_sign === 1 ? "▼/●" :
-                   //json.calib_sign === -1 ? "▲" : "●";
-    
-    if (json.error) {
+      Option Type: ${json.option_type}<br>
+      MMR (Annualized %): ${json.mmr_vol ?? "—"}<br>
+      ATM Strike: ${json.atm}<br>
+      ATM Call Price: ${json.call}<br>
+      ATM Put Price: ${json.put}<br>
+      Profit Points | Min: ${json.profit_points.min} | Max: ${json.profit_points.max}<br>
 
-      document.getElementById("box-model").innerHTML = `
-        <div class="mmr-card-title">[ ERROR ]</div>
-    
-        <div style="color:#f87171; font-size:13px; line-height:1.4;">
-          ${json.message}
-        </div>
-      `;
-    
-    } else {
-    
-      document.getElementById("box-model").innerHTML = `
-        <div class="mmr-card-title">[ MODEL OUTPUT ]</div>
-    
-        OTM Strike: ${json.strike} | OTM Type: ${json.option_type}<br>
-        MMR (Annualized %): ${json.mmr_vol ?? "—"}<br>
-        ATM Strike: ${json.atm}<br>
-        ATM Call Price: ${json.call}<br>
-        ATM Put Price: ${json.put}<br>
-        Profit Points | Min: ${json.profit_points.min} | Max: ${json.profit_points.max}<br>
-    
-        <br>
-        <div style="font-size:12px; color:#facc15; line-height:1.4;">
-          ⚠ Model output is for educational purposes only.
-        </div>
-      `;
-    }
-
-    
-    
+      <br>
+      <div style="font-size:12px; color:#facc15; line-height:1.4;">
+        ⚠ Model output is for educational purposes only.
+      </div>
+    `;
 
   }catch(e){
     showError("Connection error")
