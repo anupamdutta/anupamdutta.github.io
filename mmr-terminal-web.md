@@ -36,9 +36,9 @@ permalink: /mmr-terminal-web/
         <div class="field"><label>Spot/SF</label><input id="spot" type="number" placeholder="e.g. 23190.40"></div>
         <div class="field"><label>Strike Diff</label><input id="strikeDiff" type="number" placeholder="e.g. 50"></div>
 
-        <div class="field">
+        <div class="field full-width">
           <label>Expected Risk Level</label>
-          <input id="riskLevel" type="number" placeholder="Enter strike">
+          <input id="riskLevel" type="number" placeholder="Risk level...">
         </div>
 
         <div class="full-width">
