@@ -230,11 +230,12 @@ async function runMMR(){
     document.getElementById("box-model").innerHTML = `
       <div class="mmr-card-title">[ MODEL OUTPUT ]</div>
 
-      Option Type: ${json.option_type}<br>
+      Calculation Type: ${json.option_type}<br>
       MMR (Annualized %): ${json.mmr_vol ?? "—"}<br>
-      ATM Strike: ${json.atm}<br>
-      ATM Call Price: ${json.call}<br>
-      ATM Put Price: ${json.put}<br>
+      Strike: ${json.strike}<br>
+      Call (ref): ${json.call}<br>
+      Put (ref): ${json.put}<br>
+      Risk: ${json.sf}<br>
       Profit Points | Min: ${json.profit_points.min} | Max: ${json.profit_points.max}<br>
 
       <br>
