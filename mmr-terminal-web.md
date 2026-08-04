@@ -275,13 +275,10 @@ async function runQuant(){
       <div class="mmr-card-title">[ QUANT ANALYSIS OUTPUT ]</div>
 
       Strike: ${json.strike}<br>
-      Call Buy Price: ${json.callBuyPrice}<br>
-      Target: ${json.target}<br>
-      Resistance (Spot @ Expiry): ${json.resistance}<br>
-      Call Delta: ${json.callDelta}<br>
-      Put Delta: ${json.putDelta}<br>
       BS Call Price: ${json.bsCallPrice}<br>
       BS Put Price: ${json.bsPutPrice}<br>
+      Model Call Price: ${json.modelCallPrice}<br>
+      Model Put Price: ${json.modelPutPrice}<br>
 
       <br>
       <div style="font-size:12px; color:#facc15; line-height:1.4;">
