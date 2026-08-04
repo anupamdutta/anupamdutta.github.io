@@ -111,10 +111,9 @@ permalink: /mmr-terminal-web/
 <div class="mmr-about-full">
   <div class="mmr-about-box">
 
-    <div class="mmr-about-title">[ ABOUT TRADESTER PRO ]</div>
+    <div class="mmr-about-title">[ ABOUT MMR TERMINAL ]</div>
 
-    <p>TradeSter Pro is a high-precision, IV-driven Quant Analysis engine - resistance/target 
-    projection, Black-Scholes call/put pricing & delta, and a proprietary IV Estimator - built 
+    <p>MMR Terminal is a high-precision, IV-driven Quant Analysis engine, Black-Scholes and model call/put pricing, and a proprietary IV Estimator - built 
     for advanced derivatives analysis and model-driven decision making.</p>
 
     <p>⚠️ This is an advanced system intended for experienced users. Proper understanding 
