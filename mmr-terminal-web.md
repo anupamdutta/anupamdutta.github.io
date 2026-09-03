@@ -278,7 +278,7 @@ async function runQuant(){
       BS Put Price: ${json.bsPutPrice}<br>
       Model Call Price: ${json.modelCallPrice}<br>
       Model Put Price: ${json.modelPutPrice}<br>
-
+      1Sigma: ${json.target}<br>
       <br>
       <div style="font-size:12px; color:#facc15; line-height:1.4;">
         ⚠ Model output is for educational purposes only.
