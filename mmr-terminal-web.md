@@ -36,10 +36,10 @@ permalink: /mmr-terminal-web/
 
         <div class="field full-width">
           <label>Option Type <span style="color:#f87171;">*</span></label>
-          <div class="option-type-row">
-            <button class="type-btn active" id="btnCall" onclick="selectType('call')">CALL</button>
-            <button class="type-btn" id="btnPut" onclick="selectType('put')">PUT</button>
-          </div>
+          <select id="optionType">
+            <option value="call">CALL</option>
+            <option value="put">PUT</option>
+          </select>
         </div>
 
         <div class="field"><label>Strike</label><input id="strike" type="number" placeholder="e.g. 24800"></div>
@@ -81,8 +81,8 @@ permalink: /mmr-terminal-web/
 
     <div class="mmr-about-title">[ ABOUT MMR TERMINAL ]</div>
 
-    <p>MMR Terminal is a high-precision Option Risk Analyzer - computing synthetic futures, stop-loss levels,
-    estimated prices, and implied volatility using a Black-76 model - built
+    <p>MMR Terminal is a high-precision Option Risk Analyzer — computing synthetic futures, stop-loss levels,
+    estimated prices, and implied volatility using a Black-76 model — built
     for advanced derivatives analysis and model-driven decision making.</p>
 
     <p>⚠️ This is an advanced system intended for experienced users. Proper understanding
@@ -110,15 +110,6 @@ permalink: /mmr-terminal-web/
 <script>
 
 const ENDPOINT = "https://script.google.com/macros/s/AKfycbyeRllRTjvMPaXRqDZJSnvj9FyBUl9Lhot0D-nsfW5zWztJjZO1pI3hGhXGQTrP9O2U/exec";
-
-let selectedType = 'call';
-
-/* ================= OPTION TYPE TOGGLE ================= */
-function selectType(type) {
-  selectedType = type;
-  document.getElementById('btnCall').classList.toggle('active', type === 'call');
-  document.getElementById('btnPut').classList.toggle('active', type === 'put');
-}
 
 /* ================= DEFAULT STATE ================= */
 function resetOutputPanels() {
@@ -162,7 +153,7 @@ async function runRisk() {
     action: "risk",
     appKey:     document.getElementById("appKey").value.trim(),
     appToken:   document.getElementById("appToken").value.trim(),
-    optionType: selectedType,
+    optionType: document.getElementById("optionType").value,
     strike:     Number(document.getElementById("strike").value),
     callPrice:  Number(document.getElementById("callPrice").value),
     putPrice:   Number(document.getElementById("putPrice").value),
