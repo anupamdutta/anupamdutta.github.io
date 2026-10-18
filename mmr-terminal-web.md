@@ -11,7 +11,7 @@ permalink: /mmr-terminal-web/
     <div class="iv-container">
 
       <p class="subtext">
-        Option Risk Analyzer
+        IV Finder &amp; Greeks
       </p>
 
       <!-- AUTH -->
@@ -31,20 +31,27 @@ permalink: /mmr-terminal-web/
 
       <br>
 
-      <!-- RISK INPUTS -->
+      <!-- IV FINDER INPUTS -->
       <div class="iv-grid">
 
-        <div class="field full-width">
-          <label>Option Type <span style="color:#f87171;">*</span></label>
-          <select id="optionType">
-            <option value="call">CALL</option>
-            <option value="put">PUT</option>
-          </select>
-        </div>
-
+        <div class="field"><label>SF</label><input id="sf" type="number" placeholder="e.g. 24800"></div>
         <div class="field"><label>Strike</label><input id="strike" type="number" placeholder="e.g. 24800"></div>
-        <div class="field"><label>Call Price</label><input id="callPrice" type="number" placeholder="e.g. 120"></div>
-        <div class="field"><label>Put Price</label><input id="putPrice" type="number" placeholder="e.g. 95"></div>
+
+        <div class="full-width">
+          <div class="triple-row">
+            <div class="field">
+              <label>Level Type <span style="color:#f87171;">*</span></label>
+              <select id="levelType" onchange="updateLevelLabel()">
+                <option value="R">Resistance</option>
+                <option value="S">Support</option>
+              </select>
+            </div>
+            <div class="field">
+              <label id="levelLabel">Resistance (R)</label>
+              <input id="level" type="number" placeholder="e.g. 25000">
+            </div>
+          </div>
+        </div>
 
         <div class="full-width">
           <div class="field">
@@ -53,9 +60,22 @@ permalink: /mmr-terminal-web/
           </div>
         </div>
 
+        <div class="full-width">
+          <div class="triple-row">
+            <div class="field">
+              <label>r %</label>
+              <input id="r" type="number" value="0" placeholder="e.g. 0">
+            </div>
+            <div class="field">
+              <label>q %</label>
+              <input id="q" type="number" value="0" placeholder="e.g. 0">
+            </div>
+          </div>
+        </div>
+
       </div>
 
-      <button class="run-btn" onclick="runRisk()">Run Risk Analysis</button>
+      <button class="run-btn" onclick="runIvGreeks()">Find IV &amp; Greeks</button>
 
     </div>
   </div>
@@ -69,7 +89,7 @@ permalink: /mmr-terminal-web/
     </div>
 
     <div class="mmr-card" id="box-model">
-      <div class="mmr-card-title">[ RISK ANALYSIS OUTPUT ]</div>
+      <div class="mmr-card-title">[ IV &amp; GREEKS OUTPUT ]</div>
       Waiting for model to run...
     </div>
 
@@ -81,8 +101,8 @@ permalink: /mmr-terminal-web/
 
     <div class="mmr-about-title">[ ABOUT MMR TERMINAL ]</div>
 
-    <p>MMR Terminal is a high-precision Option Risk Analyzer — computing synthetic futures, stop-loss levels,
-    estimated prices, and implied volatility using a Black-76 model — built
+    <p>MMR Terminal is a high-precision IV Finder - deriving implied volatility from a support or resistance
+    level, then computing Black-76 call/put prices and Greeks (delta, gamma, vega, theta) for any strike - built
     for advanced derivatives analysis and model-driven decision making.</p>
 
     <p>⚠️ This is an advanced system intended for experienced users. Proper understanding
@@ -118,7 +138,7 @@ function resetOutputPanels() {
     Waiting for input...
   `;
   document.getElementById("box-model").innerHTML = `
-    <div class="mmr-card-title">[ RISK ANALYSIS OUTPUT ]</div>
+    <div class="mmr-card-title">[ IV &amp; GREEKS OUTPUT ]</div>
     Waiting for model to run...
   `;
 }
@@ -136,6 +156,12 @@ function toggleToken(event) {
   }
 }
 
+/* ================= LEVEL LABEL ================= */
+function updateLevelLabel() {
+  const isR = document.getElementById("levelType").value === "R";
+  document.getElementById("levelLabel").innerText = isR ? "Resistance (R)" : "Support (S)";
+}
+
 /* ================= MODAL ================= */
 function showError(msg) {
   document.getElementById("modalText").innerText = msg;
@@ -146,32 +172,43 @@ function closeModal() {
   document.getElementById("errorModal").style.display = "none";
 }
 
-/* ================= RISK ANALYSIS ================= */
-async function runRisk() {
+/* ================= IV FINDER + GREEKS ================= */
+async function runIvGreeks() {
 
   const payload = {
-    action: "risk",
-    appKey:     document.getElementById("appKey").value.trim(),
-    appToken:   document.getElementById("appToken").value.trim(),
-    optionType: document.getElementById("optionType").value,
-    strike:     Number(document.getElementById("strike").value),
-    callPrice:  Number(document.getElementById("callPrice").value),
-    putPrice:   Number(document.getElementById("putPrice").value),
-    dte:        Number(document.getElementById("dte").value)
+    action: "ivGreeks",
+    appKey:    document.getElementById("appKey").value.trim(),
+    appToken:  document.getElementById("appToken").value.trim(),
+    sf:        Number(document.getElementById("sf").value),
+    strike:    Number(document.getElementById("strike").value),
+    levelType: document.getElementById("levelType").value,
+    level:     Number(document.getElementById("level").value),
+    dte:       Number(document.getElementById("dte").value),
+    r:         Number(document.getElementById("r").value),
+    q:         Number(document.getElementById("q").value)
   };
+
+  const isR = payload.levelType === "R";
+  const lvlName = isR ? "Resistance" : "Support";
 
   // ===== VALIDATION =====
   if (!payload.appKey)   return showError("App Key required");
   if (!payload.appToken) return showError("Token required");
 
+  if (!payload.sf || payload.sf <= 0)
+    return showError("SF must be greater than 0");
+
   if (!payload.strike || payload.strike <= 0)
     return showError("Strike must be greater than 0");
 
-  if (isNaN(payload.callPrice) || payload.callPrice < 0)
-    return showError("Call Price must be 0 or more");
+  if (!payload.level || payload.level <= 0)
+    return showError(lvlName + " must be greater than 0");
 
-  if (isNaN(payload.putPrice) || payload.putPrice < 0)
-    return showError("Put Price must be 0 or more");
+  if (isR && payload.level <= payload.sf)
+    return showError("Resistance must be greater than SF");
+
+  if (!isR && payload.level >= payload.sf)
+    return showError("Support must be less than SF");
 
   if (!payload.dte || payload.dte <= 0)
     return showError("DTE must be greater than 0");
@@ -179,13 +216,19 @@ async function runRisk() {
   if (payload.dte > 3650)
     return showError("DTE too large (check input)");
 
+  if (isNaN(payload.r))
+    return showError("r is required (use 0 if not applicable)");
+
+  if (isNaN(payload.q))
+    return showError("q is required (use 0 if not applicable)");
+
   /* ===== LOADING STATE ===== */
   document.getElementById("box-input").innerHTML = `
     <div class="mmr-card-title">[ INPUT PARAMETERS ]</div>
     Loading input...
   `;
   document.getElementById("box-model").innerHTML = `
-    <div class="mmr-card-title">[ RISK ANALYSIS OUTPUT ]</div>
+    <div class="mmr-card-title">[ IV &amp; GREEKS OUTPUT ]</div>
     Running model...
   `;
 
@@ -207,33 +250,33 @@ async function runRisk() {
     /* ===== INPUT ECHO ===== */
     document.getElementById("box-input").innerHTML = `
       <div class="mmr-card-title">[ INPUT PARAMETERS ]</div>
-      Option Type: ${json.optionType.toUpperCase()}<br>
+      SF: ${payload.sf}<br>
       Strike: ${payload.strike}<br>
-      Call Price: ${payload.callPrice}<br>
-      Put Price: ${payload.putPrice}<br>
-      DTE: ${payload.dte}
+      ${lvlName}: ${payload.level}<br>
+      DTE: ${payload.dte}<br>
+      r: ${payload.r}%<br>
+      q: ${payload.q}%
     `;
 
     /* ===== OUTPUT ===== */
-    const fmt = v => (v === null || v === undefined) ? "N/A" : v;
+    const f = (v, d) => (v === null || v === undefined) ? "N/A" : Number(v).toFixed(d);
+    const block = (name, o) => `
+      <b>${name}</b><br>
+      Price: ${f(o.price, 2)}<br>
+      Delta: ${f(o.delta, 4)}<br>
+      Gamma: ${f(o.gamma, 6)}<br>
+      Vega: ${f(o.vega, 2)}<br>
+      Theta: ${f(o.theta, 2)}<br>
+    `;
 
     document.getElementById("box-model").innerHTML = `
-      <div class="mmr-card-title">[ RISK ANALYSIS OUTPUT ]</div>
+      <div class="mmr-card-title">[ IV &amp; GREEKS OUTPUT ]</div>
 
-      Synthetic Future: ${fmt(json.sf)}<br>
+      IV (${lvlName}): <b>${f(json.iv, 3)}%</b><br>
       <br>
-      Call SL: ${fmt(json.callSL)}<br>
-      Put SL: ${fmt(json.putSL)}<br>
+      ${block("CALL @ " + payload.strike, json.call)}
       <br>
-      Est. Call Price: ${fmt(json.estCall)}<br>
-      Est. Put Price: ${fmt(json.estPut)}<br>
-      <br>
-      IV (Call): ${fmt(json.ivCall)}%<br>
-      IV (Put): ${fmt(json.ivPut)}%<br>
-      Level IV: ${fmt(json.levelIv)}%<br>
-      <br>
-      Optimal Price: ${fmt(json.optimal)}<br>
-      Target Price: ${fmt(json.target)}<br>
+      ${block("PUT @ " + payload.strike, json.put)}
       <br>
       <div style="font-size:12px; color:#facc15; line-height:1.4;">
         ⚠ Model output is for educational purposes only.
