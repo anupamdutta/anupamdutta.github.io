@@ -266,7 +266,8 @@ async function runIvGreeks() {
       SF: ${payload.sf}<br>
       Strike: ${payload.strike}<br>
       ${lvlName}: ${payload.level}<br>
-      DTE: ${isExpiry ? 1 : payload.dte}<br>
+      DTE: ${payload.dte > 0 ? payload.dte : "-"}<br>
+      Mode: ${isExpiry ? "Expiry" : "Next Session"}<br>
       r: ${payload.r}%<br>
       q: ${payload.q}%
     `;
