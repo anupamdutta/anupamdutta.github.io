@@ -54,9 +54,18 @@ permalink: /mmr-terminal-web/
         </div>
 
         <div class="full-width">
-          <div class="field">
-            <label>DTE</label>
-            <input id="dte" type="number" placeholder="Days to Expiry">
+          <div class="triple-row">
+            <div class="field">
+              <label>DTE</label>
+              <input id="dte" type="number" placeholder="Days to Expiry">
+            </div>
+            <div class="field">
+              <label>Mode</label>
+              <select id="mode">
+                <option value="nextSession">Next Session</option>
+                <option value="expiry">Expiry</option>
+              </select>
+            </div>
           </div>
         </div>
 
@@ -102,7 +111,7 @@ permalink: /mmr-terminal-web/
     <div class="mmr-about-title">[ ABOUT MMR TERMINAL ]</div>
 
     <p>MMR Terminal is a high-precision IV Finder - deriving implied volatility from a support or resistance
-    level, then computing Black-76 call/put prices and Greeks (delta, gamma, vega, theta) for any strike - built
+    level, then computing Black-76 call/put prices, delta and directional threshold for any strike - built
     for advanced derivatives analysis and model-driven decision making.</p>
 
     <p>⚠️ This is an advanced system intended for experienced users. Proper understanding
@@ -184,11 +193,13 @@ async function runIvGreeks() {
     levelType: document.getElementById("levelType").value,
     level:     Number(document.getElementById("level").value),
     dte:       Number(document.getElementById("dte").value),
+    mode:      document.getElementById("mode").value,
     r:         Number(document.getElementById("r").value),
     q:         Number(document.getElementById("q").value)
   };
 
   const isR = payload.levelType === "R";
+  const isExpiry = payload.mode === "expiry";
   const lvlName = isR ? "Resistance" : "Support";
 
   // ===== VALIDATION =====
@@ -210,11 +221,13 @@ async function runIvGreeks() {
   if (!isR && payload.level >= payload.sf)
     return showError("Support must be less than SF");
 
-  if (!payload.dte || payload.dte <= 0)
-    return showError("DTE must be greater than 0");
+  if (!isExpiry) {
+    if (!payload.dte || payload.dte <= 0)
+      return showError("DTE must be greater than 0");
 
-  if (payload.dte > 3650)
-    return showError("DTE too large (check input)");
+    if (payload.dte > 3650)
+      return showError("DTE too large (check input)");
+  }
 
   if (isNaN(payload.r))
     return showError("r is required (use 0 if not applicable)");
@@ -253,7 +266,7 @@ async function runIvGreeks() {
       SF: ${payload.sf}<br>
       Strike: ${payload.strike}<br>
       ${lvlName}: ${payload.level}<br>
-      DTE: ${payload.dte}<br>
+      DTE: ${isExpiry ? 1 : payload.dte}<br>
       r: ${payload.r}%<br>
       q: ${payload.q}%
     `;
@@ -264,9 +277,6 @@ async function runIvGreeks() {
       <b>${name}</b><br>
       Price: ${f(o.price, 2)}<br>
       Delta: ${f(o.delta, 4)}<br>
-      Gamma: ${f(o.gamma, 6)}<br>
-      Vega: ${f(o.vega, 2)}<br>
-      Theta: ${f(o.theta, 2)}<br>
     `;
 
     document.getElementById("box-model").innerHTML = `
@@ -277,6 +287,8 @@ async function runIvGreeks() {
       ${block("CALL @ " + payload.strike, json.call)}
       <br>
       ${block("PUT @ " + payload.strike, json.put)}
+      <br>
+      ${json.thresholdType} Threshold: <b>${f(json.threshold, 2)}</b><br>
       <br>
       <div style="font-size:12px; color:#facc15; line-height:1.4;">
         ⚠ Model output is for educational purposes only.
