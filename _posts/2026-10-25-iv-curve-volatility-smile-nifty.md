@@ -61,7 +61,7 @@ That difference matters when I am deciding which strike to buy.
 
 ## Let's read the NIFTY IV Curve
 
-![NIFTY Implied Volatility Curve showing strike-wise IV, spot price, ATM strike and selected strike](/assets/iv-smile-nifty.png)
+![NIFTY Implied Volatility Curve showing strike-wise IV, spot price, ATM strike and selected strike](/assets/iv_smile_nifty.png)
 
 *Figure 1: NIFTY IV Curve. The chart displays a strike-wise volatility snapshot, with spot near 23,366.70, the ATM strike at 23,400, and the selected 23,300 strike showing an IV of approximately 13.397%. The displayed trade date is 5 June 2026.*
 
