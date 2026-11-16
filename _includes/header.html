@@ -21,6 +21,16 @@
           Black65
         </a>
 
+        <!-- PRODUCTS -->
+        <div class="nav-group">
+          <a class="page-link nav-label">Products ▾</a>
+          <div class="nav-dropdown">
+            <a class="{% if page.url == '/option-trading-simulator/' %}active{% endif %}" href="/option-trading-simulator/">
+              Option Trading Simulator
+            </a>
+          </div>
+        </div>
+
         <!-- ABOUT -->
         <a class="page-link {% if page.url == '/about/' %}active{% endif %}" href="/about/">
           About
@@ -50,8 +60,9 @@
   </div>
 </header>
 <script>
-document.querySelectorAll('.nav-group > span').forEach(el => {
-  el.addEventListener('click', () => {
+document.querySelectorAll('.nav-group .nav-label, .nav-group > span').forEach(el => {
+  el.addEventListener('click', (e) => {
+    e.preventDefault();
     el.parentElement.classList.toggle('active');
   });
 });

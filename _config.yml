@@ -4,6 +4,7 @@ description: Precision Options Trading, Systems, and Insights
 markdown: kramdown
 header_pages:
   - about.md
+  - option-trading-simulator.md
   - iv-finder.md
   - price-finder.md
   - zscore-model.md
