@@ -152,6 +152,32 @@ Actual executions. No hindsight. No storytelling.
 
 ---
 
+
+---
+
+## Products
+
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 16px;">
+
+  <a href="/cdra-76-pro/" style="text-decoration: none;">
+    <div style="background: rgba(15,23,42,0.8); border: 1px solid rgba(56,189,248,0.25); border-radius: 10px; padding: 20px; transition: 0.2s; box-shadow: 0 4px 16px rgba(0,0,0,0.4);">
+      <div style="font-family: monospace; font-size: 11px; color: #38bdf8; font-weight: bold; letter-spacing: 1px; margin-bottom: 8px;">QUANT ENGINE</div>
+      <div style="font-size: 16px; font-weight: bold; color: #f1f5f9; margin-bottom: 8px;">CDRA 76 Pro</div>
+      <div style="font-size: 13px; color: #94a3b8; line-height: 1.5;">Call Delta Resistance Analyzer — Black-76 IV, Synthetic Futures, Greek decomposition. Historical BhavCopy batch analytics.</div>
+      <div style="margin-top: 14px; font-size: 12px; font-family: monospace; color: #38bdf8;">View product →</div>
+    </div>
+  </a>
+
+  <a href="/voltrix/" style="text-decoration: none;">
+    <div style="background: rgba(15,23,42,0.8); border: 1px solid rgba(56,189,248,0.25); border-radius: 10px; padding: 20px; transition: 0.2s; box-shadow: 0 4px 16px rgba(0,0,0,0.4);">
+      <div style="font-family: monospace; font-size: 11px; color: #38bdf8; font-weight: bold; letter-spacing: 1px; margin-bottom: 8px;">LIVE TERMINAL</div>
+      <div style="font-size: 16px; font-weight: bold; color: #f1f5f9; margin-bottom: 8px;">VolTrix Commercial</div>
+      <div style="font-size: 13px; color: #94a3b8; line-height: 1.5;">Real-time option chain terminal — live Zerodha Kite feed, Black-76 IV engine, Synthetic Futures, IV alerts, NFO / BFO / MCX.</div>
+      <div style="margin-top: 14px; font-size: 12px; font-family: monospace; color: #38bdf8;">View product →</div>
+    </div>
+  </a>
+
+</div>
 ## Operating Principle
 
 Trade less.  
