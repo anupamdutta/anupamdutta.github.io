@@ -127,9 +127,24 @@ This is **not** a retail screener. This is a professional derivatives pricing te
 
 ### Subscription Pricing
 
-| Plan | Duration | Coverage |
-|------|----------|----------|
-| Monthly | 1 month | Full access — all exchanges, all features, engine updates |
+<div style="overflow-x: auto; margin: 16px 0;">
+  <table style="width: 100%; border-collapse: collapse; background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; overflow: hidden;">
+    <thead>
+      <tr style="background: rgba(2, 132, 199, 0.2); border-bottom: 1px solid rgba(56, 189, 248, 0.35);">
+        <th style="padding: 12px 16px; text-align: left; color: #38bdf8; font-family: monospace; font-size: 13px; border: none;">Plan</th>
+        <th style="padding: 12px 16px; text-align: left; color: #38bdf8; font-family: monospace; font-size: 13px; border: none;">Duration</th>
+        <th style="padding: 12px 16px; text-align: left; color: #38bdf8; font-family: monospace; font-size: 13px; border: none;">Coverage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background: transparent;">
+        <td style="padding: 12px 16px; color: #f1f5f9; font-weight: bold; border-top: 1px solid rgba(56, 189, 248, 0.15); border-left: none; border-right: none; border-bottom: none;">Monthly</td>
+        <td style="padding: 12px 16px; color: #cbd5e1; border-top: 1px solid rgba(56, 189, 248, 0.15); border-left: none; border-right: none; border-bottom: none;">1 month</td>
+        <td style="padding: 12px 16px; color: #cbd5e1; border-top: 1px solid rgba(56, 189, 248, 0.15); border-left: none; border-right: none; border-bottom: none;">Full access — all exchanges, all features, engine updates</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 > Pricing is disclosed on request. Contact directly to discuss terms.
 
