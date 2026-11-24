@@ -5,7 +5,7 @@ markdown: kramdown
 header_pages:
   - about.md
   - cdra-76-pro.md
+  - voltrix.md
   - option-trading-simulator.md
   - iv-finder.md
   - price-finder.md
-  - zscore-model.md
